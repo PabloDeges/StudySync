@@ -129,7 +129,9 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: SafeArea(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -193,7 +195,7 @@ class WeekdayIndicator extends StatelessWidget {
       children: List.generate(5, (index) {
         return Expanded(
           child: Container(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(4.0),
             color: Colors.blue,
             child: Center(
               child: Text(
@@ -215,7 +217,7 @@ class FocussedWeekdayIndicator extends StatelessWidget {
       children: List.generate(1, (index) {
         return Expanded(
           child: Container(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(4.0),
             color: Colors.blue,
             child: Center(
               child: Text(
@@ -235,7 +237,7 @@ class StudySyncGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     // Calculate the height of each cell based on the screen height
     final double cellHeight =
-        (MediaQuery.of(context).size.height - kBottomNavigationBarHeight - 64) /
+        (MediaQuery.of(context).size.height - kBottomNavigationBarHeight - 80) /
             13;
 
     final List weekdays = [
@@ -266,7 +268,7 @@ class StudySyncGrid extends StatelessWidget {
                       child: Text(
                         ((8 + timeOffset).toString() + ":00"),
                         style: TextStyle(
-                          color: Colors.grey[700],
+                          color: Colors.grey,
                           fontSize: 10,
                         ),
                       ),
@@ -277,7 +279,7 @@ class StudySyncGrid extends StatelessWidget {
                           stundenplan[weekdays[day]][timeOffset]["name"],
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 24,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -285,7 +287,7 @@ class StudySyncGrid extends StatelessWidget {
                           stundenplan[weekdays[day]][timeOffset]["room"],
                           style: TextStyle(
                             color: Colors.grey[800],
-                            fontSize: 12,
+                            fontSize: 10,
                           ),
                         ),
                       ]),
@@ -325,7 +327,7 @@ class DayStudySync extends StatelessWidget {
                   child: Text(
                     ((8 + timeOffset).toString() + ":00"),
                     style: TextStyle(
-                      color: Colors.grey[700],
+                      color: Colors.grey,
                       fontSize: 10,
                     ),
                   ),
@@ -336,7 +338,7 @@ class DayStudySync extends StatelessWidget {
                       stundenplan["Monday"][timeOffset]["fullname"],
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 24,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
