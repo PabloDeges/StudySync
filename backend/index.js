@@ -3,6 +3,7 @@ const cors = require("cors");
 const {pool} = require("./db")
 require("dotenv").config();
 const app = express();
+const timetableRoute = require("./routes/timetable.route")
 
 app.use(cors());
 
@@ -19,6 +20,8 @@ app.get("/", async (req,res) => {
         res.json({message:"Nö"})
     }
 })
+
+app.use("/mainpage",timetableRoute)
 
 app.listen(PORT, () => {
     console.log(`Server läuft http://localhost:${PORT}`);
