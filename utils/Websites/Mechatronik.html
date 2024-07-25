@@ -1,0 +1,5707 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<title>Campusinfo BO</title>
+<!--[if lte IE 6]>
+<script type="text/javascript" src="https://www.creditBenchmark.de/styleSheets/minmax.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" href="Mechatronik-Dateien/page.css" type="text/css">
+
+<link rel="stylesheet" href="Mechatronik-Dateien/fhStyle.css" type="text/css">
+<link rel="stylesheet" href="Mechatronik-Dateien/intranet2009.css" type="text/css">
+<link rel="stylesheet" href="Mechatronik-Dateien/intranet_cm_2009.css" type="text/css">
+
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="https://www.creditBenchmark.de/styleSheets/IEstyle.css" type="text/css">
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" href="https://www.creditBenchmark.de/styleSheets/IE7style.css" type="text/css">
+<![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-15">
+<script type="text/javascript">
+	var HTTP_DIR='https://wwwccb.hochschule-bochum.de/campusInfo';
+</script>
+<script type="text/javascript">
+	var HTTP_DIR='https://wwwccb.hochschule-bochum.de/campusInfo';
+</script>
+</head>
+<body id="bodyId"><!--Achtung: bei Aufrufen der Darstellungslogik MUESSEN Blancs zwischen den Anweisungen stehen!!! -->
+<div id="frame">
+	<div id="boxHeader">
+		<div style="position:absolute;"><!--Header Anfang-->
+	<div style="position:absolute; top:5px; left:735px; width:300px;">
+	angemeldet im: <span style="color:#dc143c;font-size:12pt;font-weight:bold">FBE</span>		
+
+	<img src="Mechatronik-Dateien/senkrechte_linie_top.gif" width="1" height="25" align="top" alt="">&nbsp;&nbsp;&nbsp;
+	<a href="https://wwwccb.hochschule-bochum.de/campusInfo/applications.php" class="grey">Home</a>&nbsp;&nbsp;&nbsp;
+		
+	
+		<img src="Mechatronik-Dateien/senkrechte_linie_top.gif" width="1" height="25" align="top" alt="">&nbsp;&nbsp;&nbsp;
+	<a href="https://wwwccb.hochschule-bochum.de/campusInfo/logout.php" class="red">Abmelden</a>&nbsp;&nbsp;&nbsp;
+	</div>
+
+	<div style="position:absolute; top:10px; left:-20px; z-index:3; ">
+	<a href="http://www.hochschule-bochum.de/fbw.html" title="Fachbereich Wirtschaft"><img src="Mechatronik-Dateien/logo_hs_bochum.gif" hspace="20" vspace="17" style="no-repeat;" alt=""></a>
+	</div>
+
+	<!--<div id="fhTextAdjust">
+		<div class="fhTextOben"></div>
+		<div class="fhTextUnten"></div>
+	</div>
+	<div id="boxBlueFh">
+		<div class="whiteFh"></div>
+	</div>
+	<div id="boxGreyFh">
+	</div>
+	-->
+</div>
+<!--Header Ende-->	
+</div>
+	<div id="boxContent">
+		<div id="menuBar">
+										<div class="boxGreyForMenu">
+				<a href="https://wwwccb.hochschule-bochum.de/campusInfo/displayApplicationsOrApplicationAreas.php?AppNr=1">
+					Vorlesungspläne
+					<br>
+				</a>
+				</div>
+							<div class="boxGreyForMenu">
+				<a href="https://wwwccb.hochschule-bochum.de/campusInfo/displayApplicationsOrApplicationAreas.php?AppNr=5">
+					Vorlesungsausfälle
+					<br>
+				</a>
+				</div>
+							<div class="boxGreyForMenu">
+				<a href="https://wwwccb.hochschule-bochum.de/campusInfo/displayApplicationsOrApplicationAreas.php?AppNr=7">
+					Blockveranstaltungen
+					<br>
+				</a>
+				</div>
+							<div class="boxGreyForMenu">
+				<a href="https://wwwccb.hochschule-bochum.de/campusInfo/displayApplicationsOrApplicationAreas.php?AppNr=9">
+					Ressource
+					<br>
+				</a>
+				</div>
+															<div class="boxGreyForMenu">
+						<a href="https://wwwccb.hochschule-bochum.de/campusInfo/logout.php" class="extlink">
+							Abmelden<br>
+						</a>
+					</div>
+									</div>
+		
+		<div class="navigationGrey" id="navigationAdjust">
+														<a href="https://wwwccb.hochschule-bochum.de/campusInfo/displayApplicationsOrApplicationAreas.php?AppNr=1" class="navigationGrey">
+						Vorlesungspläne
+					</a>
+					-&gt;
+														Stundenplan anzeigen
+					</div>			
+		<div id="outerBoxScript">
+			<div id="innerBoxScript" style="min-height:px;"><center><a href="https://wwwccb.hochschule-bochum.de/campusInfo/newslist/displayTimetable.php">Neue Auswahl</a></center>	<table border="0">
+			<tbody><tr>
+			<td>Semester</td><td>XB4 - Mechatronik 4. Sem.
+		
+		
+		
+		
+		</td>
+		</tr>
+	<!-- &nbsp; &nbsp; <a href='./loadIcs.php' target='_blank'><img src='https://wwwccb.hochschule-bochum.de/campusInfo/images/calendar1.png'></a>  -->
+	</tbody></table>
+
+
+	<style type="text/css">
+		*.schmal { font-size:80% }
+		*.gross {  }
+		a.schmal { font-size:100% }
+		a.gross {  }
+	</style>
+
+<table width="100%">
+	<tbody><tr>
+			<th class="navi_blue_bold"><b>Zeit</b></th>
+			
+					<th width="120px" ;="" class="navi_blue_bold"><b>Montag</b></th>
+			
+					<th width="120px" ;="" class="navi_blue_bold"><b>Dienstag</b></th>
+			
+					<th width="120px" ;="" class="navi_blue_bold"><b>Mittwoch</b></th>
+			
+					<th width="120px" ;="" class="navi_blue_bold"><b>Donnerstag</b></th>
+			
+					<th width="120px" ;="" class="navi_blue_bold"><b>Freitag</b></th>
+			
+			</tr>
+
+		
+		<!---->		
+		<tr class="tableRowGrey1">
+		<td>08:00-09:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Pautzke<br>
+																Grundlagen Elektromobilität-P<br>
+								C6-10 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=908 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+						
+		</tr>
+		
+		<!---->		
+		<tr class=" tableRowGrey0">
+		<td>09:00-10:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Pautzke<br>
+																Grundlagen Elektromobilität-P<br>
+								C6-10 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=909 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Lipphardt<br>
+																Energieerzeugung und -versorgung-S<br>
+								C6-13 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=907 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+						
+		</tr>
+		
+		<!---->		
+		<tr class="tableRowGrey1">
+		<td>10:00-11:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																																		<div class="schmal">
+																	Lipphardt<br>
+																Energieerzeugung und -versorgung-S<br>
+								C6-07 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=905' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Pautzke<br>
+																Grundlagen Elektromobilität-P<br>
+								C6-10 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=910' ><img align="right" src=""></a>-->
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Lipphardt<br>
+																Energieerzeugung und -versorgung-P<br>
+								C6-13 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=903 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																&nbsp;
+									</td>
+						
+		</tr>
+		
+		<!---->		
+		<tr class=" tableRowGrey0">
+		<td>11:00-12:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																																		<div class="schmal">
+																	Lipphardt<br>
+																Energieerzeugung und -versorgung-S<br>
+								C6-07 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=906' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Pautzke<br>
+																Grundlagen Elektromobilität-P<br>
+								C6-10 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=911' ><img align="right" src=""></a>-->
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Bosselmann<br>
+																Identifikationstechnik-RFID-Vorlesung<br>
+								C7-10 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=883 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Lipphardt<br>
+																Energieerzeugung und -versorgung-P<br>
+								C6-13 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=904 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																&nbsp;
+									</td>
+						
+		</tr>
+		
+		<!---->		
+		<tr class="tableRowGrey1">
+		<td>12:00-13:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Bosselmann<br>
+																Identifikationstechnik-RFID-Vorlesung<br>
+								C7-10 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=884 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+						
+		</tr>
+		
+		<!---->		
+		<tr class=" tableRowGrey0">
+		<td>13:00-14:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Bosselmann<br>
+																Identifikationstechnik-RFID-Übung<br>
+								C7-10 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=882 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+						
+		</tr>
+		
+		<!---->		
+		<tr class="tableRowGrey1">
+		<td>14:00-15:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+																																																		<div class="schmal">
+																	Biesenbach<br>
+																Regelungstechnik-P<br>
+								D3-15 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=885' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Pautzke<br>
+																Grundlagen Elektromobilität-V<br>
+								D3-12 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=913' ><img align="right" src=""></a>-->
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																																		<div class="schmal">
+																	Biesenbach<br>
+																Regelungstechnik-P<br>
+								D3-15 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=889' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Coersmeier<br>
+																Mikrocontroller-P<br>
+								C5-11 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=896' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Pautzke<br>
+																Entwicklung nachhaltiger Fahrzeuge-S<br>
+								D3-33 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=916' ><img align="right" src=""></a>-->
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Bosselmann<br>
+																Identifikationstechnik-RFID-Praktikum<br>
+								C7-07 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=878 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+						
+		</tr>
+		
+		<!---->		
+		<tr class=" tableRowGrey0">
+		<td>15:00-16:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+																																																		<div class="schmal">
+																	Biesenbach<br>
+																Regelungstechnik-P<br>
+								D3-15 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=886' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Pautzke<br>
+																Grundlagen Elektromobilität-V<br>
+								D3-12 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=914' ><img align="right" src=""></a>-->
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																																		<div class="schmal">
+																	Biesenbach<br>
+																Regelungstechnik-P<br>
+								D3-15 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=890' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Coersmeier<br>
+																Mikrocontroller-P<br>
+								C5-11 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=897' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Pautzke<br>
+																Entwicklung nachhaltiger Fahrzeuge-S<br>
+								D3-33 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=917' ><img align="right" src=""></a>-->
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Bosselmann<br>
+																Identifikationstechnik-RFID-Praktikum<br>
+								C7-07 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=879 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+						
+		</tr>
+		
+		<!---->		
+		<tr class="tableRowGrey1">
+		<td>16:00-17:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																																		<div class="schmal">
+																	Biesenbach<br>
+																Regelungstechnik-P<br>
+								D3-15 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=887' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Coersmeier<br>
+																Mikrocontroller-V<br>
+								D3-16 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=901' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Pautzke<br>
+																Grundlagen Elektromobilität-Ü<br>
+								D3-12 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=912' ><img align="right" src=""></a>-->
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																																		<div class="schmal">
+																	Biesenbach<br>
+																Regelungstechnik-P<br>
+								D3-15 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=891' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Coersmeier<br>
+																Mikrocontroller-P<br>
+								C5-11 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=898' ><img align="right" src=""></a>-->
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Bosselmann<br>
+																Identifikationstechnik-RFID-Praktikum<br>
+								C7-07 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=880 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Bui<br>
+																Regelungstechnik-V<br>
+								C6-07 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=894 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+						
+		</tr>
+		
+		<!---->		
+		<tr class=" tableRowGrey0">
+		<td>17:00-18:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																																		<div class="schmal">
+																	Biesenbach<br>
+																Regelungstechnik-P<br>
+								D3-15 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=888' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Coersmeier<br>
+																Mikrocontroller-V<br>
+								D3-16 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=902' ><img align="right" src=""></a>-->
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																																		<div class="schmal">
+																	Biesenbach<br>
+																Regelungstechnik-P<br>
+								D3-15 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=892' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Coersmeier<br>
+																Mikrocontroller-P<br>
+								C5-11 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=899' ><img align="right" src=""></a>-->
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Bosselmann<br>
+																Identifikationstechnik-RFID-Praktikum<br>
+								C7-07 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=881 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Bui<br>
+																Regelungstechnik-V<br>
+								C6-07 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=895 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+						
+		</tr>
+		
+		<!---->		
+		<tr class="tableRowGrey1">
+		<td>18:00-19:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																																		<div class="schmal">
+																	Coersmeier<br>
+																Mikrocontroller-Ü<br>
+								D3-16 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=900' ><img align="right" src=""></a>-->
+															</div>
+																	
+																					<hr>
+																																												<div class="schmal">
+																	Pautzke<br>
+																Entwicklung nachhaltiger Fahrzeuge-Ü<br>
+								D3-33 /
+								XB4  
+																	<!--<a href='../personalTimetable/deleteRegistration.php?timetable_nr=918' ><img align="right" src=""></a>-->
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Bui<br>
+																Regelungstechnik-Ü<br>
+								C6-07 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=893 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+						
+		</tr>
+		
+		<!---->		
+		<tr class=" tableRowGrey0">
+		<td>19:00-20:00</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+																																										<div class="gross">
+																	Pautzke<br>
+																Entwicklung nachhaltiger Fahrzeuge-P<br>
+								D3-33 /
+								XB4  
+																	<!--<a href='../personalTimetable/insertRegistration.php?timetable_nr=915 ' ><img align="right" src=""></a>-->
+																
+															</div>
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+							
+				<td align="left" height="100px">
+										<!-- -->
+											
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																	
+													
+																&nbsp;
+									</td>
+						
+		</tr>
+	</tbody></table>
+<!--
+--></div></div></div></div></body></html>
