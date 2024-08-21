@@ -20,6 +20,20 @@ app.get("/", async (req,res) => {
     }
 })
 
+app.get("/testdata", async (req,res) => {
+    try{
+        console.log("testdaten angefragt")
+        const tableName = "testdata"
+        const result = await pool.query(`SELECT * FROM ${schema}.${tableName}`);
+        let stringy = result.rows[0]["data"]
+        res.json(stringy)
+
+    }catch(error){
+        console.error(error)
+        res.json({message:"Fehlerchen"})
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`Server läuft http://localhost:${PORT}`);
 });
