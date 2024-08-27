@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'WeekViewObject.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(StudySyncApp());
 }
 
-class MyApp extends StatefulWidget {
+class StudySyncApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,30 +19,18 @@ class MyApp extends StatefulWidget {
       home: StudySyncHomePage(),
     );
   }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
 }
 
 class StudySyncHomePage extends StatefulWidget {
-  const StudySyncHomePage({super.key});
   @override
   _StudySyncHomePageState createState() => _StudySyncHomePageState();
 }
 
 class _StudySyncHomePageState extends State<StudySyncHomePage> {
-  late Future<Map<String, dynamic>> futureWeekData;
-
-  @override
-  void initState() {
-    super.initState();
-    futureWeekData = fetchWeek();
-  }
-
   int _selectedIndex = 0;
+
+  // WeekViewObject _wvo = WeekViewObject();
+  Map weekJsonMap = Map();
 
   Future<Map<String, dynamic>> fetchWeek() async {
     var url = Uri.http('10.0.2.2:3000', 'testdata');
@@ -71,6 +59,10 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    fetchWeek().then((value) {
+      weekJsonMap = value;
+    });
+
     return Scaffold(
       body: SafeArea(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -98,7 +90,8 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
   }
 }
 
-class WeekView extends StatefulWidget {
+class WeekView extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -106,12 +99,6 @@ class WeekView extends StatefulWidget {
         Expanded(child: StudySyncGrid()),
       ],
     );
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
   }
 }
 
@@ -181,10 +168,8 @@ class FocussedWeekdayIndicator extends StatelessWidget {
   }
 }
 
-class StudySyncGrid extends StatefulWidget {
-  late Map weekJsonMap = Map();
-
-  StudySyncGrid({super.key});
+class StudySyncGrid extends StatelessWidget {
+  Map weekJsonMap = Map();
 
   Future<Map<String, dynamic>> fetchWeek() async {
     var url = Uri.http('10.0.2.2:3000', 'testdata');
@@ -199,6 +184,7 @@ class StudySyncGrid extends StatefulWidget {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     fetchWeek().then((value) {
       weekJsonMap = value;
@@ -210,78 +196,62 @@ class StudySyncGrid extends StatefulWidget {
 
     final dayArray = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
-    return FutureBuilder<Map<String, dynamic>>(
-      future: fetchWeek(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Column(
-            children: List.generate(13, (timeOffset) {
-              // change to 13 again
-              return Row(
-                children: List.generate(5, (day) {
-                  return Expanded(
-                    child: Container(
-                      margin: EdgeInsets.all(1.0),
-                      height: cellHeight,
-                      color: Colors.grey[((timeOffset % 2) * 100) + 300],
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            top: 0,
-                            left: 0,
-                            child: Text(
-                              ("${8 + timeOffset}:00"),
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 10,
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Column(children: [
-                              Text(
-                                snapshot.data!['week']['monday']['slots']
-                                    ['slot_8']['class_name_short'],
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                "placeholder",
-                                style: TextStyle(
-                                  color: Colors.grey[800],
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ]),
-                          ),
-                        ],
+    return Column(
+      children: List.generate(13, (timeOffset) {
+        // change to 13 again
+        return Row(
+          children: List.generate(5, (day) {
+            return Expanded(
+              child: Container(
+                margin: EdgeInsets.all(1.0),
+                height: cellHeight,
+                color: Colors.grey[((timeOffset % 2) * 100) + 300],
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Text(
+                        ("${8 + timeOffset}:00"),
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 10,
+                        ),
                       ),
                     ),
-                  );
-                }),
-              );
-            }),
-          );
-        } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
-        }
-
-        // By default, show a loading spinner.
-        return const CircularProgressIndicator();
-      },
+                    Center(
+                      child: Column(children: [
+                        Text(
+                          weekJsonMap['week']['monday']['slots']['slot_8']
+                              ['class_name_short'],
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          "placeholder",
+                          style: TextStyle(
+                            color: Colors.grey[800],
+                            fontSize: 10,
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
+        );
+      }),
     );
   }
-
-  @override
-  State<StudySyncGrid> createState() => _StudySyncGridState();
 }
 
-class _StudySyncGridState {}
-
 class DayStudySync extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     // Calculate the height of each cell based on the screen height
     final double cellHeight =
