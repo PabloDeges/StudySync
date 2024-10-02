@@ -11,13 +11,19 @@ const PORT = process.env.PORT;
 
 app.get("/", async (req,res) => {
     try{
-        const tableName = "studytable"
+        const tableName = "testdata"
         const result = await pool.query(`SELECT * FROM ${schema}.${tableName}`);
         res.json(result.rows)
+
     }catch(error){
         console.error(error)
         res.json({message:"Nö"})
+        
     }
+})
+
+app.get("/test", async (req,res) => {
+    res.json({message:"YIPPIE"})
 })
 
 app.listen(PORT, () => {

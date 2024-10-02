@@ -155,14 +155,169 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
   }
 }
 
-class WeekView extends StatelessWidget {
+class WeekView extends StatefulWidget {
+  @override
+  _WeekViewState createState() => _WeekViewState();
+}
+
+class _WeekViewState extends State<WeekView> {
+  late Future<Map<String, dynamic>> weekJsonMap; // dynamic value
+
+  Future<Map<String, dynamic>> fetchWeek() async {
+    var url = Uri.http('10.0.2.2:3000');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      final dec_response =
+          jsonDecode(jsonDecode(response.body)) as Map<String, dynamic>;
+      return dec_response;
+    } else {
+      throw Error();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    weekJsonMap = fetchWeek();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        WeekdayIndicator(),
-        Expanded(child: StudySyncGrid()),
-      ],
+    // Calculate the height of each cell based on the screen height
+    final double cellHeight =
+        (MediaQuery.of(context).size.height - kBottomNavigationBarHeight - 80) /
+            13;
+
+    final List weekdays = [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ];
+
+    return FutureBuilder<Map<String, dynamic>>(
+      future: weekJsonMap,
+      builder: (context, snapshot) {
+        if ((snapshot.connectionState == ConnectionState.done)) {
+          if (snapshot.hasError) {
+            return Column(
+              children: [
+                WeekdayIndicator(),
+                Column(
+                  children: List.generate(13, (timeOffset) {
+                    return Row(
+                      children: List.generate(5, (day) {
+                        return Expanded(
+                          child: Container(
+                            margin: EdgeInsets.all(1.0),
+                            height: cellHeight,
+                            color: Colors.grey[((timeOffset % 2) * 100) + 300],
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  top: 0,
+                                  left: 0,
+                                  child: Text(
+                                    ((8 + timeOffset).toString() + ":00"),
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Column(children: [
+                                    Text(
+                                      "ERR",
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      "---",
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                    );
+                  }),
+                )
+              ],
+            );
+          } else {
+            return Column(
+              children: [
+                WeekdayIndicator(),
+                Column(
+                  children: List.generate(13, (timeOffset) {
+                    return Row(
+                      children: List.generate(5, (day) {
+                        return Expanded(
+                          child: Container(
+                            margin: EdgeInsets.all(1.0),
+                            height: cellHeight,
+                            color: Colors.grey[((timeOffset % 2) * 100) + 300],
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  top: 0,
+                                  left: 0,
+                                  child: Text(
+                                    ((8 + timeOffset).toString() + ":00"),
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Column(children: [
+                                    Text(
+                                      snapshot.data?[weekdays[day]][timeOffset]
+                                          ["name"],
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      snapshot.data?[weekdays[day]][timeOffset]
+                                          ["room"],
+                                      style: TextStyle(
+                                        color: Colors.grey[800],
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                    );
+                  }),
+                )
+              ],
+            );
+          }
+        } else {
+          // By default, show a loading spinner.
+          return const CircularProgressIndicator();
+        }
+      },
     );
   }
 }
@@ -226,77 +381,6 @@ class FocussedWeekdayIndicator extends StatelessWidget {
               ),
             ),
           ),
-        );
-      }),
-    );
-  }
-}
-
-class StudySyncGrid extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // Calculate the height of each cell based on the screen height
-    final double cellHeight =
-        (MediaQuery.of(context).size.height - kBottomNavigationBarHeight - 80) /
-            13;
-
-    final List weekdays = [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday"
-    ];
-
-    var stundenplan = jsonDecode(dummyJsonDataString);
-    stundenplan = stundenplan["timetable"];
-
-    return Column(
-      children: List.generate(13, (timeOffset) {
-        return Row(
-          children: List.generate(5, (day) {
-            return Expanded(
-              child: Container(
-                margin: EdgeInsets.all(1.0),
-                height: cellHeight,
-                color: Colors.grey[((timeOffset % 2) * 100) + 300],
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      child: Text(
-                        ((8 + timeOffset).toString() + ":00"),
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Column(children: [
-                        Text(
-                          stundenplan[weekdays[day]][timeOffset]["name"],
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          stundenplan[weekdays[day]][timeOffset]["room"],
-                          style: TextStyle(
-                            color: Colors.grey[800],
-                            fontSize: 10,
-                          ),
-                        ),
-                      ]),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }),
         );
       }),
     );
