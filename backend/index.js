@@ -22,9 +22,6 @@ app.get("/", async (req,res) => {
     }
 })
 
-app.get("/test", async (req,res) => {
-    res.json({message:"YIPPIE"})
-})
 
 app.listen(PORT, () => {
     console.log(`Server läuft http://localhost:${PORT}`);

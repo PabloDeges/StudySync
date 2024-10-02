@@ -161,7 +161,7 @@ class WeekView extends StatefulWidget {
 }
 
 class _WeekViewState extends State<WeekView> {
-  late Future<Map<String, dynamic>> weekJsonMap; // dynamic value
+  late Future<Map<String, dynamic>> _weekJsonMap; // dynamic value
 
   Future<Map<String, dynamic>> fetchWeek() async {
     var url = Uri.http('10.0.2.2:3000');
@@ -178,7 +178,7 @@ class _WeekViewState extends State<WeekView> {
   @override
   void initState() {
     super.initState();
-    weekJsonMap = fetchWeek();
+    _weekJsonMap = fetchWeek();
   }
 
   @override
@@ -197,7 +197,7 @@ class _WeekViewState extends State<WeekView> {
     ];
 
     return FutureBuilder<Map<String, dynamic>>(
-      future: weekJsonMap,
+      future: _weekJsonMap,
       builder: (context, snapshot) {
         if ((snapshot.connectionState == ConnectionState.done)) {
           if (snapshot.hasError) {
