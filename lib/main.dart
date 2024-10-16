@@ -1,10 +1,10 @@
-import 'dart:ffi';
+//import 'dart:ffi';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(StudySyncApp());
+  runApp(const StudySyncApp());
 }
 
 //temporär, wenn backend feststeht als Object umsetzen
@@ -94,6 +94,8 @@ String dummyJsonDataString = '''
 // final dataJson = json.decode(dummyJsonDataString) as Map<String, dynamic>;
 
 class StudySyncApp extends StatelessWidget {
+  const StudySyncApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -101,23 +103,26 @@ class StudySyncApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
-      home: StudySyncHomePage(),
+      home: const StudySyncHomePage(),
     );
   }
 }
 
 class StudySyncHomePage extends StatefulWidget {
+  const StudySyncHomePage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _StudySyncHomePageState createState() => _StudySyncHomePageState();
 }
 
 class _StudySyncHomePageState extends State<StudySyncHomePage> {
   int _selectedIndex = 0;
 
-  static List<Widget> _widgetOptions = <Widget>[
-    WeekView(),
-    DayView(),
-    EditorView(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const WeekView(),
+    const DayView(),
+    const EditorView(),
   ];
 
   void _onItemTapped(int index) {
@@ -156,21 +161,27 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
 }
 
 class WeekView extends StatefulWidget {
+  const WeekView({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _WeekViewState createState() => _WeekViewState();
 }
 
 class _WeekViewState extends State<WeekView> {
-  late Future<Map<String, dynamic>> _weekJsonMap; // dynamic value
+  late Future<Map<String, dynamic>> _weekJsonMap;
 
   Future<Map<String, dynamic>> fetchWeek() async {
-    var url = Uri.http('10.0.2.2:3000');
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      final dec_response =
-          jsonDecode(jsonDecode(response.body)) as Map<String, dynamic>;
-      return dec_response;
-    } else {
+    try {
+      var url = Uri.http('127.0.0.1:3000'); // oder 10.0.2.2:3000
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        final decResponse = jsonDecode(response.body) as Map<String, dynamic>;
+        return decResponse;
+      } else {
+        throw Error();
+      }
+    } catch (error) {
       throw Error();
     }
   }
@@ -195,22 +206,24 @@ class _WeekViewState extends State<WeekView> {
       "Thursday",
       "Friday"
     ];
-
     return FutureBuilder<Map<String, dynamic>>(
       future: _weekJsonMap,
       builder: (context, snapshot) {
-        if ((snapshot.connectionState == ConnectionState.done)) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return Column(
               children: [
-                WeekdayIndicator(),
+                const WeekdayIndicator(),
                 Column(
                   children: List.generate(13, (timeOffset) {
                     return Row(
                       children: List.generate(5, (day) {
                         return Expanded(
                           child: Container(
-                            margin: EdgeInsets.all(1.0),
+                            margin: const EdgeInsets.all(1.0),
                             height: cellHeight,
                             color: Colors.grey[((timeOffset % 2) * 100) + 300],
                             child: Stack(
@@ -219,14 +232,14 @@ class _WeekViewState extends State<WeekView> {
                                   top: 0,
                                   left: 0,
                                   child: Text(
-                                    ((8 + timeOffset).toString() + ":00"),
-                                    style: TextStyle(
+                                    "${8 + timeOffset}:00",
+                                    style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10,
                                     ),
                                   ),
                                 ),
-                                Center(
+                                const Center(
                                   child: Column(children: [
                                     Text(
                                       "ERR",
@@ -255,17 +268,27 @@ class _WeekViewState extends State<WeekView> {
                 )
               ],
             );
-          } else {
+          }
+
+          if (snapshot.hasData && snapshot.data != null) {
+            final timetable = snapshot.data!['timetable'];
+
             return Column(
               children: [
-                WeekdayIndicator(),
+                const WeekdayIndicator(),
                 Column(
                   children: List.generate(13, (timeOffset) {
                     return Row(
                       children: List.generate(5, (day) {
+                        var dayData = timetable[weekdays[day]];
+                        var timeData =
+                            dayData != null && dayData.length > timeOffset
+                                ? dayData[timeOffset]
+                                : null;
+
                         return Expanded(
                           child: Container(
-                            margin: EdgeInsets.all(1.0),
+                            margin: const EdgeInsets.all(1.0),
                             height: cellHeight,
                             color: Colors.grey[((timeOffset % 2) * 100) + 300],
                             child: Stack(
@@ -274,33 +297,33 @@ class _WeekViewState extends State<WeekView> {
                                   top: 0,
                                   left: 0,
                                   child: Text(
-                                    ((8 + timeOffset).toString() + ":00"),
-                                    style: TextStyle(
+                                    "${8 + timeOffset}:00",
+                                    style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10,
                                     ),
                                   ),
                                 ),
                                 Center(
-                                  child: Column(children: [
-                                    Text(
-                                      snapshot.data?[weekdays[day]][timeOffset]
-                                          ["name"],
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        timeData?["name"] ?? "No Data",
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      snapshot.data?[weekdays[day]][timeOffset]
-                                          ["room"],
-                                      style: TextStyle(
-                                        color: Colors.grey[800],
-                                        fontSize: 10,
+                                      Text(
+                                        timeData?["room"] ?? "No Room",
+                                        style: TextStyle(
+                                          color: Colors.grey[800],
+                                          fontSize: 10,
+                                        ),
                                       ),
-                                    ),
-                                  ]),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -313,19 +336,22 @@ class _WeekViewState extends State<WeekView> {
               ],
             );
           }
-        } else {
-          // By default, show a loading spinner.
-          return const CircularProgressIndicator();
+
+          return const Text("Keine Daten verfügbar.");
         }
+
+        return const CircularProgressIndicator();
       },
     );
   }
 }
 
 class DayView extends StatelessWidget {
+  const DayView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         FocussedWeekdayIndicator(),
         Expanded(child: DayStudySync()),
@@ -335,27 +361,31 @@ class DayView extends StatelessWidget {
 }
 
 class EditorView extends StatelessWidget {
+  const EditorView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text("//coming soon"),
     );
   }
 }
 
 class WeekdayIndicator extends StatelessWidget {
+  const WeekdayIndicator({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: List.generate(5, (index) {
         return Expanded(
           child: Container(
-            padding: EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(4.0),
             color: Colors.blue,
             child: Center(
               child: Text(
                 ['MO', 'DI', 'MI', 'DO', 'FR'][index],
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
             ),
           ),
@@ -366,18 +396,20 @@ class WeekdayIndicator extends StatelessWidget {
 }
 
 class FocussedWeekdayIndicator extends StatelessWidget {
+  const FocussedWeekdayIndicator({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: List.generate(1, (index) {
         return Expanded(
           child: Container(
-            padding: EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(4.0),
             color: Colors.blue,
             child: Center(
               child: Text(
-                ['MO'][index], // make dynamic based on current day
-                style: TextStyle(color: Colors.white),
+                ['MO'][index],
+                style: const TextStyle(color: Colors.white),
               ),
             ),
           ),
@@ -388,6 +420,8 @@ class FocussedWeekdayIndicator extends StatelessWidget {
 }
 
 class DayStudySync extends StatelessWidget {
+  const DayStudySync({super.key});
+
   @override
   Widget build(BuildContext context) {
     var stundenplan = jsonDecode(dummyJsonDataString);
@@ -400,7 +434,7 @@ class DayStudySync extends StatelessWidget {
       children: List.generate(13, (timeOffset) {
         return Expanded(
           child: Container(
-            margin: EdgeInsets.all(1.0),
+            margin: const EdgeInsets.all(1.0),
             height: cellHeight,
             color: Colors.grey[((timeOffset % 2) * 100) + 300],
             child: Stack(
@@ -409,8 +443,8 @@ class DayStudySync extends StatelessWidget {
                   top: 0,
                   left: 0,
                   child: Text(
-                    ((8 + timeOffset).toString() + ":00"),
-                    style: TextStyle(
+                    ("${8 + timeOffset}:00"),
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 10,
                     ),
@@ -420,7 +454,7 @@ class DayStudySync extends StatelessWidget {
                   child: Column(children: [
                     Text(
                       stundenplan["Monday"][timeOffset]["fullname"],
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
