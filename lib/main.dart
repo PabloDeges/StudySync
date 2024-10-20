@@ -32,16 +32,28 @@ class StudySyncHomePage extends StatefulWidget {
 
 class _StudySyncHomePageState extends State<StudySyncHomePage> {
   int _selectedIndex = 0;
-
-  static final List<Widget> _widgetOptions = <Widget>[
-    const WeekView(),
-    const DayView(),
-    const EditorView(),
-  ];
+  bool showWeekView = true;
+  Widget _getSelectedView() {
+    if (_selectedIndex == 0) {
+      return showWeekView ? const WeekView() : const DayView();
+    } else {
+      return const EditorView();
+    }
+  }
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      if (index == 0) {
+        _selectedIndex = index;
+      } else if (index == 1) {
+        _selectedIndex = index;
+      }
+    });
+  }
+
+  void _toggleWeekDay() {
+    setState(() {
+      showWeekView = !showWeekView;
     });
   }
 
@@ -49,26 +61,27 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: _getSelectedView(),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_view_week),
-            label: 'Week',
+            icon: Icon(showWeekView ? Icons.calendar_view_week : Icons.today),
+            label: showWeekView ? 'Week' : 'Day',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.today),
-            label: 'Day',
-          ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.edit),
             label: 'Editor',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.lightBlue[800],
-        onTap: _onItemTapped,
+        onTap: (index) {
+          if (index == 0 && _selectedIndex == 0) {
+            _toggleWeekDay();
+          }
+          _onItemTapped(index);
+        },
       ),
     );
   }
