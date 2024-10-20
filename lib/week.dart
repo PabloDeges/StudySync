@@ -6,7 +6,7 @@ class WeekView extends StatefulWidget {
   const WeekView({super.key});
 
   @override
-  // ignore: library_private_types_in_public_apiF
+  // ignore: library_private_types_in_public_apiF, library_private_types_in_public_api
   _WeekViewState createState() => _WeekViewState();
 }
 
