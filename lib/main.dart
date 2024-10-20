@@ -32,10 +32,10 @@ class StudySyncHomePage extends StatefulWidget {
 
 class _StudySyncHomePageState extends State<StudySyncHomePage> {
   int _selectedIndex = 0;
-  bool showWeekView = true;
+  bool showWeekView = false;
   Widget _getSelectedView() {
     if (_selectedIndex == 0) {
-      return showWeekView ? const WeekView() : const DayView();
+      return showWeekView ? const DayView() : const WeekView();
     } else {
       return const EditorView();
     }
