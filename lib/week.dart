@@ -15,7 +15,7 @@ class _WeekViewState extends State<WeekView> {
 
   Future<Map<String, dynamic>> fetchWeek() async {
     try {
-      var url = Uri.http('127.0.0.1:3000'); // oder 10.0.2.2:3000
+      var url = Uri.http('10.0.2.2:3000'); // oder 127.0.0.1:3000
       var response = await http.get(url);
       if (response.statusCode == 200) {
         final decResponse = jsonDecode(response.body) as Map<String, dynamic>;
