@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DayView extends StatelessWidget {
   const DayView({super.key});
@@ -50,7 +51,7 @@ class DayStudySync extends StatelessWidget {
   const DayStudySync({super.key});
 
   Future<Map<String, dynamic>> fetchStundenplan() async {
-    var url = Uri.http('127.0.0.1:3000');
+    var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}");
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
