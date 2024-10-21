@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class WeekView extends StatefulWidget {
   const WeekView({super.key});
 
   @override
-  // ignore: library_private_types_in_public_apiF
+  // ignore: library_private_types_in_public_apiF, library_private_types_in_public_api
   _WeekViewState createState() => _WeekViewState();
 }
 
@@ -15,7 +16,7 @@ class _WeekViewState extends State<WeekView> {
 
   Future<Map<String, dynamic>> fetchWeek() async {
     try {
-      var url = Uri.http('10.0.2.2:3000'); // oder 127.0.0.1:3000
+      var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}");
       var response = await http.get(url);
       if (response.statusCode == 200) {
         final decResponse = jsonDecode(response.body) as Map<String, dynamic>;

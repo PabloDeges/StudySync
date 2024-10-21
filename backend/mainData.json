@@ -70,216 +70,268 @@
       "Tuesday": [
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "WT2",
+          "fullname": "Webtechnologien 2",
           "room": "C6-07"
         },
         {
           "name": "WT2",
+          "fullname": "Webtechnologien 2",
           "room": "C6-07"
         },
         {
           "name": "WT2",
+          "fullname": "Webtechnologien 2",
           "room": "C6-07"
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "JP1",
+          "fullname": "Java Programmierung 1",
           "room": "C0-08"
         },
         {
           "name": "JP1",
+          "fullname": "Java Programmierung 1",
           "room": "C0-08"
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         }
       ],
       "Wednesday": [
         {
           "name": "RV",
+          "fullname": "Ringvorlesung",
           "room": "D3-13"
         },
         {
           "name": "RV",
+          "fullname": "Ringvorlesung",
           "room": "D3-13"
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "SK1",
+          "fullname": "Schlüsselkompetenzen 1",
           "room": "D3-13"
         },
         {
           "name": "SK1",
+          "fullname": "Schlüsselkompetenzen 1",
           "room": "D3-13"
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         }
       ],
       "Thursday": [
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "ENG",
+          "fullname": "Englisch für Informatiker",
           "room": "C5-06"
         },
         {
           "name": "ENG",
+          "fullname": "Englisch für Informatiker",
           "room": "C5-06"
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "JP2",
+          "fullname": "Java Programmierung 2",
           "room": "C0-08"
         },
         {
           "name": "JP2",
+          "fullname": "Java Programmierung 2",
           "room": "C0-08"
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "PY2",
+          "fullname":"Programmieren in Python 2",
           "room": "C5-08"
         },
         {
           "name": "PY2",
+          "fullname":"Programmieren in Python 2",
           "room": "C5-08"
         }
       ],
       "Friday": [
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         },
         {
           "name": "",
+          "fullname": "",
           "room": ""
         }
       ]
