@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'week.dart';
 import 'day.dart';
 import 'editor.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const StudySyncApp());
 }
 
@@ -32,10 +34,10 @@ class StudySyncHomePage extends StatefulWidget {
 
 class _StudySyncHomePageState extends State<StudySyncHomePage> {
   int _selectedIndex = 0;
-  bool showWeekView = false;
+  bool showWeekView = true;
   Widget _getSelectedView() {
     if (_selectedIndex == 0) {
-      return showWeekView ? const DayView() : const WeekView();
+      return showWeekView ? const WeekView() : const DayView();
     } else {
       return const EditorView();
     }
@@ -66,8 +68,33 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(showWeekView ? Icons.calendar_view_week : Icons.today),
-            label: showWeekView ? 'Week' : 'Day',
+            icon: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.calendar_view_week,
+                  color: _selectedIndex == 0
+                      ? (showWeekView
+                          ? Colors.blue
+                          : Colors.grey)
+                      : Colors.grey,
+                ),
+                const SizedBox(width: 4),
+                Icon(
+                  Icons.today,
+                  color: _selectedIndex == 0
+                      ? (showWeekView
+                          ? Colors.grey
+                          : Colors.blue)
+                      : Colors.grey,
+                ),
+              ],
+            ),
+            label: _selectedIndex == 0
+                ? (showWeekView
+                    ? 'Week'
+                    : 'Day')
+                : 'Week/Day',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.edit),
@@ -76,6 +103,7 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.lightBlue[800],
+        unselectedItemColor: Colors.grey,
         onTap: (index) {
           if (index == 0 && _selectedIndex == 0) {
             _toggleWeekDay();

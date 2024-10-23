@@ -1,87 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-
-String dummyJsonDataString = '''
-  {
-    "timetable": {
-      "Monday": [
-        { "name": "MI1", "fullname": "Mathematik für Informatiker 1","room": "C0-07" },
-        { "name": "MI1","fullname": "Mathematik für Informatiker 1", "room": "C0-07" },
-        { "name": "ENG","fullname": "Englisch für Informatiker", "room": "C5-06" },
-        { "name": "ENG","fullname": "Englisch für Informatiker", "room": "C5-06" },
-        { "name": "", "fullname": "", "room": "" },
-        { "name": "","fullname": "", "room": "" },
-        { "name": "JP2","fullname": "Java Programmierung 2", "room": "C0-08" },
-        { "name": "JP2","fullname": "Java Programmierung 2", "room": "C0-08" },
-        { "name": "JP2","fullname": "Java Programmierung 2", "room": "C0-08" },
-        { "name": "JP2","fullname": "Java Programmierung 2", "room": "C0-08" },
-        { "name": "","fullname": "", "room": "" },
-        { "name": "PY1","fullname": "Programmieren in Python 1", "room": "C6-08" },
-        { "name": "PY1","fullname": "Programmieren in Python 1", "room": "C6-08" }
-      ],
-      "Tuesday": [
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "WT2", "room": "C6-07" },
-        { "name": "WT2", "room": "C6-07" },
-        { "name": "WT2", "room": "C6-07" },
-        { "name": "", "room": "" },
-        { "name": "JP1", "room": "C0-08" },
-        { "name": "JP1", "room": "C0-08" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" }
-      ],
-      "Wednesday": [
-        { "name": "RV", "room": "D3-13" },
-        { "name": "RV", "room": "D3-13" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "SK1", "room": "D3-13" },
-        { "name": "SK1", "room": "D3-13" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" }
-      ],
-      "Thursday": [
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "ENG", "room": "C5-06" },
-        { "name": "ENG", "room": "C5-06" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "JP2", "room": "C0-08" },
-        { "name": "JP2", "room": "C0-08" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "PY2", "room": "C5-08" },
-        { "name": "PY2", "room": "C5-08" }
-      ],
-      "Friday": [
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" },
-        { "name": "", "room": "" }
-      ]
-    }
-  }
-  ''';
+import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DayView extends StatelessWidget {
   const DayView({super.key});
@@ -102,6 +22,12 @@ class FocussedWeekdayIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    int weekday = now.weekday;
+    List<String> wochentageShort = ['Mo', 'Di', 'Mi', 'Do', 'Fr'];
+    if (weekday > 5) {
+      weekday = 1;
+    }
     return Row(
       children: List.generate(1, (index) {
         return Expanded(
@@ -110,7 +36,7 @@ class FocussedWeekdayIndicator extends StatelessWidget {
             color: Colors.blue,
             child: Center(
               child: Text(
-                ['MO'][index],
+                [wochentageShort[weekday - 1]][index],
                 style: const TextStyle(color: Colors.white),
               ),
             ),
@@ -124,57 +50,116 @@ class FocussedWeekdayIndicator extends StatelessWidget {
 class DayStudySync extends StatelessWidget {
   const DayStudySync({super.key});
 
+  Future<Map<String, dynamic>> fetchStundenplan() async {
+    var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}");
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Fehler beim Aufruf entstanden (Fetch DayView)');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    var stundenplan = jsonDecode(dummyJsonDataString);
-    stundenplan = stundenplan["timetable"];
+    DateTime now = DateTime.now();
+    int weekday = now.weekday;
+
+    List<String> wochentage = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday'
+    ];
+
+    if (weekday > 5) {
+      weekday = 1;
+    }
+
     final double cellHeight =
         (MediaQuery.of(context).size.height - kBottomNavigationBarHeight - 64) /
             13;
-    return Column(
-      children: List.generate(13, (timeOffset) {
-        return Expanded(
-          child: Container(
-            margin: const EdgeInsets.all(1.0),
-            height: cellHeight,
-            color: Colors.grey[((timeOffset % 2) * 100) + 300],
-            child: Stack(
+
+    return FutureBuilder<Map<String, dynamic>>(
+      future: fetchStundenplan(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  child: Text(
-                    ("${8 + timeOffset}:00"),
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 10,
-                    ),
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text(
+                  'Da ist ein Fehler aufgetreten. Probieren Sie es später erneut.',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
                   ),
-                ),
-                Center(
-                  child: Column(children: [
-                    Text(
-                      stundenplan["Monday"][timeOffset]["fullname"],
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      stundenplan["Monday"][timeOffset]["room"],
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 12,
-                      ),
-                    ),
-                  ]),
                 ),
               ],
             ),
-          ),
+          );
+        } else if (!snapshot.hasData || snapshot.data!["timetable"] == null) {
+          return const Center(child: Text('Keine Daten verfügbar'));
+        }
+
+        var stundenplan = snapshot.data!["timetable"];
+
+        return Column(
+          children: List.generate(13, (timeOffset) {
+            return Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(1.0),
+                height: cellHeight,
+                color: Colors.grey[((timeOffset % 2) * 100) + 300],
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Text(
+                        ("${8 + timeOffset}:00"),
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Column(children: [
+                        Text(
+                          stundenplan[wochentage[weekday - 1]][timeOffset]
+                                  ?["fullname"] ??
+                              'Fehler beim Laden',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          stundenplan[wochentage[weekday - 1]][timeOffset]
+                                  ?["room"] ??
+                              'Fehler beim Laden',
+                          style: TextStyle(
+                            color: Colors.grey[800],
+                            fontSize: 12,
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
         );
-      }),
+      },
     );
   }
 }
