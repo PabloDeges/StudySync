@@ -5,6 +5,7 @@ const pool = require("./model/db.js")
 
 require("dotenv").config();
 const app = express();
+const schema = process.env.DBSCHEMA;
 
 app.use(cors());
 
@@ -17,3 +18,13 @@ app.listen(process.env.PORT, () => {
 pool.connect()
     .then(()=> console.log("DB erreicht"))
     .catch(err => console.error("Fehler DB", err.stack))
+    .then(async () => console.log(await testForSchema()))
+
+async function testForSchema() {
+    if((await pool.query(`SELECT schema_name FROM information_schema.schemata WHERE schema_name = '${schema}'`)).rowCount == 1) {
+        return pool.query("SET Search_Path TO " + schema)
+            .then(() => "Schema \"" + schema + "\" eingestellt")
+            .catch(() => "Fehler beim einstellen des Schemas \"" + schema + "\"");
+    }
+    return "Schema \"" + schema + "\" nicht gefunden";
+}

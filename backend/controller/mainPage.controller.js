@@ -1,4 +1,3 @@
-//const dataFormat = require("../model/mainPage.model.js");
 const fs = require("fs");
 
 const mainPageDisplayInfos = async (req, res) => {
