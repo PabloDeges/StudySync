@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require("cors");
 const mainPage = require("./route/mainPage.route.js")
-const pool = require("./model/db.js")
+const pool = require("./model/db.js");
+const { putJsonDataInDb } = require('./controller/mainPage.controller.js');
 
 require("dotenv").config();
 const app = express();
@@ -18,9 +19,11 @@ app.listen(process.env.PORT, () => {
 pool.connect()
     .then(()=> console.log("DB erreicht"))
     .catch(err => console.error("Fehler DB", err.stack))
-    .then(async () => console.log(await testForSchema()))
+    .then(async () => console.log(await changeToSchema()))
+    //nur einkommentieren, wenn inhalte der json in die db geladen werden sollen
+    //.then(async () => console.log(await putJsonDataInDb()))
 
-async function testForSchema() {
+async function changeToSchema() {
     if((await pool.query(`SELECT schema_name FROM information_schema.schemata WHERE schema_name = '${schema}'`)).rowCount == 1) {
         return pool.query("SET Search_Path TO " + schema)
             .then(() => "Schema \"" + schema + "\" eingestellt")
