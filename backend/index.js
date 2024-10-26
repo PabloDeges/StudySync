@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require("cors");
 const mainPage = require("./route/mainPage.route.js")
 const pool = require("./model/db.js");
-const { putJsonDataInDb } = require('./controller/mainPage.controller.js');
+const { putJsonDataInDb } = require('./controller/db.controller.js');
 
 require("dotenv").config();
 const app = express();
