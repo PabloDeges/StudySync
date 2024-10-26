@@ -44,6 +44,7 @@ class _EditorViewState extends State<EditorView> {
           enableFilter: true,
           // onSelected: (String value) => , add functionality later
           dropdownMenuEntries: fachbereichAuswahl),
+      const SizedBox(height: 10),
       DropdownMenu<String>(
           width: 320,
           label: const Text("Semester"),
@@ -52,16 +53,19 @@ class _EditorViewState extends State<EditorView> {
           // onSelected: (String value) => , add functionality later
           dropdownMenuEntries: semesterAuswahl),
       Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: kurse.map((kurs) {
-        return CheckboxListTile(
-            title: Text(kurs["name"]),
-            value: kurs["isChecked"],
-            onChanged: (val) {
-              setState(() {
-                kurs["isChecked"] = val;
-              });
-            });
-      }).toList()),
+            return SizedBox(
+                width: 300,
+                child: CheckboxListTile(
+                    title: Text(kurs["name"]),
+                    value: kurs["isChecked"],
+                    onChanged: (val) {
+                      setState(() {
+                        kurs["isChecked"] = val;
+                      });
+                    }));
+          }).toList()),
       TextButton(
         style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
