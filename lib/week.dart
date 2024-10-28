@@ -38,7 +38,7 @@ class _WeekViewState extends State<WeekView> {
   @override
   Widget build(BuildContext context) {
     final double cellHeight =
-        (MediaQuery.of(context).size.height - kBottomNavigationBarHeight - 80) /
+        (MediaQuery.of(context).size.height - kBottomNavigationBarHeight - 86) /
             13;
 
     final List weekdays = [
@@ -93,7 +93,7 @@ class _WeekViewState extends State<WeekView> {
                           child: Container(
                             margin: const EdgeInsets.all(1.0),
                             height: cellHeight,
-                            color: Colors.grey[((timeOffset % 2) * 100) + 300],
+                            color: timeOffset % 2 == 0 ? const Color(0xFF29ADB2) : const Color(0xFF0766AD),
                             child: Stack(
                               children: [
                                 Positioned(
@@ -102,30 +102,31 @@ class _WeekViewState extends State<WeekView> {
                                   child: Text(
                                     "${8 + timeOffset}:00",
                                     style: const TextStyle(
-                                      color: Colors.grey,
+                                      color: Colors.white,
                                       fontSize: 10,
                                     ),
                                   ),
                                 ),
                                 Center(
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        timeData?["name"] ?? "No Data",
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          timeData?["name"] ?? "No Data",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        timeData?["room"] ?? "No Room",
-                                        style: TextStyle(
-                                          color: Colors.grey[800],
-                                          fontSize: 10,
+                                        Text(
+                                          timeData?["room"] ?? "No Room",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
                                   ),
                                 ),
                               ],
@@ -152,16 +153,25 @@ class WeekdayIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int currentDayIndex = DateTime.now().weekday - 1;
     return Row(
       children: List.generate(5, (index) {
         return Expanded(
           child: Container(
             padding: const EdgeInsets.all(4.0),
-            color: Colors.blue,
+            margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 3.0),
+            decoration: BoxDecoration(
+              color: index == currentDayIndex
+                  ? const Color(0xFFC5E898)
+                  : Colors.grey,
+              borderRadius: BorderRadius.circular(5.0),
+            ),
             child: Center(
               child: Text(
                 ['MO', 'DI', 'MI', 'DO', 'FR'][index],
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
