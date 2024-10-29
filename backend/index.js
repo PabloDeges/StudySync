@@ -21,6 +21,5 @@ app.listen(process.env.PORT, () => {
 pool.connect()
     .then(()=> console.log("DB erreicht"))
     .catch(err => console.error("Fehler DB", err.stack))
-    .then(async () => console.log(await changeToSchema()))
     //nur einkommentieren, wenn inhalte der json in die db geladen werden sollen
     //.then(async () => console.log(await putJsonDataInDb()))

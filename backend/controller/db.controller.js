@@ -89,14 +89,14 @@ async function putJsonDataInDb() {
 	return "Datenbank befuellt";
 }
 
-async function changeToSchema() {
+const changeToSchema = async(req, res, next) => {
 	const schema = process.env.DBSCHEMA;
     if((await pool.query(`SELECT schema_name FROM information_schema.schemata WHERE schema_name = '${schema}'`)).rowCount == 1) {
-        return pool.query("SET Search_Path TO " + schema)
+        await pool.query("SET Search_Path TO " + schema)
             .then(() => "Schema \"" + schema + "\" eingestellt")
             .catch(() => "Fehler beim einstellen des Schemas \"" + schema + "\"");
     }
-    return "Schema \"" + schema + "\" nicht gefunden";
+	next();
 }
 
 module.exports = {
