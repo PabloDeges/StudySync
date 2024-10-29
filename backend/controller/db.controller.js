@@ -1,6 +1,8 @@
 const fs = require("fs");
 const pool = require("../model/db");
 
+require("dotenv").config();
+
 async function putJsonDataInDb() {
 	let data = readJsonFile("./stundenplaene.json")["stundenplaene"];
 	let currentStudy, currentStudyName, currentStudyType, currentSemester;
@@ -26,12 +28,12 @@ async function putJsonDataInDb() {
 		}
 
 		//pruefe, ob ein studiengang mit dem aktuellen namen bereits eine id in der db hat
-		if ((await pool.query(`SELECT COUNT(id) FROM studiengang WHERE studiengangname='${currentStudyName}' AND studiengangart ='${currentStudyType}';`)).rows[0].count == 0) {
+		if ((await pool.query(`SELECT COUNT(id) FROM studiengang WHERE studiengangname='${currentStudyName}' AND studiengangart='${currentStudyType}';`)).rows[0].count == 0) {
 			//existiert keine id fuer den entsprechenden namen, wird ein neuer eintrag hinzugefuegt
 			await pool.query(`INSERT INTO studiengang (studiengangname, studiengangart) VALUES ('${currentStudyName}','${currentStudyType}');`);
 		}
 		//die id des zuvor, oder nun existierende eintrags mit dem aktuellen namen wird aus der db geholt
-		currentStudyId = (await pool.query(`SELECT id FROM studiengang WHERE studiengangname='${currentStudyName}';`)).rows[0].id;
+		currentStudyId = (await pool.query(`SELECT id FROM studiengang WHERE studiengangname='${currentStudyName}' AND studiengangart='${currentStudyType}';`)).rows[0].id;
 		
 
 		currentSemester = currentStudy[0];
@@ -87,8 +89,19 @@ async function putJsonDataInDb() {
 	return "Datenbank befuellt";
 }
 
+async function changeToSchema() {
+	const schema = process.env.DBSCHEMA;
+    if((await pool.query(`SELECT schema_name FROM information_schema.schemata WHERE schema_name = '${schema}'`)).rowCount == 1) {
+        return pool.query("SET Search_Path TO " + schema)
+            .then(() => "Schema \"" + schema + "\" eingestellt")
+            .catch(() => "Fehler beim einstellen des Schemas \"" + schema + "\"");
+    }
+    return "Schema \"" + schema + "\" nicht gefunden";
+}
+
 module.exports = {
-	putJsonDataInDb
+	putJsonDataInDb,
+	changeToSchema
 };
 
 function readJsonFile(filePath) {
