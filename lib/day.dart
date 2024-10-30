@@ -23,22 +23,32 @@ class FocussedWeekdayIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
+    int day = now.day;
+    int month = now.month;
+    int year = now.year;
+    String dateShow = "$day.$month.$year";
+    double widthDisplay = MediaQuery.sizeOf(context).width;
     int weekday = now.weekday;
     List<String> wochentageShort = ['Mo', 'Di', 'Mi', 'Do', 'Fr'];
     if (weekday > 5) {
       weekday = 1;
     }
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(1, (index) {
-        return Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(4.0),
-            color: Colors.blue,
-            child: Center(
-              child: Text(
-                [wochentageShort[weekday - 1]][index],
-                style: const TextStyle(color: Colors.white),
-              ),
+        return Container(
+          width: widthDisplay - 20,
+          padding: const EdgeInsets.all(4.0),
+          margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+          decoration: BoxDecoration(
+            color:const Color(0xFFC5E898),
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          child: Center(
+            child: Text(
+              "${[wochentageShort[weekday - 1]][index]} - $dateShow",
+              style: const TextStyle(color: Colors.white, fontSize: 22),
+
             ),
           ),
         );
@@ -81,6 +91,7 @@ class DayStudySync extends StatelessWidget {
     final double cellHeight =
         (MediaQuery.of(context).size.height - kBottomNavigationBarHeight - 64) /
             13;
+        double widthDisplay = MediaQuery.sizeOf(context).width;
 
     return FutureBuilder<Map<String, dynamic>>(
       future: fetchStundenplan(),
@@ -114,19 +125,21 @@ class DayStudySync extends StatelessWidget {
           children: List.generate(13, (timeOffset) {
             return Expanded(
               child: Container(
-                margin: const EdgeInsets.all(1.0),
                 height: cellHeight,
-                color: Colors.grey[((timeOffset % 2) * 100) + 300],
+                width: widthDisplay - 20,
+                color: timeOffset % 2 == 0
+                    ? const Color(0xFF29ADB2)
+                    : const Color(0xFF0766AD),
                 child: Stack(
                   children: [
                     Positioned(
-                      top: 0,
-                      left: 0,
+                      top: 5,
+                      left: 5,
                       child: Text(
                         ("${8 + timeOffset}:00"),
                         style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 10,
+                          color: Colors.white,
+                          fontSize: 12,
                         ),
                       ),
                     ),
@@ -137,7 +150,7 @@ class DayStudySync extends StatelessWidget {
                                   ?["fullname"] ??
                               'Fehler beim Laden',
                           style: const TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
@@ -146,8 +159,8 @@ class DayStudySync extends StatelessWidget {
                           stundenplan[wochentage[weekday - 1]][timeOffset]
                                   ?["room"] ??
                               'Fehler beim Laden',
-                          style: TextStyle(
-                            color: Colors.grey[800],
+                          style: const TextStyle(
+                            color: Colors.white,
                             fontSize: 12,
                           ),
                         ),
