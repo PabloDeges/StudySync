@@ -76,9 +76,9 @@ class _EditorViewState extends State<EditorView> {
   late Future<List<dynamic>> _semesterAuswahl = Future.value([
     {"id": 0, "semesterkennung": "-"}
   ]);
-  // late Future<List<dynamic>> _kursAuswahl = Future.value([
-  //   {"id": 0, "semesterkennung": "wähle zuerst einen Studiengang aus!"}
-  // ]);
+  late Future<List<dynamic>> _kursAuswahl = Future.value([
+    {"id": 1, "kursname": "-"}
+  ]);
 
   bool showSemesterAuswahl = false;
   bool showKursAuswahl = false;
@@ -169,6 +169,52 @@ class _EditorViewState extends State<EditorView> {
             return const CircularProgressIndicator();
           }),
       SizedBox(height: 50),
+      FutureBuilder<List<dynamic>>(
+          future: _kursAuswahl,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            }
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return const Text("KURSAUSWAHL BUILDER HATTE  EINEN FEHLER");
+              }
+              if (snapshot.hasData &&
+                  snapshot.data != null &&
+                  !showKursAuswahl) {
+                // zustand bevor ein semester ausgewählt wurde
+                return const Text("wähle zunächst ein Semester aus");
+              }
+              if (snapshot.hasData &&
+                  snapshot.data != null &&
+                  showKursAuswahl) {
+                // standardcase
+                return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: kurse.map((kurs) {
+            return SizedBox(
+                width: 300,
+                child: CheckboxListTile(
+                    title: Text(kurs["name"]),
+                    value: kurs["isChecked"],
+                    onChanged: (val) {
+                      setState(() {
+                        kurs["isChecked"] = val;
+                      });
+                    }));
+          }).toList()),
+      TextButton(
+        style: ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
+            foregroundColor:
+                MaterialStatePropertyAll<Color>(Color(0xffffffff))),
+        onPressed: _kursAuswahlSpeichern,
+        child: Text("Auswahl Speichern"),
+      )
+              }
+            }
+            return const CircularProgressIndicator();
+          }),
     ]));
   }
 }
