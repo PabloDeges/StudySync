@@ -28,8 +28,8 @@ class _EditorViewState extends State<EditorView> {
       List<dynamic> data) {
     List<DropdownMenuEntry<String>> tempList = [];
     for (var x in data) {
-      tempList
-          .add(DropdownMenuEntry(value: x['id'], label: x['semesterkennung']));
+      tempList.add(DropdownMenuEntry(
+          value: x['id'].toString(), label: x['semesterkennung']));
     }
     return tempList;
   }
@@ -48,10 +48,12 @@ class _EditorViewState extends State<EditorView> {
 
   Future<List<dynamic>> fetchSemesterVonStudiengaenge(var id) async {
     var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
-        '/auswahlmenue/semester/{$id}');
+        '/auswahlmenue/semester/$id');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
+      setState(() {});
+      showSemesterAuswahl = true;
       return jsonDecode(response.body);
     } else {
       throw Exception('Fehler beim Aufruf entstanden (Fetch Semester)');
@@ -60,7 +62,7 @@ class _EditorViewState extends State<EditorView> {
 
   Future<List<dynamic>> fetchKurseVonSemester(var semesterId) async {
     var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
-        '/auswahlmenue/kurse/{$semesterId}');
+        '/auswahlmenue/kurse/$semesterId');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -72,8 +74,14 @@ class _EditorViewState extends State<EditorView> {
 
   late Future<List<dynamic>> _studiengangAuswahl;
   late Future<List<dynamic>> _semesterAuswahl = Future.value([
-    {""}
+    {"id": 0, "semesterkennung": "-"}
   ]);
+  // late Future<List<dynamic>> _kursAuswahl = Future.value([
+  //   {"id": 0, "semesterkennung": "wähle zuerst einen Studiengang aus!"}
+  // ]);
+
+  bool showSemesterAuswahl = false;
+  bool showKursAuswahl = false;
 
   @override
   void initState() {
@@ -104,7 +112,6 @@ class _EditorViewState extends State<EditorView> {
                     menuHeight: 200,
                     width: 320,
                     label: const Text("Studiengang"),
-                    helperText: 'Studiengang auswählen',
                     enableFilter: true,
                     onSelected: (value) => {
                           _semesterAuswahl =
@@ -115,17 +122,35 @@ class _EditorViewState extends State<EditorView> {
             }
             return const CircularProgressIndicator();
           }),
+      SizedBox(height: 50),
       FutureBuilder<List<dynamic>>(
           future: _semesterAuswahl,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const SizedBox(height: 200);
+              return CircularProgressIndicator();
             }
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
-                return const Text("Fehler");
+                return const Text(
+                    "SEMESTERAUSWAHL BUILDER HATTE  EINEN FEHLER");
               }
-              if (snapshot.hasData && snapshot.data != null) {
+              if (snapshot.hasData &&
+                  snapshot.data != null &&
+                  !showSemesterAuswahl) {
+                // zustand bevor ein studiengang ausgewählt wurde
+
+                return DropdownMenu<String>(
+                  menuHeight: 200,
+                  width: 320,
+                  label: const Text("Semester"),
+                  enableFilter: true,
+                  dropdownMenuEntries: [],
+                  helperText: "Wähle zuerst einen Studiengang aus",
+                );
+              }
+              if (snapshot.hasData &&
+                  snapshot.data != null &&
+                  showSemesterAuswahl) {
                 // standardcase
 
                 List<DropdownMenuEntry<String>> semester =
@@ -135,7 +160,6 @@ class _EditorViewState extends State<EditorView> {
                     menuHeight: 200,
                     width: 320,
                     label: const Text("Semester"),
-                    helperText: 'Semester auswählen',
                     enableFilter: true,
                     onSelected: (value) =>
                         {_semesterAuswahl = fetchKurseVonSemester(value)},
@@ -144,6 +168,7 @@ class _EditorViewState extends State<EditorView> {
             }
             return const CircularProgressIndicator();
           }),
+      SizedBox(height: 50),
     ]));
   }
 }
