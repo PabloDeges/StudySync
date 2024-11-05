@@ -54,6 +54,7 @@ class _EditorViewState extends State<EditorView> {
     if (response.statusCode == 200) {
       setState(() {});
       showSemesterAuswahl = true;
+      showKursAuswahl = false;
       return jsonDecode(response.body);
     } else {
       throw Exception('Fehler beim Aufruf entstanden (Fetch Semester)');
@@ -66,6 +67,8 @@ class _EditorViewState extends State<EditorView> {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
+      setState(() {});
+      showKursAuswahl = true;
       return jsonDecode(response.body);
     } else {
       throw Exception('Fehler beim Aufruf entstanden (Fetch Kurse)');
@@ -162,7 +165,7 @@ class _EditorViewState extends State<EditorView> {
                     label: const Text("Semester"),
                     enableFilter: true,
                     onSelected: (value) =>
-                        {_semesterAuswahl = fetchKurseVonSemester(value)},
+                        {_kursAuswahl = fetchKurseVonSemester(value)},
                     dropdownMenuEntries: semester);
               }
             }
@@ -183,34 +186,44 @@ class _EditorViewState extends State<EditorView> {
                   snapshot.data != null &&
                   !showKursAuswahl) {
                 // zustand bevor ein semester ausgewählt wurde
-                return const Text("wähle zunächst ein Semester aus");
+                return SizedBox();
               }
               if (snapshot.hasData &&
                   snapshot.data != null &&
                   showKursAuswahl) {
+                var kurse = snapshot.data!;
+                for (var x in kurse) {
+                  x["checked"] =
+                      false; //fügt das feld checked hinzu, damit nachher ausgewertet werden kann
+                }
                 // standardcase
-                return Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: kurse.map((kurs) {
-            return SizedBox(
-                width: 300,
-                child: CheckboxListTile(
-                    title: Text(kurs["name"]),
-                    value: kurs["isChecked"],
-                    onChanged: (val) {
-                      setState(() {
-                        kurs["isChecked"] = val;
-                      });
-                    }));
-          }).toList()),
-      TextButton(
-        style: ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
-            foregroundColor:
-                MaterialStatePropertyAll<Color>(Color(0xffffffff))),
-        onPressed: _kursAuswahlSpeichern,
-        child: Text("Auswahl Speichern"),
-      )
+                return StatefulBuilder(
+                    builder: (BuildContext context, StateSetter setState) {
+                  return ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height / 2),
+                      child: Scrollbar(
+                        thumbVisibility: true,
+                        child: SingleChildScrollView(
+                            clipBehavior: Clip.antiAlias,
+                            padding: EdgeInsets.all(8),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: kurse.map((kurs) {
+                                  return SizedBox(
+                                      width: MediaQuery.of(context).size.width -
+                                          40,
+                                      child: CheckboxListTile(
+                                          title: Text(kurs["kursname"]),
+                                          value: kurs["checked"],
+                                          onChanged: (val) {
+                                            setState(() {
+                                              kurs["checked"] = val;
+                                            });
+                                          }));
+                                }).toList())),
+                      ));
+                });
               }
             }
             return const CircularProgressIndicator();
