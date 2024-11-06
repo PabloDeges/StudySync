@@ -41,14 +41,13 @@ class FocussedWeekdayIndicator extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
           decoration: BoxDecoration(
-            color:const Color(0xFFC5E898),
+            color: const Color(0xFFC5E898),
             borderRadius: BorderRadius.circular(5.0),
           ),
           child: Center(
             child: Text(
               "${[wochentageShort[weekday - 1]][index]} - $dateShow",
               style: const TextStyle(color: Colors.white, fontSize: 22),
-
             ),
           ),
         );
@@ -61,13 +60,19 @@ class DayStudySync extends StatelessWidget {
   const DayStudySync({super.key});
 
   Future<Map<String, dynamic>> fetchStundenplan() async {
-    var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}");
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Fehler beim Aufruf entstanden (Fetch DayView)');
+    try {
+      var params = {'userid': '1'};
+      var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
+          '/stundenplan', params);
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        final decResponse = jsonDecode(response.body) as Map<String, dynamic>;
+        return decResponse;
+      } else {
+        throw ErrorDescription("responsecode != 200");
+      }
+    } catch (error) {
+      throw Exception("Fehler beim Laden der Woche");
     }
   }
 
@@ -77,12 +82,25 @@ class DayStudySync extends StatelessWidget {
     int weekday = now.weekday;
 
     List<String> wochentage = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday'
+      'Montag',
+      'Dienstag',
+      'Mittwoch',
+      'Donnerstag',
+      'Freitag'
     ];
+
+    String supplyDataToCell(timetable, day, time, data) {
+      String kuerzel = "";
+      try {
+        kuerzel = timetable
+            .where((x) =>
+                x['wochentag'] == wochentage[day] &&
+                x['startzeit'] == (8 + time) * 100)
+            .toList()[0][data];
+      } catch (x) {}
+
+      return kuerzel;
+    }
 
     if (weekday > 5) {
       weekday = 1;
@@ -91,7 +109,7 @@ class DayStudySync extends StatelessWidget {
     final double cellHeight =
         (MediaQuery.of(context).size.height - kBottomNavigationBarHeight - 64) /
             13;
-        double widthDisplay = MediaQuery.sizeOf(context).width;
+    double widthDisplay = MediaQuery.sizeOf(context).width;
 
     return FutureBuilder<Map<String, dynamic>>(
       future: fetchStundenplan(),
@@ -115,11 +133,11 @@ class DayStudySync extends StatelessWidget {
               ],
             ),
           );
-        } else if (!snapshot.hasData || snapshot.data!["timetable"] == null) {
+        } else if (!snapshot.hasData) {
           return const Center(child: Text('Keine Daten verfügbar'));
         }
 
-        var stundenplan = snapshot.data!["timetable"];
+        var timetable = snapshot.data!['data'];
 
         return Column(
           children: List.generate(13, (timeOffset) {
@@ -146,24 +164,30 @@ class DayStudySync extends StatelessWidget {
                     Center(
                       child: Column(children: [
                         Text(
-                          stundenplan[wochentage[weekday - 1]][timeOffset]
-                                  ?["fullname"] ??
-                              'Fehler beim Laden',
+                          supplyDataToCell(
+                              timetable, weekday - 1, timeOffset, 'kursname'),
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 22,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          stundenplan[wochentage[weekday - 1]][timeOffset]
-                                  ?["room"] ??
-                              'Fehler beim Laden',
+                          supplyDataToCell(
+                              timetable, weekday - 1, timeOffset, 'raum'),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 12,
                           ),
                         ),
+                        // Text(
+                        //   supplyDataToCell(
+                        //       timetable, weekday - 1, timeOffset, 'dozname'),
+                        //   style: const TextStyle(
+                        //     color: Colors.white,
+                        //     fontSize: 12,
+                        //   ),
+                        // ),
                       ]),
                     ),
                   ],
