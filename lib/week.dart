@@ -34,7 +34,28 @@ class WeeklySchedule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    final List<String> weekdays = [
+      "Montag",
+      "Dienstag",
+      "Mittwoch",
+      "Donnerstag",
+      "Freitag"
+    ];
+
+    String supplyDataToCell(timetable, day, time, data) {
+      String kuerzel = "";
+      try {
+        kuerzel = timetable
+            .where((x) =>
+                x['wochentag'] == weekdays[day] &&
+                x['startzeit'] == (8 + time) * 100)
+            .toList()[0][data]
+            .toUpperCase();
+      } catch (x) {}
+
+      return kuerzel;
+    }
+
     return FutureBuilder<Map<String, dynamic>>(
       future: fetchWeek(),
       builder: (context, snapshot) {
@@ -57,11 +78,11 @@ class WeeklySchedule extends StatelessWidget {
               ],
             ),
           );
-        } else if (!snapshot.hasData || snapshot.data!["timetable"] == null) {
+        } else if (!snapshot.hasData) {
           return const Center(child: Text('Keine Daten verfügbar.'));
         }
 
-        final timetable = snapshot.data!["timetable"];
+        final timetable = snapshot.data!["data"];
 
         return Column(
           children: [
@@ -72,13 +93,12 @@ class WeeklySchedule extends StatelessWidget {
                   return Expanded(
                     child: Row(
                       children: List.generate(5, (day) {
-                        var dayData = timetable[weekdays[day]];
-                        var timeData = dayData != null && dayData.length > timeOffset ? dayData[timeOffset] : null;
-
                         return Expanded(
                           child: Container(
                             margin: const EdgeInsets.all(1.0),
-                            color: timeOffset % 2 == 0 ? const Color(0xFF29ADB2) : const Color(0xFF0766AD),
+                            color: timeOffset % 2 == 0
+                                ? const Color(0xFF29ADB2)
+                                : const Color(0xFF0766AD),
                             child: Stack(
                               children: [
                                 Positioned(
@@ -97,16 +117,18 @@ class WeeklySchedule extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        timeData?["name"] ?? "No Data",
-                                        style: const TextStyle(
+                                        supplyDataToCell(timetable, day,
+                                            timeOffset, 'kurskuerzel'),
+                                        style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       Text(
-                                        timeData?["room"] ?? "No Room",
-                                        style: const TextStyle(
+                                        supplyDataToCell(
+                                            timetable, day, timeOffset, 'raum'),
+                                        style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 10,
                                         ),
