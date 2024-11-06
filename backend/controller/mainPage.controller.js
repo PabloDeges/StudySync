@@ -12,7 +12,7 @@ const mainPageDisplayInfos = async (req, res) => {
 
 const getStundenplan = async (req, res) => {
 	try {
-		let userid = req.body.userid;
+		let userid = req.query.userid;
 		let daten = (await pool.query(`SELECT t.id AS terminid, k.kursname, k.kurskuerzel, d.dozname, d.dozkuerzel, t.terminart, t.wochentag, t.startzeit, t.dauer, t.raum, bt.terminstartverzoegerung, bt.kommentar FROM termin AS t LEFT JOIN benutzer_termin AS bt ON t.id = bt.terminid LEFT JOIN doz AS d ON t.dozid = d.id LEFT JOIN kurs AS k ON t.kursid = k.id WHERE bt.benutzerid = ${userid};`)).rows;
 		let startzeit, terminstartverzoegerung;
 		//terminstartverzoegerung wird auf die startzeit gerechnet und anschliessend aus dem datensatz entfernt
@@ -25,7 +25,7 @@ const getStundenplan = async (req, res) => {
 			daten[i].startzeit = startzeit;
 			delete daten[i].terminstartverzoegerung;
 		}
-		res.status(200).json(daten);
+		res.status(200).json({'data' : daten});
 	} catch (err) {
 		res.status(500).json({ message: err.message });
 	}

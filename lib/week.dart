@@ -16,13 +16,15 @@ class _WeekViewState extends State<WeekView> {
 
   Future<Map<String, dynamic>> fetchWeek() async {
     try {
-      var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}");
+      var params = {'userid': '1'};
+      var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
+          '/stundenplan', params);
       var response = await http.get(url);
       if (response.statusCode == 200) {
         final decResponse = jsonDecode(response.body) as Map<String, dynamic>;
         return decResponse;
       } else {
-        throw Error();
+        throw ErrorDescription("responsecode != 200");
       }
     } catch (error) {
       throw Error();
