@@ -4,6 +4,7 @@ const pool = require("../model/db");
 require("dotenv").config();
 
 async function putJsonDataInDb() {
+	await selectSchema();
 	let data = readJsonFile("./stundenplaene.json")["stundenplaene"];
 	let currentStudy, currentStudyName, currentStudyType, currentSemester;
 	let currentKurs, currentDoz;
@@ -90,12 +91,7 @@ async function putJsonDataInDb() {
 }
 
 const changeToSchema = async(req, res, next) => {
-	const schema = process.env.DBSCHEMA;
-    if((await pool.query(`SELECT schema_name FROM information_schema.schemata WHERE schema_name = '${schema}'`)).rowCount == 1) {
-        await pool.query("SET Search_Path TO " + schema)
-            .then(() => "Schema \"" + schema + "\" eingestellt")
-            .catch(() => "Fehler beim einstellen des Schemas \"" + schema + "\"");
-    }
+	await selectSchema();
 	next();
 }
 
@@ -108,4 +104,13 @@ function readJsonFile(filePath) {
 	const data = fs.readFileSync(filePath, "utf8");
 	const jsonData = JSON.parse(data);
 	return jsonData;
+}
+
+async function selectSchema() {
+	const schema = process.env.DBSCHEMA;
+    if((await pool.query(`SELECT schema_name FROM information_schema.schemata WHERE schema_name = '${schema}'`)).rowCount == 1) {
+        await pool.query("SET Search_Path TO " + schema)
+            .then(() => "Schema \"" + schema + "\" eingestellt")
+            .catch(() => "Fehler beim einstellen des Schemas \"" + schema + "\"");
+    }
 }
