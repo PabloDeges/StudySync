@@ -147,7 +147,9 @@ class _EditorViewState extends State<EditorView> {
                       enableFilter: true,
                       onSelected: (value) => {
                             _semesterAuswahl =
-                                fetchSemesterVonStudiengaenge(value)
+                                fetchSemesterVonStudiengaenge(value),
+                            currentSemesterid =
+                                "", // bei neuauswahl clearen, damit keine falschen posts und datenbankfehler entstehen
                           },
                       dropdownMenuEntries: studiengaenge);
                 }
