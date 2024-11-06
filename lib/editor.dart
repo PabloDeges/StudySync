@@ -12,6 +12,20 @@ class EditorView extends StatefulWidget {
 }
 
 class _EditorViewState extends State<EditorView> {
+  Widget saveButton() {
+    return showKursAuswahl == true
+        ? TextButton(
+            onPressed: () => _checkboxenAuswerten(userselectedKurse),
+            child: Text(
+              "Auswahl Speichern",
+              style: TextStyle(color: Colors.white),
+            ),
+            style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.blue)),
+          )
+        : Container();
+  }
+
   Future<http.Response> postKursauswahl(List<dynamic> auswahlen) {
     return http.post(
       Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
@@ -269,15 +283,7 @@ class _EditorViewState extends State<EditorView> {
               }
               return const CircularProgressIndicator();
             }),
-        TextButton(
-          onPressed: () => _checkboxenAuswerten(userselectedKurse),
-          child: Text(
-            "Auswahl Speichern",
-            style: TextStyle(color: Colors.white),
-          ),
-          style:
-              ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.blue)),
-        )
+        saveButton()
       ]),
     );
   }
