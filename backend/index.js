@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json())
 
 app.use("/",mainPage);
-app.use("/auswahlmenue",auswahlemenue);
+app.use("/auswahlmenue", changeToSchema, auswahlemenue);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server läuft http://localhost:${process.env.PORT}`);

@@ -4,12 +4,12 @@ const { changeToSchema } = require("../controller/db.controller");
 const router = express.Router();
 
 
-router.get("/studiengaenge", changeToSchema,getStudiengaenge);
+router.get("/studiengaenge",getStudiengaenge);
 
-router.get("/semester/:studiengangid", changeToSchema, getSemesterZuStudiengang);
+router.get("/semester/:studiengangid", getSemesterZuStudiengang);
 
-router.get("/kurse/:semesterid", changeToSchema, getKurseZuSemester);
+router.get("/kurse/:semesterid", getKurseZuSemester);
 
-router.post("/kurse", changeToSchema, kurseAnwaehlen);
+router.post("/kurse", kurseAnwaehlen);
 
 module.exports = router;
