@@ -75,7 +75,7 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
                   Icons.calendar_view_week,
                   color: _selectedIndex == 0
                       ? (showWeekView
-                          ? Colors.blue
+                          ? const Color(0xFF0766AD)
                           : Colors.grey)
                       : Colors.grey,
                 ),
@@ -85,7 +85,7 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
                   color: _selectedIndex == 0
                       ? (showWeekView
                           ? Colors.grey
-                          : Colors.blue)
+                          : const Color(0xFF0766AD))
                       : Colors.grey,
                 ),
               ],
@@ -102,7 +102,7 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.lightBlue[800],
+        selectedItemColor: const Color(0xFF0766AD),
         unselectedItemColor: Colors.grey,
         onTap: (index) {
           if (index == 0 && _selectedIndex == 0) {
