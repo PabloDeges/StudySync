@@ -12,7 +12,35 @@ class EditorView extends StatefulWidget {
 }
 
 class _EditorViewState extends State<EditorView> {
-  void _kursAuswahlSpeichern() {}
+  Future<http.Response> postKursauswahl(List<dynamic> auswahlen) {
+    return http.post(
+      Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
+          '/auswahlmenue/kurse'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'userid': '1',
+        'semesterid': currentSemesterid,
+        'kursids': jsonEncode(auswahlen),
+      }),
+    );
+  }
+
+  void _checkboxenAuswerten(List<dynamic> auswahlen) {
+    List<dynamic> gefilterteAuswahlen = [];
+    for (var x in auswahlen) {
+      if (x["checked"]) {
+        gefilterteAuswahlen.add(x);
+      }
+    }
+
+    if (gefilterteAuswahlen.isNotEmpty && currentSemesterid.isNotEmpty) {
+      postKursauswahl(gefilterteAuswahlen);
+    }
+  }
+
+  List<dynamic> userselectedKurse = [];
 
   List<DropdownMenuEntry<String>> convertStudiengaengeToDropdowns(
       List<dynamic> data) {
@@ -85,6 +113,7 @@ class _EditorViewState extends State<EditorView> {
 
   bool showSemesterAuswahl = false;
   bool showKursAuswahl = false;
+  late String currentSemesterid;
 
   @override
   void initState() {
@@ -94,140 +123,160 @@ class _EditorViewState extends State<EditorView> {
 
   Widget build(BuildContext context) {
     return Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      FutureBuilder<List<dynamic>>(
-          future: _studiengangAuswahl,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        FutureBuilder<List<dynamic>>(
+            future: _studiengangAuswahl,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              }
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text("Fehler");
+                }
+                if (snapshot.hasData && snapshot.data != null) {
+                  // standardcase
+
+                  List<DropdownMenuEntry<String>> studiengaenge =
+                      convertStudiengaengeToDropdowns(snapshot.data!);
+
+                  return DropdownMenu<String>(
+                      menuHeight: 200,
+                      width: 320,
+                      label: const Text("Studiengang"),
+                      enableFilter: true,
+                      onSelected: (value) => {
+                            _semesterAuswahl =
+                                fetchSemesterVonStudiengaenge(value)
+                          },
+                      dropdownMenuEntries: studiengaenge);
+                }
+              }
               return const CircularProgressIndicator();
-            }
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return const Text("Fehler");
+            }),
+        SizedBox(height: 50),
+        FutureBuilder<List<dynamic>>(
+            future: _semesterAuswahl,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
               }
-              if (snapshot.hasData && snapshot.data != null) {
-                // standardcase
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text(
+                      "SEMESTERAUSWAHL BUILDER HATTE  EINEN FEHLER");
+                }
+                if (snapshot.hasData &&
+                    snapshot.data != null &&
+                    !showSemesterAuswahl) {
+                  // zustand bevor ein studiengang ausgewählt wurde
 
-                List<DropdownMenuEntry<String>> studiengaenge =
-                    convertStudiengaengeToDropdowns(snapshot.data!);
-
-                return DropdownMenu<String>(
-                    menuHeight: 200,
-                    width: 320,
-                    label: const Text("Studiengang"),
-                    enableFilter: true,
-                    onSelected: (value) => {
-                          _semesterAuswahl =
-                              fetchSemesterVonStudiengaenge(value)
-                        },
-                    dropdownMenuEntries: studiengaenge);
-              }
-            }
-            return const CircularProgressIndicator();
-          }),
-      SizedBox(height: 50),
-      FutureBuilder<List<dynamic>>(
-          future: _semesterAuswahl,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
-            }
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return const Text(
-                    "SEMESTERAUSWAHL BUILDER HATTE  EINEN FEHLER");
-              }
-              if (snapshot.hasData &&
-                  snapshot.data != null &&
-                  !showSemesterAuswahl) {
-                // zustand bevor ein studiengang ausgewählt wurde
-
-                return DropdownMenu<String>(
-                  menuHeight: 200,
-                  width: 320,
-                  label: const Text("Semester"),
-                  enableFilter: true,
-                  dropdownMenuEntries: [],
-                  helperText: "Wähle zuerst einen Studiengang aus",
-                );
-              }
-              if (snapshot.hasData &&
-                  snapshot.data != null &&
-                  showSemesterAuswahl) {
-                // standardcase
-
-                List<DropdownMenuEntry<String>> semester =
-                    convertSemesterToDropdowns(snapshot.data!);
-
-                return DropdownMenu<String>(
+                  return DropdownMenu<String>(
                     menuHeight: 200,
                     width: 320,
                     label: const Text("Semester"),
                     enableFilter: true,
-                    onSelected: (value) =>
-                        {_kursAuswahl = fetchKurseVonSemester(value)},
-                    dropdownMenuEntries: semester);
-              }
-            }
-            return const CircularProgressIndicator();
-          }),
-      SizedBox(height: 50),
-      FutureBuilder<List<dynamic>>(
-          future: _kursAuswahl,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
-            }
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return const Text("KURSAUSWAHL BUILDER HATTE  EINEN FEHLER");
-              }
-              if (snapshot.hasData &&
-                  snapshot.data != null &&
-                  !showKursAuswahl) {
-                // zustand bevor ein semester ausgewählt wurde
-                return SizedBox();
-              }
-              if (snapshot.hasData &&
-                  snapshot.data != null &&
-                  showKursAuswahl) {
-                var kurse = snapshot.data!;
-                for (var x in kurse) {
-                  x["checked"] =
-                      false; //fügt das feld checked hinzu, damit nachher ausgewertet werden kann
+                    dropdownMenuEntries: [],
+                    helperText: "Wähle zuerst einen Studiengang aus",
+                  );
                 }
-                // standardcase
-                return StatefulBuilder(
-                    builder: (BuildContext context, StateSetter setState) {
-                  return ConstrainedBox(
-                      constraints: BoxConstraints(
-                          maxHeight: MediaQuery.of(context).size.height / 2),
-                      child: Scrollbar(
-                        thumbVisibility: true,
-                        child: SingleChildScrollView(
-                            clipBehavior: Clip.antiAlias,
-                            padding: EdgeInsets.all(8),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: kurse.map((kurs) {
-                                  return SizedBox(
+                if (snapshot.hasData &&
+                    snapshot.data != null &&
+                    showSemesterAuswahl) {
+                  // standardcase
+
+                  List<DropdownMenuEntry<String>> semester =
+                      convertSemesterToDropdowns(snapshot.data!);
+
+                  return DropdownMenu<String>(
+                      menuHeight: 200,
+                      width: 320,
+                      label: const Text("Semester"),
+                      enableFilter: true,
+                      onSelected: (value) => {
+                            _kursAuswahl = fetchKurseVonSemester(value),
+                            currentSemesterid = value!,
+                          },
+                      dropdownMenuEntries: semester);
+                }
+              }
+              return const CircularProgressIndicator();
+            }),
+        SizedBox(height: 50),
+        FutureBuilder<List<dynamic>>(
+            future: _kursAuswahl,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text("KURSAUSWAHL BUILDER HATTE  EINEN FEHLER");
+                }
+                if (snapshot.hasData &&
+                    snapshot.data != null &&
+                    !showKursAuswahl) {
+                  // zustand bevor ein semester ausgewählt wurde
+                  return SizedBox();
+                }
+                if (snapshot.hasData &&
+                    snapshot.data != null &&
+                    showKursAuswahl) {
+                  userselectedKurse = snapshot.data!;
+                  for (var x in userselectedKurse) {
+                    x["checked"] =
+                        false; //fügt das feld checked hinzu, damit nachher ausgewertet werden kann
+                  }
+                  // standardcase
+                  return StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                    return ConstrainedBox(
+                        constraints: BoxConstraints(
+                            maxHeight: MediaQuery.of(context).size.height / 2),
+                        child: Scrollbar(
+                          thumbVisibility: true,
+                          child: SingleChildScrollView(
+                              clipBehavior: Clip.antiAlias,
+                              padding: EdgeInsets.all(8),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: userselectedKurse.map((kurs) {
+                                    return SizedBox(
                                       width: MediaQuery.of(context).size.width -
                                           40,
                                       child: CheckboxListTile(
+                                          // shape: RoundedRectangleBorder(
+                                          //   side: BorderSide(
+                                          //       color: Colors.black,
+                                          //       width: 2),
+                                          //   borderRadius:
+                                          //       BorderRadius.circular(10),
+
                                           title: Text(kurs["kursname"]),
                                           value: kurs["checked"],
                                           onChanged: (val) {
                                             setState(() {
                                               kurs["checked"] = val;
                                             });
-                                          }));
-                                }).toList())),
-                      ));
-                });
+                                          }),
+                                    );
+                                  }).toList())),
+                        ));
+                  });
+                }
               }
-            }
-            return const CircularProgressIndicator();
-          }),
-    ]));
+              return const CircularProgressIndicator();
+            }),
+        TextButton(
+          onPressed: () => _checkboxenAuswerten(userselectedKurse),
+          child: Text(
+            "Auswahl Speichern",
+            style: TextStyle(color: Colors.white),
+          ),
+          style:
+              ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.blue)),
+        )
+      ]),
+    );
   }
 }
