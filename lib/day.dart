@@ -168,26 +168,32 @@ class DayStudySync extends StatelessWidget {
                               timetable, weekday - 1, timeOffset, 'kursname'),
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
                           supplyDataToCell(
                               timetable, weekday - 1, timeOffset, 'raum'),
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 12,
+                            fontSize: 14,
                           ),
                         ),
-                        // Text(
-                        //   supplyDataToCell(
-                        //       timetable, weekday - 1, timeOffset, 'dozname'),
-                        //   style: const TextStyle(
-                        //     color: Colors.white,
-                        //     fontSize: 12,
-                        //   ),
-                        // ),
+                        const SizedBox(width: 100),
+                        Text(
+                          supplyDataToCell(
+                              timetable, weekday - 1, timeOffset, 'dozname'),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                          ],
+                        ),
                       ]),
                     ),
                   ],
