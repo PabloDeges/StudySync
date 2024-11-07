@@ -33,10 +33,10 @@ class _EditorViewState extends State<EditorView> {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
+      body: jsonEncode({
         'userid': '1',
         'semesterid': currentSemesterid,
-        'kursids': jsonEncode(auswahlen),
+        'kursids': auswahlen,
       }),
     );
   }
@@ -48,7 +48,6 @@ class _EditorViewState extends State<EditorView> {
         gefilterteAuswahlen.add(x);
       }
     }
-
     if (gefilterteAuswahlen.isNotEmpty && currentSemesterid.isNotEmpty) {
       postKursauswahl(gefilterteAuswahlen);
     }
