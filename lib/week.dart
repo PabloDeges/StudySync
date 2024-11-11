@@ -108,29 +108,39 @@ class WeeklySchedule extends StatelessWidget {
                                     "${8 + timeOffset}:00",
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: 10,
+                                      fontSize: 8,
                                     ),
                                   ),
                                 ),
                                 Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .center,
                                     children: [
                                       Text(
                                         supplyDataToCell(timetable, day,
                                             timeOffset, 'kurskuerzel'),
-                                        style: TextStyle(
+                                        textAlign: TextAlign
+                                            .center,
+                                        style: const TextStyle(
                                           color: Colors.white,
-                                          fontSize: 20,
+                                          fontSize: 16,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      Text(
-                                        supplyDataToCell(
-                                            timetable, day, timeOffset, 'raum'),
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 10,
+                                      ConstrainedBox(
+                                        constraints: const BoxConstraints(
+                                            maxWidth: 90),
+                                        child: Text(
+                                          supplyDataToCell(
+                                              timetable, day, timeOffset, 'raum'),
+                                          textAlign: TextAlign
+                                              .center,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 8,
+                                          ),
                                         ),
                                       ),
                                     ],
