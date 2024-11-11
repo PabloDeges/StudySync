@@ -102,8 +102,8 @@ class WeeklySchedule extends StatelessWidget {
                             child: Stack(
                               children: [
                                 Positioned(
-                                  top: 0,
-                                  left: 0,
+                                  top: 1,
+                                  left: 1,
                                   child: Text(
                                     "${8 + timeOffset}:00",
                                     style: const TextStyle(
