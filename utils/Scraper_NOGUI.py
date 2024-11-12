@@ -4,7 +4,7 @@
 from sys import argv
 import requests
 import ssl
-import pandas as pd
+import json
 
 urllink = 'https://wwwccb.hochschule-bochum.de/campusInfo/newslist/displayTimetable.php'
 loginUrl = 'https://wwwccb.hochschule-bochum.de/campusInfo/index.php'
@@ -19,8 +19,8 @@ header = {
 'Content-Type': 'application/x-www-form-urlencoded; charset=ISO8859-15',
 }
 data = {
-    'username': 'YourName',
-    'loginPassword': 'YourPasswort'
+    'username': yourUsername,
+    'loginPassword': yourPassword
 }
 
 
@@ -57,33 +57,65 @@ def removeHTML(string): #Formatierung
     return string;
 
 class Subject: #Klasse fuer Module
-    def __init__(self,name,teacher,time,days,room):
-        self.name,self.teacher, self.time, self.days, self.room = name, teacher, time, days, room;
-        self.splitName()
+    def __init__(self,name,dozent,startzeit,wochentag,raum):
+        self.name,self.dozent, self.startzeit, self.wochentag, self.raum = name, dozent, startzeit, wochentag, raum;
+        self.dauer = 60
+        self.splitName(); self.splitTime();
     def __str__(self):
-        #return f'{self.name} {self.teacher} {self.time}'
-        return f'{self.name}\n {self.teacher}'
+        #return f'{self.name} {self.dozent} {self.startzeit}'
+        return f'{self.name}\n {self.dozent}'
     __repr__ = __str__
     def toJSON(self):
-        return f'{{\n"name": "{self.name}" \n"lehrender": "{self.teacher}"\n"tag": "{self.days}"\n"time": "{self.time}"\n"room": "{self.room}"\n}}'
-    def toRealJSON(self):
-        df = pd.DataFrame({'name': [self.name],'terminart':[self.terminart],'wochentag':[self.days],'startzeit':[self.time],'dauer':["60 Minuten"],'raum':[self.room]})
-        return df.to_json(orient='records',force_ascii=False)
-    
+        return f'{{\n"name": "{self.name}" \n"lehrender": "{self.dozent}"\n"tag": "{self.wochentag}"\n"startzeit": "{self.startzeit}"\n"raum": "{self.raum}"\n}}'
+    def splitTime(self):
+        self.startzeit = self.startzeit[0:self.startzeit.find('-')]
     def splitName(self):
-        self.terminart = self.name[self.name.find('-')+1:len(self.name)]
-        self.name = self.name[0:self.name.find('-')]
+        if self.name.find('Tutorium') == -1: 
+            self.terminart = self.name[self.name.find('-')+1:len(self.name)]
+            if len(self.terminart) > 2:
+                self.terminart = self.terminart[-1];
+        else: self.terminart = "t"
+        if self.name.find('-') != -1: self.name = self.name[0:self.name.find('-')]
+    def to_dict(self):
+        return {
+            "dauer": self.dauer,
+            "dozent": self.dozent,
+            "name": self.name,
+            "raum": self.raum,
+            "startzeit": self.startzeit,
+            "terminart": self.terminart,
+            "wochentag": self.wochentag
+        }
 
 class Semester: #Klasse fuer Ids
     def __init__(self,id,name):
         self.id, self.name = id, name
     def getID(self):
         return self.id
+    def setStundenplan(self,stundenplan):
+        self.stundenplan = stundenplan
     def __str__(self):
         return f'{self.id}\t {self.name}'
     __repr__ = __str__
     def toJSON(self):
         return f'{{\n"id": "{self.id}" \n"name": "{self.name}"\n}}'
+    def exportSemesterJSON(self):
+        # Stundenplan in Liste von Dictionaries umwandeln
+        #stundenplan_data = [subject.to_dict() for subject in self.stundenplan]
+        stundenplan_data = []
+        # Semester-Datenstruktur erstellen
+        for i in range(0,len(self.stundenplan)):
+                for j in range(1,len(self.stundenplan[i])):
+                    stundenplan_data.append(self.stundenplan[i][j].to_dict())
+        data = {
+            "stundenplaene": [
+                {
+                    "studiengang": self.name,
+                    "stundenplan": stundenplan_data
+                }
+            ]
+        }
+        return json.dumps(data, ensure_ascii=False, indent=4)
     
 def initStundenplan(): #Leeren Stundenplan anlegen
     modules = [['Montag'],['Dienstag'],['Mittwoch'],['Donnerstag'],['Freitag']]
@@ -113,8 +145,8 @@ def scrape(html): #WebStundenplan Scrapen - Muss immer in Kombination mit fetchS
         if htmlSplit[line].find("<trheight='25'class='tableRowGrey1'>")==0 or htmlSplit[line].find("<trheight='25'class='tableRowGrey0'>")==0:
             for module in modules:
                 if module.count(htmlSplit[line+3]) == 1:
-                    module.append(Subject(htmlSplit[line+2],htmlSplit[line+1],htmlSplit[line+4],htmlSplit[line+3],htmlSplit[line+5]))
-    #print(modules)
+                    subject = Subject(htmlSplit[line+2],htmlSplit[line+1],htmlSplit[line+4],htmlSplit[line+3],htmlSplit[line+5])
+                    module.append(subject)
     return modules
 
 
@@ -141,21 +173,28 @@ def fetchStundenplan(session, semesterNR): #Stundenplan request vorbereiten und 
     stundenplanLatin = switchCharset(
         stundenplan.content.decode("ISO8859-15"))
     return stundenplanLatin
-def writeIntoJSON(module): #Stundenplan in JSON schreiben
-    with open('stundenplan.json', 'w') as outfile:
-        for stundenplan in module:
-            for i in range(0,len(stundenplan)):
-                for j in range(1,len(stundenplan[i])):
-                    outfile.write(stundenplan[i][j].toRealJSON())
-                    outfile.write("\n")
+def writeIntoJSON(semesterList): #Stundenplan in JSON schreiben
+    with open('stundenplaene.json', 'w') as outfile:
+        #for stundenplan in module:
+        #    for i in range(0,len(stundenplan)):
+        #        for j in range(1,len(stundenplan[i])):
+        #            outfile.write(stundenplan[i][j].toRealJSON())
+        #            outfile.write("\n")
+        for semester in semesterList:
+            outfile.write(semester.exportSemesterJSON())
+            outfile.write("\n")
 
 def getAllStundenplaene(clientSession):
     semesterList = fetchSemesterGroups(clientSession)
     stundenPlaeneList = []
-    for studiengang in semesterList:
-        stundenPlaeneList.append(scrape(fetchStundenplan(clientSession,studiengang.getID())))
-    print(stundenPlaeneList)
-    return stundenPlaeneList
+    #for studiengang in semesterList:
+    #    stundenPlaeneList.append(scrape(fetchStundenplan(clientSession,studiengang.getID())))
+    for i in range(0,len(semesterList)):
+        semesterList[i].setStundenplan(scrape(fetchStundenplan(clientSession,semesterList[i].getID())))
+    #print(semesterList)
+    #for semester in semesterList:
+    #    print(semester.toRealJSON())
+    return semesterList
 
 def main():
     global clientSession
