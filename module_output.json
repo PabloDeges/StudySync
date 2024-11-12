@@ -1,0 +1,66 @@
+[
+    {
+        "Modulname": "Grundlagen Elektrotechnik",
+        "Kuerzel": "IB-E1"
+    },
+    {
+        "Modulname": "Mathematik für Informatiker*innen 1",
+        "Kuerzel": "IB-MI1"
+    },
+    {
+        "Modulname": "Programmieren in Java 1",
+        "Kuerzel": "IBO4-JP1"
+    },
+    {
+        "Modulname": "Mathematik für Informatiker*innen 2",
+        "Kuerzel": "IBO3-MI2"
+    },
+    {
+        "Modulname": "Programmieren in Java 2",
+        "Kuerzel": "IBO5-JP2"
+    },
+    {
+        "Modulname": "Programmieren in C",
+        "Kuerzel": "IBO9-CP"
+    },
+    {
+        "Modulname": "Software Engineering",
+        "Kuerzel": "IB10-SE"
+    },
+    {
+        "Modulname": "Objektorientierte Programmiertechniken",
+        "Kuerzel": "IB11-OP"
+    },
+    {
+        "Modulname": "Algorithmen und Datenstrukturen",
+        "Kuerzel": "IB12-AD"
+    },
+    {
+        "Modulname": "Einführung in moderne Webtechnologien",
+        "Kuerzel": "IB13-WT1"
+    },
+    {
+        "Modulname": "Betriebssysteme",
+        "Kuerzel": "IB15-BS"
+    },
+    {
+        "Modulname": "Datenbanken",
+        "Kuerzel": "IB16-DB"
+    },
+    {
+        "Modulname": "Webtechnologien 2",
+        "Kuerzel": "IB14-WT2"
+    },
+    {
+        "Modulname": "Projektmanagement",
+        "Kuerzel": "IB21-PM"
+    },
+    {
+        "Modulname": "Programmieren in Python",
+        "Kuerzel": "IB22-PY"
+    },
+    {
+        "Modulname": "Theoretische Informatik",
+        "Kuerzel": "IB25-THI"
+    }
+]

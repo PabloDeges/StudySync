@@ -1,0 +1,2593 @@
+Seite 1:
+Hochschule Bochum
+Bochum University
+of Applied Sciences
+
+2. r) Fachbereich
+Lw iw Elektrotechnik und Informatik
+
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+mit dem Abschluss
+
+Bachelor of Science
+Studiengangsprufungsordnung vom 29. Juni 2019
+Amtl. Bekanntmachung Nr. 1004
+
+Stand: 18.12.2020
+
+
+
+Seite 2:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+Inhalt:
+
+1. Module des BaSiSStudiuMs ..........ceecsescscsseesesessesseeeeaeseeeseaseesaeaeseeeseaseesaeaeeeeesaeaeeesateeeesannaeeeas 3
+L.1. Grundlagen Elektrotechnik ..0....... cc cecescsssseesceesseceeeseaeseeesaeaeeesaeaeseeesaeaeeesaeaeeeeesanaeeesataneesaninaseeeas 3
+1.2. Mathematik fiir Informatiker*innen Lou... sseseseeceeeseseeeeseeseeesseseesseaeseeeseeeesneeseesineseeeas 4
+1.3. Programmieren in Java Lowe... eseessseesescseseescsessesceesseaeseeesaeaseesaeaeseeeseaseesaeaeeeeesneeesanseeseesnaneeeas 5
+1.4. SchliisSelkompetenZen 1 .0........ccccscsssssssesseesssssseessesaesecassacsesaesecaeseesceaeseeaeseeseesseesseeesaesaesarstsassesarsas 6
+1.5. Englisch fir Informatiker*innen............cccssessessescsesseesseesseseeseaeseeesseseeseaeseeeseeeesanneneesneeetas 7
+1.6. Mathematik fiir Informatiker*innen 2............ccssssceseesseecseseeseseeseeesieeeesaeaeeeeeseseeesatneeeesneeeeas 8
+1.7. Programmieren in JaVAa 2........cccesseesesecsesceessesesesesesceesseaeseeesaeaeeesaeaeseeesaeaeeesaeaeeeeesanaeeesaneeseesnaeeeeas 9
+1.8. SchlUSSelkOMpPeteNZeN 2 ..........scsscscsscssssessessesssseessssesesesacsesarsecaesaeaceaesesasseeseesseesaeeesseeaesassnsasneass 10
+L.9. Programmieren it Cu... ceeecssscscsseescsecseecsessesesesecsescsesaeeesesecaeecesaeaesesesaeaceesanansesesanasnesananseeetanacaes 11
+1.10. Software Engineering ............cccscsseescsecseecsessesesesecsescesaeensesecanacesanaesesesaeacesaeanseeetanaeeesananseeetanacaes 12
+1.11. Objektorientierte ProgrammMiertechnike n ............ccccescsccsecsesseeeseseceeecsesaeeesesecetassesananseeetanacaes 13
+1.12. Algorithmen und Datenstrukturen ...........cccscscssecsesseescsecsescsesaeeesesecaeassesanacsenesaeassesananseeetanacaes 14
+1.13. Einfllhrung in moderne Webtechnologien .............ccscscsececssseeseeeceecsesseeesesesaeaseesananseeetanacaes 15
+1.14. BetriebSSySteMe .............csccccsscsscsssscsesssssssssssesesssseessesassesaesacsesarsecaesaeaesanseeaeenesesaeeesaeeeseesatensteasaneass 16
+1.15. Datembanke nn .......... ce cecscsssseescseeseecseseesesesecseecsesaesnsesesaeacsesauansesesanacsesanansesesaeacesananseesanaenesananseeesanacaes 17
+1.16. Webtechnologien 2...........cccsccssscscsseesesecseecsesaesesesecsescesaeanseseeaeacaesaeansesesanasesanansesananaseesananseeetanacaes 18
+1.17. Mathematik fiir Informatiker*innen 3............ccccscscsseeseseceecesseeeeseseceeacsesanansesesenassesananseeesanacaes 19
+1.18. IT-Sicherhe it... ceceeceseseseseseseseeeseeesesesesesesesesesesesesseeseeeseeeseseeeseeesaeesaeesaeesaeasaeasaeaeaeaeseaseeseesseesaees 20
+1.19. MikroCOmtrouler 0... ee ecsescsecseecseseeeescsecseecsesaesnseseseescsesaeansesecaeacsesaeansesesaeacesaeaceesanaseesanansesenanasaes 2l
+1.20. Softwar epraktikum ..........c:ccsccsccsssscsessssssssssessesssseessesassesaesacsesarseeassaeaseassesasenesessseesseeesseeasenseseasaneass 22
+1.21. Projektmanageme nl ............cccccscscseesesecseecsesseseseneceeacsesanensesesaeacsesaeaeseesaeasesananseeetanaseesananseeesanacaes 24
+1.22. ProgrammMieren in Python ............cccscsccsecscsseeseeecseecsesseeeseseeaeacsesaeaeseesaeaceesananseeesanaseesansesenetanacaes 25
+1.23. Theoretische INfOrmatik ...........ccsccscsccseecsesseeesesecsescseseeeeseseceeacsesaeaesesesaeaseesananseeetanaseesanaseenesanacaes 26
+1.24. Wahlmodul: Schlusselkompetenzen 3 — StudiUM PUUS............:cccscescsssesessseesseesseessseeeeeaes 27
+2.  Individuelle Vertiefungsmoglichkeiten durch Wahlmodulle ................csseeseeeeeeeseeseeeeees 28
+2.1. Wahlmodule Informatik [-V oo... ecsscesesecceecsesceseseseceeeseseeeeaeaeeeeeseeeesaeaeeeeeseeeesanaeseeesaneeeeeaeas 28
+Angebot ausschlieBlich 111 WInterS@meStel..ecssessssssesssesssesssessssssssssssssssssssssssssssssssessesscssscesssesssesasesssesiss 30
+
+2.2. Wahlpflicht: Computer VISION ..............:csscscsscsssessesssessseessesseeeseesaesesaesacaesarseeanseeaesansesaeenesnesseesoses 30
+2.3. Wahlpflicht: Lokalisierung und mobile Applikationen..............cccccsseesesssesseeeseeeeeesteseeeeaees 31
+2.4. Wahlpflicht: Videobasierte FahrassistenZSySteme ..............:scssssscsssssssssessssessssscsessesseesees 32
+2.5. Wahlpflicht: VHDL... sesseccsesseescsecsssseseeseeseenseesseeeseeesescaeseaeaeseaeseaeseaeseaeseaeeesaeeeseeeseeeseeesaeesaes 33
+Angebot sowohl im Winter- alS GUCH IM SOMITICLSCIMOSCEL ..sssessvessesssesssesssesssesssessscssssssssesssesseesssesses 35
+
+2.6. Wahlpflicht: Softwareentwicklung fiir solarbetriebene Fahrzeuge@..............scccccsseeeees 35
+Angebot ausSschlieBlich I SOMIMELSCMESTES ...csessessesssesssesssssssesssssssssssssssssssssssssssssssseencesscesscesscesaeesasesass 36
+
+2.7. Wahlpflicht: E-L@ arming .............cccccssssceesesecseesseseeeeseseceeesseeeeeaeaeeeeesaeaeeesaeaeeeeesaeaeeesanaeeeeesaneeeeaeas 36
+2.8. Wahlpflicht: Context-aware und Mobile Computing ..............:.:cssccessseeeseseseeeeseseeeeesseseeeeaees 37
+2.9. Wahlpflicht: Datawarehouse und Datamining .............csccccsssecceecsesseeeseseceeesneseeeeseeeseesinseeeeaees 38
+2.10. Wahlpflicht: Digitale Bildverarbeitung und Game Development...............cccscsceeeseeeeeeees 39
+2.11. Wahlpflicht: Einfihrung in weitere Programmiersprache n .............sccccsseceseeeeseesseeeeeeees 40
+2.12. Wahlpflicht: Grundlagen Elektrotechnik 2 00... cessssseeseseceeecseseeeeseieeeeeseseeesaeeeesneeeeeeaeas 41
+2.13. Wahlpflicht: Einfihrung in die Kiinstliche Intelligen.............cesesseseesseeseeeseeeseesteseeeeaees 42
+3. ADSCHIUSS oo. eceecccseseceeecneneeeeseseeeeesaeaeeesaeaeeeeesaeaeeesaeaeeeeesaeaeeesaeaeeeeesaeaeeesaeaeeeeesaeaeeesanaeeeeesaneeeesaeas 43
+
+Seite 2 /43
+
+
+Seite 3:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+1. Module des Basisstudiums
+
+1.1. Grundlagen Elektrotechnik
+
+Grundlagen Elektrotechnik (IB-E1)
+
+Kennnummer Workload Credits Studiensem.: | Haufigkeit des Angebots Dauer
+1 150 h 5 1. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+E1: Grundlagen der 5 SWS/ 70h 80 h V60, SV35, U20
+Elektrotechnik 3V2U P15, $15, EDV-P30
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden sind mit den grundlegenden Begriffen der Elektrotechnik vertraut. Sie sind in der
+Lage, in einfachen Schaltungen die Zusammenhange zwischen Spannung, Strom und Leistung zu
+ermitteln. Die Konzepte von Leistungsanpassung und Wirkungsgrad kOnnen sie auf einfache Modelle
+anwenden. Sie sind in der Lage, die Wirkung von elektrischen Feldern auf Leiter und Nichtleiter
+einzuschatzen. Ursache und Wirkungen des magnetischen Felds sind ihnen vertraut, einschlieBlich
+
+des Einflusses von Materie.
+
+3 Inhalte
+e Physikalische Grundlagen der Elektrotechnik
+e Berechnungsmethoden elektrischer Schaltungen in Gleichstromkreisen durch Anwendung der
+Kirchhoff’schen Gesetze
+e Maschenstromverfahren
+e Ersatzspannungsquelle
+e Leistungsanpassung,
+e  Elektrostatische Felder und Stromungsfelder
+4 Lehrformen
+Vorlesung (3 SWS) und Ubung (2 SWS)
+5 Teilnahmevoraussetzungen
+6 Priifungsformen
+Klausurarbeit (120 Minuten)
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung
+8 Verwendung des Moduls (in anderen Studiengangen)
+Pflichtfach im  Bachelorstudiengang Nachhaltige Entwicklung in der  Vertiefung
+Ingenieurwissenschaften als ,,Grundlagen der Elektrotechnik 1“
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Martin Sternberg
+Prof. Dr. Rainer Lutticke, Prof. Dr. Martin Sternberg
+11_| Sonstige Informationen
+
+Seite 3 /43
+
+PO 2019
+
+
+Seite 4:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.2. Mathematik fiir Informatiker*innen 1
+
+Mathematik fiir Informatiker*innen 1 (IB-MI1)
+
+Kennnummer Workload Credits Studiensem.: | Haufigkeit des Angebots Dauer
+2 150h 5 1. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+MI1: Mathematik fur 5 SWS/ 80 h 70h V60, SV35, U20
+Informatiker*innen 1 3V2U P15, $15, EDV-P30
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden sind mit den Grundkenntnissen der Mathematik, insbesondere der diskreten
+Mathematik und der Analysis vertraut. Sie sind in der Lage, selbstandig die erlernten Methoden auf
+kleinere mathematische Aufgabenstellungen anzuwenden.
+
+3 Inhalte
+
+e Grundstrukturen (Boolesche Algebra, Aussagenlogik, Relationen, Mengen, Funktionen,
+Ordnungen)
+
+e Darstellung, Umrechnungen (Horner-Schema)
+
+e Moduloarithmetik (Euklidischer Algorithmus, Idee der RSA-Verschlusselung)
+
+e Grundlagen der Differenzialrechnung einer Veranderlichen
+
+4 Lehrformen
+Vorlesung, Ubung
+
+5 Teilnahmevoraussetzungen
+
+6 Priifungsformen
+Klausurarbeit (120 Minuten)
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+Pflichtfach im Bachelorstudiengang Wirtschaftsinformatik
+
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+N.N. (Nachfolge Knorrenschild)
+N.N. (Nachfolge Knorrenschild), Prof. Dr. Jorg Frochte
+
+11 | Sonstige Informationen
+
+Literatur:
+
+Schafer, Georgi, Trippler, ,Mathematik-Vorkurs", Vieweg + Teubner 2006
+Michael Knorrenschild ,Vorkurs Mathematik“, Hanser 2009
+
+Michael Knorrenschild, ,Mathematik fur Ingenieure 1“; Hanser 2009
+
+Seite 4 /43
+
+
+Seite 5:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.3. Programmieren in Java 1
+
+Programmieren in Java 1 (IBO4-JP1)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+3 300 h 10 1. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+JP1: Programmieren in Java 1 7SWS/112h 188h V60, SV35, U20
+3V3U1P P15, $15, EDV-P30
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden sind mit grundlegenden Konzepten von Programmiersprachen vertraut und kOnnen
+diese in der Programmiersprache Java anwenden. Die Studierenden sind in der Lage einfache
+Programme mit mehreren Klassen zu schreiben und konnen leicht eine weitere Programmiersprache
+erlernen.
+
+3 Inhalte
+
+Es werden die grundlegenden Elemente von Programmiersprachen behandelt: Anweisungen,
+Variablen, Datentypen, Sichtbarkeit, Operatoren, Fallunterscheidungen, Schleifen und Methoden. Des
+Weiteren wird Wissen Uber Arrays, den Umgang mit Zeichenketten und Exceptions vermittelt. Die
+Objektorientierung von Java bildet dann den Abschluss: Eigenschaften einer Klasse,
+Objekterzeugung, Vererbung, abstrakte Klassen, Interfaces, Bildung von Paketen.
+
+4 Lehrformen
+Vorlesung (3 SWS), Ubung (3 SWS), Praktikum (1 SWS).
+
+5 Teilnahmevoraussetzungen
+
+6 Priifungsformen
+Klausurarbeit (120 Minuten), die teilweise aus Programmieraufgaben am Rechner bestehen kann;
+Testat
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+Pflichtfach im Bachelorstudiengang Wirtschaftsinformatik
+
+9 Stellenwert der Note fiir die Endnote
+10/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Rainer Litticke
+Prof. Dr. Rainer Lutticke, Prof. Dr. Katrin Brabender, Prof. Dr. Wolf Ritschel
+
+11_| Sonstige Informationen
+
+Seite 5 /43
+
+
+Seite 6:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.4. Schlisselkompetenzen 1
+
+Schliisselkompetenzen 1 - Einfiihrung in das Studium | (IBO6-SK1)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+4 150h 5 1. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+SK 1: Schliisselkompetenzen 3SWS/48h 102h V60, SV35, U20
+| -Einfuhrung in das Studium
+ev1u
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+Die Studierenden sind in der Lage sich zu organisieren, sie verfugen uber Lern- & Arbeitstechniken
+sowie Uber die Fahigkeit einer strukturierten Vorgehensweise zur Problemlosung.
+
+3 Inhalte
+e = Lern- und Arbeitstechniken
+e Verbesserung der Lese-, Schreib- und Formulierungsfahigkeiten und Textverstandnis
+e  =Recherchen in Informationssystemen
+e Zeitmanagement
+e §=6Analytisches Denken
+e §=Schriftliches Formulieren von Losungen (Ausgangspunkt, verwendete Methoden, Ergebnis)
+e Selbstorganisation
+
+4 Lehrformen:
+Vorlesung mit integrierter Ubung
+
+5 Teilnahmevoraussetzungen
+
+6 Priifungsformen
+Unbenoteter Leistungsnachweis
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+Aktive Teilnahme an den Veranstaltungen
+
+8 Verwendung des Moduls (in anderen Studiengangen):
+
+9 Stellenwert der Note fiir die Endnote
+unbenotet
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende:
+Dekan des Fachbereichs Elektrotechnik und Informatik
+Lehrender : Prof. Dr. Eckhard Muller in Kooperation mit dem ISD/Studium Plus
+
+11 | Sonstige Informationen
+
+Seite 6 /43
+
+
+
+Seite 7:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+1.5. Englisch fir Informatiker*innen
+
+Englisch fiir Informatiker*innen (IBO7-El)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+5 150h 5 1 Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+EI: Englisch fiir 4 SWS / 64h 86h V60, SV35, U20
+Informatiker*innen 2V2U P15, $15, EDV-P30
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden sind mit grundlegenden Arbeitstechniken vertraut, um _ englische
+Programmdokumentationen (z.B. API von Java) und Fachliteratur lesen zu konnen. Sie sind in der
+Lage Fachtexte auf dem Niveau ihres Studiensemesters in Englisch zu schreiben. Die Studierenden
+k6nnen mundlich die englische Sprache in praxisrelevanten Bereichen der Arbeitswelt angehender
+Informatiker*innen gebrauchen.
+
+3 Inhalte
+e Wiederholung elementarer grammatikalischer Strukturen anhand von Texten aus Technologie
+und Berufswelt
+e Verstehendes Lesen von Fachliteratur Cadaptiert und im Original) zur Entwicklung von
+Fertigkeiten im orientierenden Lesen, im Lesen zur Erfassung von Hauptgedanken und im
+Lesen zum Verstehen von Details
+e =Schreiben nach verbal oder nonverbal vorgegebenen Sachverhalten unter Einhaltung der fur die
+jeweilige Textsorte ublichen Normen
+o Zusammenfassungen zu den gelesenen fachspezifischen Artikeln
+o  Schreiben z.B. von Texten zu einigen der folgenden Themen: Firmenprofile, Technische
+Produkte, Innovative Technologien, Tabellarische Lebenslaufe, Bewerbungen
+e Sprachkompetenz
+o  Wiederholung und Reaktivierung von Grundwortschatz und -grammatik
+o Vermittlung des neuen Wortschatzes in einem informatik-relevanten Umfeld
+4 Lehrformen
+z.B. seminaristischer Unterricht, Projektarbeiten, Gruppenarbeiten, Planspiel, etc.
+5 Teilnahmevoraussetzungen
+6 Priifungsformen
+Klausurarbeit (120 Minuten)
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung
+8 Verwendung des Moduls (in anderen Studiengangen)
+9 Stellenwert der Note fiir die Endnote
+2/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Dekan des Fachbereichs Elektrotechnik und Informatik
+11_| Sonstige Informationen
+
+Seite 7 /43
+
+PO 2019
+
+
+Seite 8:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.6. Mathematik fiir Informatiker*innen 2
+
+Mathematik fiir Informatiker*innen 2 (IBO3-MI2)
+
+Kennnummer Workload Credits Studiensem.: | Haufigkeit des Angebots Dauer
+6 300 h 10 2. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+Mle: Mathematik fur 7 SWS/ 112h 188 h V60, SV35, U20
+Informatiker*innen 2 4V2U1P P15, $15, EDV-P30
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Nach Absolvieren des Moduls verfugen die Studierenden Uber grundlegende Kenntnisse und
+Fahigkeiten mathematischer Methoden in der Informatik, insbesondere der linearen Algebra sowie
+der Analysis. Sie besitzen die Fahigkeit, die erlernten Methoden selbststandig auf typische in der
+Informatik auftretende Anwendungssituationen anzuwenden.
+
+3 Inhalte
+
+e = Zahlendarstellung im Rechner
+
+e Anwendungen der Differenzialrechnung einer Veranderlicher (u.a. diskrete Differenziation,
+Fehlerfortpflanzung)
+
+Newton- und Sekantenverfahren
+
+Vektorrechnung
+
+Matrizen (-rechnung) und Anwendungen Lu. a. bei Netzwerken)
+
+e Gleichungssysteme und GauB-Algorithmus
+
+4 Lehrformen
+Vorlesung, Ubung in Gruppen, Praktikum am Rechner mit MATLAB
+
+5 Teilnahmevoraussetzungen
+Inhalte des Moduls ,Mathematik fur Informatiker*innen 2“ werden vorausgesetzt.
+
+6 Priifungsformen
+Klausurarbeit (120 Minuten); Testat
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+Pflichtfach im Bachelorstudiengang Wirtschaftsinformatik
+
+9 Stellenwert der Note fiir die Endnote
+10/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+N.N. (Nachfolge Knorrenschild)
+N.N. (Nachfolge Knorrenschild), Prof. Dr. Jorg Frochte
+
+11 | Sonstige Informationen
+
+Literatur:
+
+Lothar Papula ,Mathematik fur Ingenieure und Naturwissenschaftler, Band 1“, Springer Vieweg
+2014
+
+Michael Knorrenschild ,Vorkurs Mathematik“, Hanser 2009
+
+Michael Knorrenschild, ,Mathematik fur Ingenieure 1“; Hanser 2009
+
+Seite 8 /43
+
+
+Seite 9:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+1.7. Programmieren in Java 2
+
+Programmieren in Java 2 (IBO5-JP2)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+7 150h 5 2. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+JP2: Programmieren in Java 2 4 SWS / 64h 86h V60, SV35, U20
+1,5V1,5U1P P15, $15, EDV-P30
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden sind nach dem Belegen des Moduls in der Lage, groBere Java-Anwendungen mit
+mehreren Klassen zu schreiben.
+
+3 Inhalte
+Es werden weiterfuUhrende Java-Elemente eingefuhrt und eingeubt. Insbesondere das Ein- und
+Auslesen von Datenstromen, Klassen zur Verarbeitung von Datenstrukturen und die neben-laufige
+Programmierung. Das Modul schlieBt mit einer Einfuhrung in die Programmierung von graphischen
+Benutzeroberflachen mit Java.
+
+4 Lehrformen
+Vorlesung (1,5 SWS), Ubung (1,5 SWS), Praktikum (1 SWS).
+
+5 Teilnahmevoraussetzungen
+Formale Teilnahmevoraussetzung fur das Praktikum: Bestandenes Testat ,,Programmieren in Java
+ie
+
+6 Priifungsformen
+Klausurarbeit (120 Minuten), die teilweise oder ganz aus Programmieraufgaben am Rechner
+bestehen kann; Testat
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+Pflichtfach im Bachelorstudiengang Wirtschaftsinformatik
+
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Rainer Litticke
+Prof. Dr. Rainer Lutticke, Prof. Dr. Katrin Brabender, Prof. Dr. Wolf Ritschel
+
+11_| Sonstige Informationen
+
+Seite 9 /43
+
+PO 2019
+
+
+Seite 10:
+Modulhandbuch
+des Bachelorstud
+
+PO 2019
+
+iengangs Informatik
+
+1.8. Schlisselkompetenzen 2
+
+Schliisselkompetenzen II - Erfolgreich studieren (IBO8-SK2)
+
+ev1U
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+8 150h 5 2. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen: Kontaktzeit: Selbststudium: | geplante GruppengrdBe:
+SK 2: Schliisselkompetenzen 3SWS/48h 102h V60, SV35, U20
+
+Erfolgreich studieren
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+Die Studierenden verfugen Uber Techniken der wissenschaftlichen Arbeitsweise sowie die Fahigkeit,
+Themen zur Présentation aufzubereiten und einem Publikum angemessen vorzutragen.
+
+3 Inha
+e
+e
+e
+
+lte
+
+Kreativtechniken
+
+Prasentationstechnik
+
+Softwaretools (Powerpoint, Excel, Projektmanagement, Mindmap, etc.)
+
+Wissenschaftliches Schreiben und korrekte wissenschaftliche Arbeitsweise bei der Nutzung
+von Inhalten Dritter
+
+Kommunikation im Team und im Betrieb
+
+4 Lehrformen:
+Vorlesung mit integrierter Ubung
+
+5 Teilnahmevoraussetzungen
+Formale Teilnahmevoraussetzung: Bestandenes Modul ,,Schlusselkompetenzen 1"
+
+6 Prif
+
+ungsformen
+
+Unbenoteter Leistungsnachweis
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+Aktive Teilnahme an den Veranstaltungen
+
+8 Verwendung des Moduls (in anderen Studiengangen):
+
+9 Stellenwert der Note fiir die Endnote
+unbenotet
+10 | Modulbeauftragte/r und hauptamtlich Lehrende:
+
+Dekan des Fachbereichs Elektrotechnik und Informatik
+Lehrende: Prof. Or. Eckhard Muller und Prof. Dr. Michael Radermacher in Kooperation mit dem
+ISD/Studium Plus
+
+11 | Sonstige Informationen
+
+Seite 10 /43
+
+
+
+Seite 11:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.9. Programmieren in C
+
+Programmieren in C (IBO9-CP)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+9 150h 5 2. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+CP: Programmieren in C 2V1U1P 4 SWS / 64h 86h V60, SV35, U20
+
+P15, S15, EDV-P30
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden konnen Embedded System Problemstellungen erfolgreich behandeln. Die
+Studierenden sind nach erfolgreichem Abschluss der Vorlesung zudem in der Lage, im industriellen
+Sektor, besonders in den Bereichen loT und Industrie 4.0 Beitrage zur Konzepterstellung, Losung von
+Embedded Programmierproblemen und der Fehlersuche in bestehen Systemen ein Beitrag zu leisten.
+Die Studierenden trainieren wahrend der Vorlesung / Ubung und in den Praktika untereinander
+Kooperationsansatze zur Losung von komplexen Problemen.
+
+3 Inhalte
+Die Veranstaltung wird das Programmieren in C in der Linux-Umgebung umfassen. Der Fokus liegt
+auf Embedded Linux Systemen, die mit Hardwarenaher C-Programmierung Sensorik und Aktorik
+ansteuern konnen. Die dazugeh6érigen Programmier- und Build-Tools werden neben dem Einblick in
+die Treiberprogrammierung behandelt:
+
+e = Linux Grundlagen basierend auf Ubuntu und Yocto Linux
+
+e §6Makefiles
+
+e Elementare C(hardwarenahe) C Konstrukte (Shiften, logische VerknUpfungen,
+Zeigerarithmetik) - ANSI C
+C-Strukturen, Verkettete Listen, Threads
+Treiberprogrammierung fur ein eingebettetes Betriebssystem Linux
+Debugger, Racing und Profiling Tools
+Build System Tools wie BitBake
+e Bootloader, BusyBox und Docker
+
+4 Lehrformen
+Vorlesung (2), Ubung (2), Praktikum (1)
+
+5 Teilnahmevoraussetzungen
+
+6 Priifungsformen
+Klausurarbeit (120 Minuten); Testat
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+Wahlpflichtfach im Bachelorstudiengang Elektrotechnik und Pflichtfach im Bachelorstudiengang
+Mechatronik
+
+9 Stellenwert der Note fir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Edmund Coersmeier
+Prof. Dr. Edmund Coersmeier, Prof. Dr. Carsten Kohn, Prof. Dr. Wolf Ritschel
+
+11_| Sonstige Informationen
+
+Seite 11 /43
+
+
+Seite 12:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.10. Software Engineering
+
+Software Engineering (IB10-SE)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+10 150h 5 2. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+SE: Software-Engineering 4 SWS / 64h 86h V60, SV35, U20
+2v1U1P P15, $15, EDV-P30
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Nach Absolvieren des Moduls verfugen die Studierenden uber ein grundlegendes Verstandnis fur den
+Ablauf eines Softwareprojekts und fur die in einem Softwareprojekt anfallenden unterschiedlichen
+Arbeiten und Rollen innerhalb eines Teams. Sie besitzen Kenntnisse zur Modellierung von
+Fachlichkeiten und zur Uberpriifung der Qualitat eines Softwareprodukts.
+
+Inhalte
+
+Erste Grundlagen zum Projektmanagement und zum Software-Lebenszyklus,
+Grundlagen zur Anforderungsanalyse,
+
+Grundlagen der Softwaremodellierung mit UML,
+
+Grundlagen zur Qualitatssicherung
+
+Lehrformen
+Vorlesung, Ubung an Rechnern, Praktikum
+
+Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandenes Praktikum ,,Programmieren in
+Java 1“
+
+Priifungsformen
+Klausurarbeit (120 Minuten); Testat
+
+Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+Verwendung des Moduls (in anderen Studiengangen)
+Pflichtfach im Bachelorstudiengang Wirtschaftsinformatik
+
+Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10
+
+Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Ursula Oesing, N.N.
+
+ll
+
+Sonstige Informationen
+
+Seite 12 /43
+
+
+
+Seite 13:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.11. Objektorientierte Programmiertechniken
+
+Objektorientierte Programmiertechniken (IB11-OP)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+11 150h 5 3. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengrdRe
+OP: Objektorientierte 4 SWS / 64h 86h V60, SV35, U20
+Programmiertechniken P15, S15, EDV-P30
+2v1U1P
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Nach Absolvieren des Moduls verfugen die Studierenden Uber ein vertieftes Verstandnis fur die
+Bedeutung objektorientierter Programmiertechniken in einem umfangreichen Softwareprodukt und
+konnen diese Techniken anwenden. Sie kennen Methoden, Verfahren und Werkzeuge, die in der Praxis
+fur die Entwicklung von anspruchsvollen Softwareprodukten verwendet werden.
+
+3 Inhalte
+
+Idiome einer Programmiersprache (Java) und deren Bedeutung bei der Entwicklung eines
+umfangreichen Softwareprodukts,
+
+Vertiefung der objektorientierten Aspekte und Sprachmittel (generics, annotations, lambdas) einer
+Programmiersprache (Java),
+
+Vertiefung von Softwaretests,
+
+Zusammenhange zwischen Software-Architektur, objektorientiertem Design, Spracheigenschaften,
+Softwaretests und deren Bedeutung fur die Projektfuhrung:
+
+Vorgehensweisen, Techniken und gute Praxis (state of the art): Clean Code, SOLID,
+
+Design patterns: Hintergrunde und Idee, konkrete Design Patterns,
+
+Grundlagen und Werkzeuge zur Versionsverwaltung
+
+4 Lehrformen
+Vorlesung, Ubung an Rechnern, Praktikum
+
+5 Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandenes Modul ,,Programmieren in Java
+1“ und bestandene Testate ,,Programmieren in Java 2" und ,Software Engineering”
+
+6 Priifungsformen
+Klausurarbeit (120 Minuten); Testat
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend” bewertete Prufungsleistung; Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+Pflichtfach im Bachelorstudiengang Wirtschaftsinformatik
+
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Ursula Oesing
+Prof. Dr. Ursula Oesing, Prof. Dr. Henrik Blunck
+
+11_| Sonstige Informationen
+
+Seite 13 /43
+
+
+Seite 14:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.12. Algorithmen und Datenstrukturen
+
+Algorithmen und Datenstrukturen (IB12-AD)
+
+Kennnummer Workload Credits Studiensem. Haufigkeit des Angebots Dauer
+12 150h 5 3. Sem. Wintersemester 1 Semester
+1 | Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+AD: Algorithmen und Datenstrukturen 4 SWS / 64h 86h V60, SV35, U20
+2v1U1P P15, $15, EDV-P30
+2 | Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden verfugen Uber Grundlagen fur ein vertieftes algorithmisches Verstandnis. Die dabei
+erworbenen Kompetenzen umfassen die Fahigkeit zum selbstandigen Aneignen von neuen Algorithmen,
+Datenstrukturen sowie algorithmischen Ideen und Analysen. Die Studierenden sind in der Lage bekannte
+Algorithmen auf neue Problemstellungen zu Ubertragen und Algorithmen im Hinblick auf veranderte
+Anforderungen zu modifizieren. Sie sind mit dem _ Einsatz mathematischer Methoden zum
+Korrektheitsbeweis und zur Effizienzanalyse vertraut. Sie haben die Fahigkeit die Qualitat von Algorithmen
+und algorithmischen Ansatzen im Hinblick auf Problemadaquatheit, Effizienz, Korrektheit, Vollstandigkeit
+und praktische Verwertbarkeit zu beurteilen und grundlegende Beschrankungen von gegebenen
+Algorithmen zu erkennen. Die Studierenden konnen Informationsverarbeitungsprobleme in Hinblick auf
+ihre algorithmische Komplexitat einschatzen.
+
+Inhalte
+In der Veranstaltung werden wichtige Klassen von Algorithmen vorgestellt und exemplarische
+Anwendungen in den verschiedensten Bereichen der Informatik diskutiert.
+e = Datenstrukturen und ihre Eigenschaften
+e Bewertungskriterien fur Algorithmen
+e =Effiziente Datenstrukturen und Algorithmen fur ausgewahlte grundlegende Probleme (lineare
+Datenstrukturen, Arrays, Listen, Stapel, Schlangen; Suchen und Sortieren; Hash-Indizierung,
+Suchbaume)
+
+Wechselwirkungen zwischen Algorithmus und Datenstruktur
+
+e Methoden fur das selbstandige, kreative Entwickeln geeigneter Datenstrukturen und effizienter
+Algorithmen
+
+e Methoden zum Korrektheitsbeweis und zur Effizienzanalyse von Algorithmen und
+Datenstrukturen
+
+Lehrformen
+Vorlesung, Ubung, Praktikum
+
+Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandenes Modul ,,Programmieren in Java 1“
+
+Priifungsformen
+Klausurarbeit (120 Minuten); Testat
+
+Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+Verwendung des Moduls (in anderen Studiengangen)
+Pflichtfach im  Bachelorstudiengang Wirtschaftsinformatik und Wahlpflichtfach in den
+Bachelorstudiengangen Elektrotechnik und Mechatronik
+
+Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10
+
+Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Henrik Blunck
+Prof. Dr. Henrik Blunck, Prof. Dr. Katrin Brabender
+
+ll
+
+Sonstige Informationen
+
+Seite 14 /43
+
+
+
+Seite 15:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+1.13. Einfuhrung in moderne Webtechnologien
+
+Einfiihrung in moderne Webtechnologien (IB13-WT1)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+13 150h 5 3. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+WT1: Einfuhrung in moderne 4 SWS / 64h 86h V60, SV35, U20,
+Webtechnologien 2V1U1P P15, $15, EDV-P30
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden sind in der Lage die Technik zum Einsatz moderner Webtechnologien auszuwahlen.
+Sie besitzen die Fahigkeit in komplexen Webprojekten die Verantwortung zu tragen. Sie sind in die
+Lage aktuelle Webtechnologien einzusetzen. Sie haben ein Verstandnis fur Konzepte und Protokolle
+und konnen die wichtigsten Markup- und Programmiersprachen zur Erstellung von Webanwendungen
+anwenden.
+
+3 Inhalte
+HTTP, CSS, URI-Prinzip, REST, JSON, XML, JavaScript, PHP, Ajax, Web 2.0, sowie technische
+Grundlagen in den Bereichen Netze, Protokolle, sowie Client- Servertechnologie, ggf.:
+Sicherheitsaspekte, Authentifizierung, elektr. Bezahldienste, ,,Das Internet und seine Geschichte".
+4 Lehrformen
+seminaristischer Unterricht, Projektarbeit in Kleingruppen
+5 Teilnahmevoraussetzungen
+6 Priifungsformen
+Klausurarbeit (90 Minuten); Testat
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+8 Verwendung des Moduls (in anderen Studiengangen)
+Wahlpflichtfach in den Bachelorstudiengangen Elektrotechnik und Mechatronik
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Carsten Kohn
+Prof. Dr. Carsten Kohn, Prof. Dr. Rainer LUtticke
+11_| Sonstige Informationen
+
+Seite 15 /43
+
+PO 2019
+
+
+Seite 16:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.14. Betriebssysteme
+
+Betriebssysteme (IB15-BS)
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+14 150 h 5 3. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+BS: Betriebssysteme 4 SWS / 64h 86h V60, SV35, U20
+2v1U1P P15, $15, EDV-P30
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+Die Studierenden verfugen Uber das Verstandnis fur die Konzepte von Betriebssystemen von den
+theoretischen und praktischen Grundlagen bis hin zu aktuellen Losungen der Virtualisierung.
+Im letzteren Zusammenhang gehort hierzu auch die Fahigkeit Ubliche Fehler zu verstehen, deren
+Vermeidung viel Hardware (und Elektrizitat) sparen konnte.
+3 Inhalte
+e Aktuelle Betriebssysteme und Standards (Windows, Linux, POSIX)
+e Ressourcenverwaltung
+e Threading, Semaphore und Synchronisationsmechanismen
+e Multiuseransatze und Benutzerverwaltung
+e  Virtualisierung, Hardwaretreiberkonzepte
+4 Lehrformen
+Vorlesung, seminaristische Arbeit, Praktikum
+5 Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandenes Modul ,,Programmieren in
+Java 1“ und bestandene Testate ,,Programmieren in Java 2“ und ,,Programmieren in C“
+6 Priifungsformen
+Klausurarbeit (Multiple Choice, 90 Minuten); Testat
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+8 Verwendung des Moduls (in anderen Studiengangen)
+Wahlpflichtfach im Bachelorstudiengang Elektrotechnik
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Carsten Kohn
+Prof. Dr. Carsten Kohn, Prof. Dr. Wolf Ritschel
+11_| Sonstige Informationen
+
+Seite 16 /43
+
+
+
+Seite 17:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.15. Datenbanken
+
+Datenbanken (IB16-DB)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+15 300 h 10 3. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+DB: Datenbanken 3V3U1P 7SWS/112h 188 h V60, SV35, U20
+
+P15, S15, EDV-P30
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden sind in der Lage, fur eine komplexe Aufgabenstellung ein Datenmodell zu
+entwickeln, dieses in einem Datenbankmanagementsystem umzusetzen und hieraus eine
+Datenbankanwendung zu erstellen. Sie konnen unterschiedliche Datenmodelle mit ihren Vor- und
+Nachteilen verstehen und haben die Fahigkeit Datenbanktechniken zu beherrschen.
+
+3 Inhalte
+
+Datenbankmodelle Cinsbesondere das relationale Datenmodell), ER-Modellierung, konzeptionelles
+und logisches Modell, Normalisierung, SOL (Data Definition Language, Data Manipulation Language
+mit Schwerpunkt komplexer Selektion von Daten, Data Control Language), Datenbankoptimierung,
+Sichten, gespeicherte Prozeduren, Trigger, Transaktionen, Vergleich von verschiedenen
+Datenbankmanagementsystemen, verteilte Datenbanken, Benutzerverwaltung, Datenreplikation,
+NoSQL Datenbanken.
+
+4 Lehrformen
+seminaristischer Unterricht, Vorlesung, Ubung, Projektarbeit
+
+5 Teilnahmevoraussetzungen
+Formale Teilnahmevoraussetzung fur das Praktikum: Bestandenes Modul ,,Programmieren in Java 1“
+
+6 Priifungsformen
+Klausurarbeit (120 Minuten) (schriftlich oder rechnerbasiert) oder mUndliche Prufung; Testat
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+Pflichtfach im Bachelorstudiengang Wirtschaftsinformatik
+
+9 Stellenwert der Note fiir die Endnote
+10/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Katrin Brabender
+Prof. Dr. Katrin Brabender, Prof. Dr. Rainer Lutticke
+
+11_| Sonstige Informationen
+
+Seite 17 /43
+
+
+Seite 18:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.16. Webtechnologien 2
+
+Webtechnologien 2 (IB14-WT2)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+16 180h 5 4. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+WTe: Webtechnologien 2 4 SWS / 64h 86h V60, SV35, U20,
+2v1U1P P15, $15, EDV-P30
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierendenkonnen grdBere, verteilte (multimediale) Webanwendungen entwerfen und die
+Abhangigkeiten zu Standardkomponenten (wie z.B. Webbrowser oder Webserver) bewerten und die
+effiziente Steuerung der Kommunikation Uber das HTTP Protokoll realisieren. Sie bewaltigen typische
+Aufgaben fur Informatiker*innen, hier z.B. das Design der Architektur, Entwicklung spezifischer
+Bausteine und die Integration und Anpassung von Standardkomponenten.
+
+3 Inhalte
+
+Aktuelle Frameworks und Softwareentwicklungsumgebungen fur das Umsetzen komplexer
+Webprojekte, E-Learning- und Kollaborationssysteme, Konzepte des Semantic Web (RDF, OWL,
+Ontologien), Webservices (SOA, SAS), REST, Android Programmierung, Social Networks
+
+4 Lehrformen
+seminaristischer Unterricht, Projektarbeit in Kleingruppen
+
+5 Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandenes Testat ,,Webtechnologien 1“
+
+6 Priifungsformen
+Hausarbeit mit mundlicher Prufung; Testat
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Carsten Kohn
+Prof. Dr. Carsten Kohn, Prof. Dr. Rainer LUtticke
+
+11 | Sonstige Informationen
+
+Seite 18 /43
+
+
+Seite 19:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+1.17. Mathematik fiir Informatiker*innen 3
+
+Mathematik 3 fiir Informatiker*innen (IB17-MI3
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+17 150 h 5 4. Sem Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengrdRe
+MI3: Mathematik 3 fur 4 SWS / 64h 86h V60, SV35, U20,
+Informatiker*innen 2V2U P15, S15, EDV-P30
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden sind mit mathematischen Techniken in fur Informatiker*innen relevanten Fachern
+und mit den Grundbegriffen der drei gelehrten Gebiete vertraut. Sie sind in der Lage sich leicht in
+vertiefende Gebiete einzuarbeiten.
+
+3 Inhalte
+1. Einfuhrung der Wahrscheinlichkeitsrechnung und Statistik: Ereignis, Wahrscheinlichkeit,
+unabhangige Ereignisse, bedingte Wahrscheinlichkeit, Verteilung, Erwartungswert,
+Korrelations- und Regressionsrechnung
+2. Einfuhrung in die Graphentheorie: Knoten, Kanten, Baume, gerichtete Graphen
+4 Lehrformen
+Vorlesung, Ubung
+5 Teilnahmevoraussetzungen
+Inhaltliche Voraussetzung;: Lehrinhalte und erworbene Kompetenzen aus den Modulen ,,Mathematik
+fur Informatiker*innen 1“ und ,Mathematik fur Informatiker*innen 2“
+6 Prifungsformen
+Klausurarbeit (120 Minuten)
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung
+8 Verwendung des Moduls (in anderen Studiengangen)
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Henrik Blunck
+Prof. Dr. Henrik Blunck, N.N. (Nachfolge Knorrenschild)
+11 | Sonstige Informationen
+
+Literatur:
+
+Sachs: Wahrscheinlichkeitsrechnung und Statistik, 3. Aufl., Hanser 2009
+
+Ottman und Widmeyer: Algorithmen und Datenstrukturen, 5. Aufl. Springer 2001: Kapitel 9 -
+Graphenalgorithmen
+
+Tittmann: Graphentheorie, 2. Aufl, Hanser 2011
+
+Seite 19 /43
+
+PO 2019
+
+
+Seite 20:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.18. IT-Sicherheit
+
+IT Sicherheit (1IB18-1S)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+18 150h 5 4. Sem. Sommersemester 1 Semester
+1 | Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+IS: IT-Sicherheit 2V1U1P 4 SWS / 64h 86h V60, SV35, U20,
+
+P15, S15, EDV-P30
+
+2 | Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden erlangen die Fahigkeit, neue Aufgabenstellungen aus der IT-Sicherheit analysieren
+und mit den entsprechenden Methoden losen, sowie sicherheitsrelevante Entscheidungen im IT-
+Umfeld professionell treffen zu konnen. Die Studierenden sind in der Lage relevante Teilaspekte der
+IT-Sicherheit in der Praxis einsetzten zu konnen. Sie verfugen Uber Grundkenntnisse, wie man sich in
+diesem schnell andernden Umfeld selbstandig weiterbildet. Die Studierenden verstehen die
+Bedeutung der Hartung von Systemen fur ein sicheres |T-Umfeld.
+
+3 | Inhalte
+
+Systemsicherheit
+
+Diskussion: Was heiBt ,,sicher“?, Sicherheits- und Datenschutzaspekte von IT-Systemen, Trusted
+Computing, Sicherheitsprotokolle, Sicherheit in Hardware, Sicherheitsmanagement,
+Notfallvorsorgemanagement, Outsourcing von Sicherheit,
+
+Kryptografie
+
+Grundlagen der Kryptografie, u.a. mathematische Grundlagen,
+
+Sicherheit in Netzen
+
+Wireshark, Cross-Side-Scripting, SOL-Injections, Webattacken (DDoS, Phishing etc.), Konzepte zum
+Erhohen der Sicherheit in komplexen Webanwendungen, Firewall /VPN, Social Engineering,
+Footprinting (Webrecherche), Systemhartung, Viren,
+
+4 | Lehrformen
+seminaristischer Unterricht, Projektarbeit in Kleingruppen
+
+5 | Teilnahmevoraussetzungen
+
+6 | Prifungsformen
+Klausurarbeit (90 Minuten); Testat
+
+7 | Voraussetzungen fir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+8 | Verwendung des Moduls (in anderen Studiengangen)
+Pflichtfach im Bachelorstudiengang Wirtschaftsinformatik
+
+9 | Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Carsten Kohn
+Prof. Dr. Carsten Kohn, Prof. Dr. Rainer Lutticke, Prof. Dr. Jorg Frochte
+
+11 | Sonstige Informationen
+
+Seite 20 /43
+
+
+Seite 21:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+1.19. Mikrocontroller
+
+Mikrocontoller INFORMATIK CIB-MCI)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+19 150h 5 4. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+MCI: Mikrocontroller 4 SWS / 64h 86h V60, SV35, U20
+2v1U1P P15, $15, EDV-P30
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden konnen Embedded System Architekturen einschatzen und planen und diese fur
+Projektplanungen im spateren Berufsleben einbringen. Die Studierenden beherrschen Gruppen- und
+Einzelarbeit und konnen in deren Rahmen sowohl abstrakte als auch sehr detaillierte Probleme im
+Bereich Embedded Systeme losen.
+
+Inhalte
+Das Ziel der Veranstaltung ist es, Embedded Systeme hinsichtlich ihrer Leistungsfahigkeit und
+Komplexitat bewerten und handhaben zu k6nnen. Es werden verschiedene Controller Architekturen
+im Bereich 8-Bit und 32/64-Bit erlautert und analysiert. Fur die Kommunikation der Mikrocontroller
+mit der Umwelt werden verschiedene Schnittstellen im Detail behandelt. Abgerundet wird die
+Veranstaltung durch die Datenverarbeitung auf dem Controller bzw. der Embedded Plattform, um
+Sensordaten zu verarbeiten und Aktorbefehle zu berechnen.
+e CPU- und Speicher-Architekturen: Stack, Heap, Register, Akku, RICS/CISC, Multi-
+Prozessor/Multi-Core, Pipelining, Harvard, von Neumann; Flash, RAM
+e Analyse von Embedded Plattformen (Prozessoren, Speicher, |O-Interfaces, Stromverbrauch,
+Rechenleistung)
+e = AD und DA Wandlung
+e Input-Output (SPI, UART, CAN, l2C, GPIO)
+e  Sensoren (Beschleunigung, Drehrate, Ultraschall, Temperatur, GPS, Feinstaub,
+Luftqualitat)
+e =Algorithmen zur Datenverarbeitung (Filter, CORDIC, Kunstlich Neuronale Netze,
+Bildverarbeitung mit OpenCV)
+e Hardwarebeschleunigung (FPGA, Funktionsspezifische Hardware Module, Anwendung von
+VHDL)
+e = Anbindung der Datenverarbeitung an Cloud-Losungen / Server-Datenbanken
+
+Lehrformen
+Vorlesung, Ubung und Praktikum
+
+Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandene Module ,,Programmieren in
+Java 1", ,,Programmieren in Java 2“ und ,,Programmieren in C“
+
+Priifungsformen
+Klausurarbeit (120 Minuten); Testat
+
+Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+Verwendung des Moduls (in anderen Studiengangen)
+
+Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10
+
+ll
+
+Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Edmund Coersmeier
+
+Prof. Dr. Edmund Coersmeier, Prof. Dr. Wolf Ritschel
+Sonstige Informationen
+
+Seite 21 /43
+
+PO 2019
+
+
+Seite 22:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.20. Softwarepraktikum
+
+Softwarepraktikum
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+20 600 h 20 4. und 5. Sem. SOP: Sommer- und 2 Semester
+
+(10+10) Wintersemester (SOP)
+RV: Sommersemester 1 Semester
+
+(RV)
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+SOP: Softwarepraktikum 4P 6 SWS/ 96h 504 h 3-4 Studierende (SOP)
+
+RV: Ringvorlesung 2V V60 (RV)
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+SOP:
+
+Die Studierenden sind in der Lage ein vollstandiges Softwareprojekt in einem Team mit 3-4
+Teilnehmern durchzufuhren. Sie konnen die in den vorangehenden Semestern gelernten Techniken
+wie Verfahren des Software-Entwurfs, der Softwareentwicklung, der Implementierungskompetenz
+und der Qualitatssicherung in einem groBeren Zusammenhang praktisch anwenden. Sie haben die
+Fahigkeit arbeitsteilig im Team zu arbeiten.
+
+RV:
+
+Die Studierenden sind mit aktuellen Softwareprojekte in der Industrie, Wirtschaft und Forschung
+vertraut. Sie kennen die Fahigkeiten, die von ihnen in realen Softwareprojekten gefordert werden. Die
+Studierenden erhalten Anregungen fur ihr eigenes Softwareprojekt. Sie gewinnen eine Ubersicht von
+verschiedenen Bereichen der Informatik, so dass sie in der Lage sind im 5. Semester die Wahlfacher
+gemaB ihren eigenen Neigungen und Kompetenzen zu wahlen.
+
+3 Inhalte
+
+SOP:
+
+Eine Gruppe von Studierenden bekommt von einem Dozenten/einer Dozentin des FB E ein Lastenheft
+zu einem Softwareprojekt. Zu diesem Lastenheft erstellen die Studierenden ein Pflichtenheft mit
+Meilensteinplanung. Einsatzszenarien und Software-Architektur werden mit dem betreuenden
+Dozenten/der Dozentin besprochen. AnschlieBend folgt unter Begleitung des Dozenten/der Dozentin
+die Implementierung, Umsetzung von QualitatssicherungsmaBnahmen, Erstellung von
+Dokumentationen und abschlieBend die Prasentation des fertigen Systems, sowie eine Software-
+technische Abnahme.
+
+Die Umsetzung erfolgt Uber den Zeitraum von zwei Semestern, wobei kurze, wochentliche Feedback -
+und Status-Gesprache mit dem betreuenden Dozenten/der Dozentin vorgesehen sind, mit dem Ziel
+eine kontinuierliche Arbeit am Projekt und den ,,Kundenkontakt" zu fordern.
+
+RV:
+
+Dozent* innen des Fachbereiches sowie vor allem externe Vortragende aus Forschung und Wirtschaft
+bieten einen Einblick in ihr jeweiliges Arbeitsfeld und ihre Softwareprojekte. Besonderes Augenmerk
+liegt dabei auf zukunftstrachtigen Entwicklungen und Arbeitsbereichen.
+
+4 Lehrformen:
+SOP: Projektarbeit. Einmal pro Woche Feedback-Gesprach mit dem Dozenten/der Dozentin.
+RV: Vorlesung
+
+5 Teilnahmevoraussetzungen
+
+Seite 22 /43
+
+
+Seite 23:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+Formale Voraussetzungen fur Teilnahme an SOP zum Praktikum wie auch zur Prufung: Bestandene
+Module ,,Programmieren in Java 1", ,Programmieren in Java 2", ,,Programmieren in C“ und ,,Software
+
+Engineering“
+
+Inhaltliche Voraussetzungen konnen je nach Projekt dazukommen.
+6 Priifungsformen
+
+SOP: Hausarbeit mit mUndlicher Prufung
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+
+SOP: mit mindestens ,,ausreichend“ bewertete Prufungsleistung, Erlangung der Testate
+8 Verwendung des Moduls (in anderen Studiengangen):
+9 Stellenwert der Note fiir die Endnote
+
+20/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+
+Dekan des Fachbereichs Elektrotechnik und Informatik;
+
+SOP: Professor*innen des Fachbereichs Elektrotechnik und Informatik
+11_| Sonstige Informationen
+
+Seite 23 /43
+
+PO 2019
+
+
+Seite 24:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.21. Projektmanagement
+
+Projektmanagement (IB21-PM)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+el 150h 5 5. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+PM: Projektmanagement 4 SWS / 64h 86h V60, SV35, U20
+2v1U1P P15, $15, EDV-P30
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Nach Absolvieren des Moduls besitzen die Studierenden vertiefte Kenntnisse fur den Ablauf eines
+Softwareprojekts und uber Techniken, die beim Projektmanagement angewendet werden. Sie
+verfugen Uber ein Verstandnis fur unterschiedliche Konzepte des Projektmanagements und deren
+Einsatz in Abhangigkeit der jeweiligen Situation und gewinnen eine Offenheit gegenuber
+zukuUnftigen Entwicklungen. Sie erlernen die Bedeutung der unterschiedlichen Rollen und erkennen
+die Wichtigkeit einer guten Teamarbeit und einer guten Kommunikation in einem Softwareprojekt.
+
+3 Inhalte
+e Verstandnis des Projektmanagementbegriffs und der Rollen in einem Projekt
+e =Strukturierung eines Projekts mittels unterschiedlicher Techniken wie Projektstrukturplan
+und Netzplan
+e Qualitatskontrolle und Projekt-Controlling
+e Klassische Vorgehensmodelle
+e §=Agiles Projektmanagement: Scrum, Kanban
+e  Teamarbeit (Kommunikation im Team, Konflikte in der Projektarbeit)
+4 Lehrformen
+seminaristischer Unterricht und Projektarbeit in der Form eines Planspiels
+5 Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandene Module ,,Programmieren in
+Java 1", ,Programmieren in Java 2", ,Software Engineering” und ,Datenbanken“
+6 Priifungsformen
+Klausurarbeit (120 Minuten); Testat
+7 Voraussetzungen fiir die Vergabe von Kreditpunkte
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+8 Verwendung des Moduls (in anderen Studiengangen)
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Ursula Oesing
+Prof. Dr. Ursula Oesing, Prof. Or. Jorg Frochte
+11_| Sonstige Informationen
+
+Seite 24 /43
+
+
+
+Seite 25:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.22. Programmieren in Python
+
+Programmieren in Python (IB22-PY)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+22 150h 5 5. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+PY: Programmieren in Python 4 SWS / 64h 86h V60, SV35, U20
+2v1U1P P15, $15, EDV-P30
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden sind mit den Grundlagen der Programmiersprache Python und ihrer Anwendung mit
+Bezug auf die groBe Vielfalt von frei nutzbaren Anwendungsmodulen vertraut. Sie konnen Python-
+spezifische Eigenschaften im Bereich des Programmablaufs und der Objektorientierung anwenden.
+Die Studierenden erwerben vor allem Kenntnisse Uber die Module aus dem Bereich der Mathematik,
+dem Maschinellen Lernen, der Bioinformatik und fur Webservices.
+
+Die Studierenden konnen sowohl zugig und kosteneffizient Prototypen als auch nachhaltige,
+objektorientierte Software entwickeln. Sie besitzen die Fahigkeiten, um sowohl im F&E- als auch im
+Produkttest-Bereich einen aktiven Beitrag im Berufsleben leisten zu kOnnen.
+
+3 Inhalte
+
+e Python Programmablauf und Kontrollstrukturen (Schleifen, Datentypen wie Listen,
+Dictionaries, Error Exceptions, Funktionen, Variablen, ...)
+Dateioperation (Lesen, Schreiben)
+
+Testen
+
+Lambda-Operator
+
+Objektorientierung (Klassen, Instanzen, Vererbung, Uberladen)
+Mathematische Anwendungen mittels des Moduls numpy
+Verarbeitung biologischer Datensequenzen mittels numpy
+Bildverarbeitung mittels openCV fur biologische Bilder
+
+Zugriff aus Python auf SQL Datenbanken
+
+Anwendung von Maschinellem Lernen mittels tensorflow Bibliothek
+e —_Einfuhrung in das Modul django fur die Webservice Implementierung
+
+4 Lehrformen -
+Seminaristischer Unterricht, Vorlesung, Ubung
+
+5 Teilnahmevoraussetzungen
+Formale Teilnahmevoraussetzung fur die Teilmahme am Praktikum: Bestandene Module
+»Programmieren in Java 1“, ,Programmieren in Java 2“ und ,,Programmieren in C“
+
+6 Priifungsformen
+Klausurarbeit (120 Minuten) oder mundliche Prufung; Testat
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+Wahlpflichtfach im Bachelorstudiengang Elektrotechnik und Mechatronik
+
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Edmund Coersmeier
+Prof. Dr. Edmund Coersmeier, Prof. Dr. Katrin Brabender
+
+11_| Sonstige Informationen
+
+Seite 25 /43
+
+
+Seite 26:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.23. Theoretische Informatik
+
+Theoretische Informatik (IB25-THI)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+25 150h 5 6. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+THI: Theoretische Informatik 4 SWS / 64h 86h V60, SV35, U20
+2v1U1P P15, $15, EDV-P30
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden beherrschen grundlegende Konzepte der theoretischen Informatik im Bereich
+Automatentheorie und Formale Sprachen. Sie verfugen daruber hinaus Uber grundlegende Kenntnisse
+der Berechenbarkeitstheorie.
+
+3 Inhalte
+Im Bereich Automatentheorie und Formale Sprachen werden behandcelt: Grammatiken, Syntaxbaume,
+Wortproblem, Chomsky-Hierarchie, regulare-, kontextfreie-, kontextsensitive und Typ0Q Sprachen,
+endliche (deterministische, nichtdeterministische) Automaten, Kellerautomaten, Regulare
+Ausdrucke, Pumping Lemma, Minimalautomaten, Abschlusseigenschaften, Entscheidbarkeit, Mealy-
+Maschine, Moore-Maschine, Chomsky Normalform, Backus-Naur-Form.
+Berechenbarkeitstheorie: Turing-, LOOQP-,WHILE-,GOTO-Berechenbarkeit, Chursche These,
+Ackermannfunktion.
+
+4 Lehrformen
+Seminaristischer Unterricht, Vorlesung, Ubung
+
+5 Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandene Module ,,Programmieren in
+Java 1“ und ,,Programmieren in Java 2“
+
+6 Priifungsformen
+Klausurarbeit (120 Minuten); Testat
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Wolf Ritschel
+Prof. Dr. Wolf Ritschel, Prof. Dr. Katrin Brabender, Prof. Dr. Rainer LUtticke
+
+11_| Sonstige Informationen
+
+Seite 26 /43
+
+
+
+Seite 27:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+1.24. Wahlmodul: Schlisselkompetenzen 3 - Studium Plus
+
+Wahlmodul: Schliisselkompetenzen 3 - Studium Plus (IB-SK3)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+26 300 10 6. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+SK3: SchlUsselkompetenzen 3- 8 SWS/128 h 172h 20 Studierende
+
+Studium Plus 8S
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+Die Studierenden haben je nach ihren personlichen Interessen sprachliche, methodische,
+kommunikative, interkulturelle und/oder personale Kompetenzen neu erwerben oder vertieft.
+
+3 Inhalte
+
+Wahl von Veranstaltungen aus den Bereichen “Aspekte der Nachhaltigkeit", “Aspekte des
+unternehmerischen Handelns", “Gesellschaftliche Aspekte", “Methodenkompetenzen", “Soziale
+Kompetenzen’, “Interkulturelle Kompetenzen” und “Sprachen” des ISD/Studium Plus
+
+4 Lehrformen:
+Seminar
+
+5 Teilnahmevoraussetzungen
+keine
+
+6 Priifungsformen
+Klausurarbeiten, Hausarbeiten, Referate oder mundliche Prufungen
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+Aktive Teilnahme an den Seminaren und unbenoteter Leistungsnachweis
+
+8 Verwendung des Moduls Cin anderen Studiengangen): -
+
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Dekan des Fachbereichs Elektrotechnik und Informatik
+Institut fur Studienerfolg und Didaktik (ISD/Studium Plus)
+
+11_| Sonstige Informationen
+
+Seite 27 /43
+
+
+Seite 28:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+2. Individuelle Vertiefungsmoéglichkeiten durch Wahlmodule
+2.1. Wahlmodule Informatik I-V
+
+Wahlmodule 1 und 2: IB23-IB24 im 5. Semester
+Wahlmodule 3 bis 5: IB27-IB29 im 6. Semester
+
+Wahlmodul allgemein
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+IB23-IB24 150h jew. 5 5. und 6. Sem. Sommer- & Wintersem. jew. 1 Sem.
+IB27-IB29
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+WP1-WP5: Wahlpflichtfach 1-5 4 SWS / 64h 86h 30 Studierende
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden beherrschen die Terminologie der behandelten Thematik und haben einen Uberblick
+Uber Probleme und Methoden dieser Thematik. Sie verfugen Uber grundlegende Kenntnisse in der
+Anwendung und Problemlosung und Uber grundlegendes Wissen Uber den Stand der Technik und der
+aktuellen Entwicklungen diese Thematik betreffend. Sie besitzen die grundlegende Fahigkeit
+Sachverhalte, die sich auf die Thematik beziehen, zu begreifen, zu analysieren und zu bewerten.
+
+3 Inhalte
+
+Aktuelle Themen aus dem Bereich des offenen Wahlkataloges
+
+Uber die unten aufgetihrten Facher hinaus, haben die Studierenden die Méglichkeit, folgende Module
+aus anderen Studiengangen zu belegen:
+
+Aus dem Bachelor Maschinenbau:
+
+ee, Technik der Mensch-Maschine-/nterak tion”
+
+Aus den Bachelorstudiengangen des CVH:
+
+e _,Fingebettete Systeme“
+e = —,,Grundlagen der Robotik“
+e = ,,Grundlagen der Automatisierung“
+
+4 Lehrformen: Vorlesung mit integrierter Ubung und Praktikum
+
+5 Teilnahmevoraussetzungen
+Siehe Beschreibungen der Lehrveranstaltungen des Wahlpflichtkatalogs
+
+6 Priifungsformen
+Siehe Beschreibungen der Lehrveranstaltungen des Wahlpflichtkataloges
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen):
+
+9 Stellenwert der Note fiir die Endnote
+jeweils 5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Siehe Beschreibungen der Lehrveranstaltungen des Wahlpflichtkataloges
+
+11_| Sonstige Informationen
+
+Wahlpflichtkatalog
+
+Seite 28 /43
+
+
+Seite 29:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+Der Katalog der Wahlpflichtfacher ist offen und soll die Mdglichkeit bieten, aktuelle Fragestellungen aufzugreifen
+sowie ihn durch interessante Spezialveranstaltungen durch Lehrbeauftragte aufzuwerten. Die folgenden
+Wahlpflichtfacher sind exemplarische Auspragungen des Wahlmoduls IB23. Die Facherbeschreibungen der einzelnen
+
+Dozent*innen konnen formale oder empfehlende Voraussetzungen enthalten.
+
+Seite 29 /43
+
+
+Seite 30:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+Angebot ausschlieBlich im Wintersemester
+
+2.2. Wahlpflicht: Computer Vision
+
+Wahlpflicht - Computer Vision
+
+Kennnummer Workload Credits Studiensem Haufigkeit des Angebots Dauer
+150h 5 5. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+CV: Computer Vision 4 SWS / 64h B6h 20 Studierende
+2viU1P
+2 Lernergebnisse (learning outcomes) /Kompetenzen
+
+Die Studierenden kennen die Algorithmen und Verfahrensweisen des Themengebietes ,Computer
+Vision“. Dieses Themenfeld befasst sich mit der kUnstlichen Modellierung des menschlichen
+Sehvermogens fur technische Anwendungen. Die Studierenden konnen die erworbenen Kenntnisse
+praxisorientiert anwenden, um in typischen Anwendungsfeldern der Computer Vision Aufgaben zu
+losen.
+
+Inhalte
+e Komponenten und Elemente von Computer Vision
+e Photometrische und geometrische Kalibrierung
+e Stereo Vision und andere 3D-Verfahren (z.B. Time-of-Flight)
+e Moderne Mustererkennungsverfahren (z.B. Ada-Boost, Histogram-of-Oriented-Gradients,
+Deep Learning)
+Tracking
+e Implementierung von Algorithmen fur ,,Face Detection” und ,,Face Recognition“
+e Anwendungsbereiche von Computer Vision in der Robotik, Fahrerassistenzsysteme,
+Medizintechnik und Multimedia-Anwendungen
+
+Lehrformen
+Vorlesung, Ubung, Praktikum
+
+Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandene Module ,Mathematik fur
+Informatiker*innen 2“ und ,,Programmieren in Java 2“
+
+Prifungsformen
+Klausurarbeit (90 Minuten) oder mundliche Prufung; Testat
+
+Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+Verwendung des Moduls (in anderen Studiengangen)
+Wahlpflichtfach im Bachelorstudiengang Mechatronik
+
+Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10
+
+Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr.-Ing. Stefan Muller-Schneiders
+
+11
+
+Sonstige Informationen
+
+Literatur:
+
+Gonzales, Woods: ,,Digital Image Processing“, Pearson Higher Education, 4. Auflage, 2017
+Kaehler, Bradski: ,Learning QpenCV 3: Computer Vision in C++“, O’Reilly, 2017
+
+Seite 30 /43
+
+
+
+Seite 31:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+2.3. Wahlpflicht: Lokalisierung und mobile Applikationen
+
+Wahlpflicht - Lokalisierung und Mobile Applikationen
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+150h 5 5. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+LM: Lokalisierung und Mobile 4 SWS / 64h B6h 15 Studierende
+
+Applikationen 2V1U1P
+
+Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden verfugen Uber grundlegende Kenntnisse in den Bereichen mobile Lokations- und
+Kontexterkennungsbasierte Dienste sowie Uber grundlegende mobile Positionierungstechnologien.
+Sie beherrschen die Grundlagen der Konzeption und Implementierung solcher Dienste. Des Weiteren
+kOnnen die Studierenden fur vorgegebene Anwnendungsszenarien und dazu passende Dienste
+geeignete Technologien, etwa zur energie-effizienten Positionierung, vergleichend evaluieren,
+auswahlen und geeignet adaptieren.
+
+Inhalte
+
+e Grundlagen und energie-effiziente Nutzbarmachung der Sensorik mobiler Endgerate.
+
+e Ausgewahlte Grundlagen der Android-Programmierung: Entwicklungsumgebungen, App-
+Erstellung, GUI-Programmierung, Sensor- und Kommunikationsschnittstellen.
+
+e Positionierungs- und Tracking-konzepte und -technologien: GPS-, WiFi-, Ultrasound, Dead
+Reckoning-Techniken, etc.
+
+e Konzepte zur Kontexterkennung auf mobilen Endgeraten: Gestenerkennung und
+Aktivitatserkennung
+
+e Methoden zur Evaluation mobiler Dienste und Technologien zur Positionierung und Kontext-
+Erkennung
+
+Lehrformen
+Vorlesung, Gruppenprojektarbeiten, Ubung, Praktikum
+
+Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandene Module ,,Programmieren in
+Java 1“, ,Programmieren in Java 2“ und ,Algorithmen und Datenstrukturen“
+
+Prifungsformen
+mundliche Prufung; Testat
+
+Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+Verwendung des Moduls (in anderen Studiengangen)
+Wahlpflichtfach im Bachelorstudiengang Elektrotechnik und Mechatronik
+
+Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10
+
+11
+
+Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Henrik Blunck
+Sonstige Informationen
+
+Seite 31 /43
+
+PO 2019
+
+
+Seite 32:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+2.4. Wahlpflicht: Videobasierte Fahrassistenzsysteme
+
+Wahlpflicht - Videobasierte Fahrerassistenzsysteme
+
+Kennnummer Workload Credits Studiensem Haufigkeit des Angebots Dauer
+150 h 5 5. Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+VF: Videobasierte 4 SWS / 64h B6h 20 Studierende
+Fahrerassistenzsysteme
+2v1U1P
+2 Lernergebnisse (learning outcomes) /Kompetenzen
+
+Die Studierenden kennen die Funktionen aktueller Fahrerassistenzsysteme, zugehdrige Sensoren,
+Aktoren und ausgewahlte Algorithmen. Sie konnen die erworbenen Kenntnisse praxisorientiert
+anwenden. Die Studierenden sind in der Lage einfache Sensorfunktionen fur videobasierte
+Fahrerassistenzsysteme selbst zu entwerfen und zu implementieren.
+
+Inhalte
+e Videobasierte Systeme (z.B. Fahrzeug-, FuBganger-, Fahrspur- und
+Verkehrszeichenerkennung)
+Sensoren und Aktoren fur Fahrerassistenzsysteme
+Einfuhrung in die digitale Bildverarbeitung
+Sensordatenfusion
+Autonomes Fahren
+Verwendung von Softwarebibliotheken, z.B. OpenCV
+e —_Einfuhrung in das Middleware-Framework ADTF
+
+Lehrformen
+Vorlesung, Ubung, Praktikum
+
+Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandene Module ,Mathematik fur
+Informatiker*innen 2“ und ,,Programmieren in Java 2“
+
+Priifungsformen
+Klausurarbeit (90 Minuten) oder mundliche Prufung; Testat
+
+Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+Verwendung des Moduls (in anderen Studiengangen)
+Wahlpflichtfach im Bachelorstudiengang Mechatronik
+
+Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10
+
+Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr.-Ing. Stefan Muller-Schneiders
+
+ll
+
+Sonstige Informationen
+In diesem Modul werden zwei ,,Audi Autonomous Driving Cup“-Fahrzeuge eingesetzt (Siehe hierzu:
+https://www.audi-autonomous-driving-cup.com/)
+
+Literatur:
+
+Peter Haberacker ,,Praxis der Digitalen Bildverarbeitung und Mustererkennung", Hanser, 1995
+Bernd Jahne ,,Digitale Bildverarbeitung und Bildgewinnung", Springer, 2012
+
+Hermann Winner ,,Handbuch Fahrerassistenzsysteme’”, Springer, 2015
+
+Seite 32 /43
+
+
+
+Seite 33:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+2.5. Wahlpflicht: VHDL
+
+VHDL CIB-HD)
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+150h 5 5. Sem. Wintersemester 1 Semester
+Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengrdRe
+HD: VHDL 2V1U1P 4 SWS / 64h 86h V60, SV35, U20
+
+P15, $15, EDV-P30
+
+Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden sind mit den Grundlagen der Hardwarebeschreibungssprache VHDL und ihrer
+Anwendung mit Bezug auf die Planung, den Entwurf, die Implementierung und die Synthese von
+digitalen Schaltungen auf konfigurierbarer Hardware (FPGA, ASIC) vertraut. Sie konnen VHDL-
+spezifische Konstrukte im Bereich des Hardwareentwurfs und des Testens anwenden. Die
+Studierenden erwerben vor allen Dingen Kenntnisse Uber die Bedeutung von synthesefahigem
+Register Transfer Level (RTL) Code aus den Bereichen der geschwindigkeitsoptimierten
+Datenverarbeitung, strom-effizienten Signalverarbeitung, der Steuerung- und Regelungstechnik mit
+Fokus auf die Gebiete loT (Internet of Things) und Industrie 4.0.
+
+Die Studierenden k6nnen sowohl zUgig und hardwareeffizient Prototypen als auch nachhaltigen,
+synthesefahigen RTL Code in der Hardwarebeschreibungssprache VHDL entwerfen, simulieren und
+synthetisieren. Sie besitzen die Fahigkeiten, sowohl im F&E- als auch im Test-Bereich einen aktiven
+Beitrag im Berufsleben leisten zu kOnnen.
+
+Inhalte
+e Unterscheidung zwischen Software Entwicklung und Code-basierter
+Hardwarebeschreibung mittels VHDL
+e Bedeutung von Entwurf, Simulation und Synthese digitaler Schaltungen mittels VHDL
+Einfuhrung in die Sprachkonstrukte und Syntax von VHDL
+Einfuhrung in ausgewahlte Softwaretools zur VHDL Code Entwicklung, Simulation und
+Synthese fur FPGA-Bausteine
+e = Entwurf sequentieller und paralleler Schaltungslogik via synchroner und asynchroner
+Prozesse
+Entwurf von Testbenches
+Simulation von VHDL Code
+Synthese von VHDL Code auf FPGA Basis
+Entwurf und VHDL Implementierung von Zahlern (autonome Automaten) und Finite State
+Machines (FSM)
+e = Niedrig Energiedesign (Low Power) fur die Signalverarbeitung in loT-Geraten und Industrie
+4.0 Anwendungen
+e =Entwurf, Implementierung und Synthese schneller Datenverarbeitungsalgorithmen mit
+Blick auf Maschinelles Lernen und Kunstliche Intelligenz
+e  Ejinbettung von Softcore Prozessoren bzw. Microcontrollern in dedizierte Hardware
+(FPGA/ASIC)
+
+Lehrformen -
+Seminaristischer Unterricht, Vorlesung, Ubung
+
+Teilnahmevoraussetzungen
+Formale Teilnahmevoraussetzung fur die Teilnmahme am Praktikum: Bestandene Module
+»Programmieren in Java 1“, ,Programmieren in Java 2“ und ,,Programmieren in C“
+
+Priifungsformen
+Klausurarbeit (120 Minuten) oder mundliche Prufung; Testat
+
+Voraussetzungen fiir die Vergabe von Kreditpunkten
+
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+Seite 33 /43
+
+PO 2019
+
+
+Seite 34:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+Wahlpflichtfach im Bachelorstudiengang Elektrotechnik und Mechatronik
+
+9 Stellenwert der Note fiir die Endnote
+
+5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+
+Prof. Dr. Edmund Coersmeier
+
+Prof. Dr. Edmund Coersmeier, Prof. Dr. Ludwig Schwoerer
+
+11 | Sonstige Informationen
+
+Seite 34 /43
+
+
+Seite 35:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+Angebot sowohl im Winter- als auch im Sommersemester
+
+2.6. Wahlpflicht: Softwareentwicklung fiir solarbetriebene Fahrzeuge
+
+Wahlpflicht - Softwareentwicklung fiir solarbetriebene Fahrzeuge
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+150h 5 5.0. 6. Sem. Sommersemester 1 Semester
+
+Wintersemester
+
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+SSF: Softwareentwicklung fur 4 SWS / 64h B6h 15 Studierende
+solarbetriebene Fahrzeuge 4P
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden besitzen die Fahigkeit in einem interdisziplinaren Team ihre Arbeit zu strukturieren
+und Aufgaben eigenstandig zu losen. Sie sind in der Lage selbst verantwortlich ihren Lernerfolg zu
+erreichen und sich eigenstandig fortzubilden. Die Studierenden erwerben die Kompetenz
+verantwortlich alle konkreten Entwicklungsschritte durchzufuhren und den Einsatz der notwendigen
+Ressourcen zu planen, indem die Lehrenden als Trainer agieren, fur die notwendige Infrastruktur und
+Materialien sorgen und die Studierenden durch prozessnahe Refexionen durch das Vorhaben
+begleiten.
+
+3 Inhalte
+
+Die Lehrveranstaltung wird als Problem Based Learning Lehrforschungsprojekt durchgefuhrt. Als
+
+Problemstellung dient die Softwareentwicklung fur ein solarbetriebenes Fahrzeug und die Teilnahme
+an einem internationalen Wettbewerb. Dabei geht es sowohl um die Software innerhalb der
+Fahrzeuge als auch um die Software, die fur die Entwicklung der Fahrzeuge benotigt wird. Jedem
+Teilnehmer wird eine eigene Aufgabe Ubertragen. Den Studierenden wird schrittweise immer mehr
+Verantwortung fur den eigenen Wissensaufbau Ubertragen. Die Motivation wird entscheidend durch
+eine komplexe, unstrukturierte Problemstellung aus der Realitat gesteigert, fur die
+fachbereichsubergreifende Losungsansatze in einem interdisziplinaren Team entwickelt werden
+mussen. Neben fachpraktischen Fahigkeiten werden insbesondere Projektmanagement und
+Zusammenarbeit in einem interdisziplinaren Team durch praktische Anwendung erlebbar vermittelt.
+
+4 Lehrformen
+
+Seminaristischer Unterricht im Zusammenhang mit Projektarbeit
+
+5 Teilnahmevoraussetzungen
+
+Formale Voraussetzungen fur Teilnahme am Praktikum wie auch an der Prufung: Bestandene Module
+»Programmieren in Java 1“, ,Programmieren in Java 2", ,Software Engineering” und ,,Objektorientierte
+Programmiertechniken*
+
+6 Prifungsformen
+Hausarbeit mit mundlicher Prufung; Testat
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+Mit mindestens ,,ausreichend” bewertete Prufungsleistung, Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+
+9 Stellenwert der Note fiir die Endnote
+
+5/Summe der prufungsrelevanten ECTS
+
+10 (| Modulbeauftragte/r und hauptamtlich Lehrende
+
+Prof. Dr. Rainer Litticke
+
+Prof. Dr. Rainer Lutticke, Prof. Dr.-Ing. Stefan Muller-Schneiders
+11 | Sonstige Informationen
+
+Seite 35 /43
+
+
+Seite 36:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+Angebot ausschlieflich im Sommersemester
+
+2.7. Wahlpflicht: E-Learning
+
+Wahlpflicht - E-Learning
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+150h 5 6. Sem. Sommersemester 1 Semester
+
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengrdRe
+LG: E-Learning 2V1U1P 4 SWS / 64h 86h 30
+
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+Die Studierenden beherrschen nach der Teilnahme an dem Modul die grundlegenden Konzepte des E-
+Learnings sowohl in Bezug auf die verwendeten Techniken als auch auf die Einsatzformen. Sie
+erwerben die Kompetenz bestehende E-Learning-Systeme zu bewerten und neue E-Learning-
+Systeme abhangig von den Anforderungen zu entwickeln.
+
+3 Inhalte
+Didaktik des E-Learnings. Techniken des _ E-Learnings: Web- und Computerbasierte
+Trainingsanwendungen (WBT, CBT), Autorensysteme, Audience-Response-Systeme, Intelligente
+tutorielle Systeme (ITS), Lernplattformen/Lernmanagementsysteme (LMS), Virtuelle Welten,
+Virtuelle Labore, Digitale Lernspiele und E-Learning mittels Smartphones.
+Die Einsatzformen beinhalten: selbstgesteuertes Lernen, tutoriell begleitendes Lernen, virtuelles
+Klassenzimmer, Computer-unterstutztes kooperatives Lernen, Blended Learning,
+An praktischen Beispielen werden die verschiedenen Facetten des E-Learnings wie Interaktivitat,
+Multimedialitat, Multimodalitat und Multicodalitat besprochen.
+
+4 Lehrformen
+Vorlesung, Ubung, Praktikum, seminaristischer Unterricht, Projektarbeiten
+
+5 Teilnahmevoraussetzungen
+Formale Voraussetzungen fur Teilnahme am Praktikum wie auch an der Prufung: Bestandene Module
+»Moderne Webtechnologien 1“, ,Programmieren in Java 1“ und ,,Programmieren in Java 2“
+
+6 Prifungsformen
+Hausarbeit mit mundlicher Prufung; Testat
+
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+8 Verwendung des Moduls (in anderen Studiengangen)
+
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Rainer Lutticke
+
+11 | Sonstige Informationen
+
+Seite 36 /43
+
+
+
+Seite 37:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+2.8. Wahlpflicht: Context-aware und Mobile Computing
+
+WahlIpflicht Context-aware und Mobile Computing
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+150h 5 6. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+CM: Context-aware und 4 SWS / 64h B6h 20 Studierende
+Mobile Computing 2V1U1P
+
+2 Lernergebnisse (learning outcomes) /Kompetenzen
+Die Studierenden besitzen grundlegende Kenntnisse in den Bereichen Context-aware Computing
+sowie mobile kontext-gewahre Nutzerdienste.Insbesondere erlangen die Studierenden Kenntnisse in
+der Konzeption und Implementierung Kontext-gewahrer Systeme, Architekturen und Dienste und
+kOnnen dies Kenntnisse fur konkrete Szenarien und Dienstanforderungen anwenden.
+Sie sind vor allem mit der Kontext-Herleitung, insbesondere aus Sensordaten, Nutzerdaten, sowie
+weiteren historischen Daten, sowie mobilen und verteilten Architekturen fur die Verarbeitung und
+den Zugriff auf solcher Kontext-relevanten Daten vertraut. Die Studierenden konnen zum Zwecke der
+Kontext-Herleitung auch Tools und Techniken des maschinellen Lernens anwenden. Des Weiteren
+sind die Studierenden in der Lage fur vorgegebene Anwendungsszenarien dazu passende Tools zu
+nutzen, Dienste zu konzipieren und vergleichend evaluieren, auswahlen und geeignet adaptieren zu
+kOnnen.
+3 Inhalte
+e = Software-Architekturen, Design-Konzepte sowie Sensorik fur Kontext-gewahre Dienste
+insbesondere auch auf mobilen Endgeraten und in verteilten Systemen
+e Ausgewahlte Konzepte zur Kontexterkennung, unter anderem auf mobilen Endgeraten,
+insbesondere auch Aktivitatsklassifizierung und Gestenerkennung, sowie Anwendung hierzu
+geeigneter Techniken und Werkzeuge des maschinellen Lernens
+e Technische sowie qualitative Methoden zur Evaluation kontext-gewahrer Dienste sowie von
+Technologien zur Kontext-Erkennung
+4 Lehrformen
+Vorlesung, Gruppenprojektarbeiten, Ubung, Praktikum
+5 Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandene Module ,,Programmieren in
+Java 1“ und ,,Programmieren in Java 2“
+6 Prifungsformen
+mundliche Prufung; Testat
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+8 Verwendung des Moduls (in anderen Studiengangen)
+Wahlpflichtfach im Bachelorstudiengang Elektrotechnik und Mechatronik
+9 Stellenwert der Note fir die Endnote
+5/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Henrik Blunck
+11 | Sonstige Informationen
+
+Seite 37 /43
+
+PO 2019
+
+
+Seite 38:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+2.9. Wahlpflicht: Datawarehouse und Datamining
+
+WahlIpflicht - Datawarehouse und Data Mining
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+150 h 5 6. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+DW: Datawarehouse und Data 4 SWS / 64h 86h 15 Studierende
+Mining 2V1U1P
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+Nach erfolgreichem Abschluss der Veranstaltung haben die Studierenden Kenntnisse uber den
+Aufbau eines Datawarehouses, beherrschen die grundlegenden Methoden des Data Mining und
+kOnnen diese anwenden.
+3 Inhalte
+e = §©Architektur eines Datawarehouses
+e QLAP/MOLAP/ROLAP
+e Starschema /Snowflakeschema
+e Optimierungen
+e = Grundlegende Methoden von Data Mining kennenlernen und anwenden
+e Auswertung der Ergebnisse
+4 Lehrformen
+seminaristischer Unterricht, Projektarbeiten, Gruppenarbeiten
+5 Teilnahmevoraussetzungen
+Formale Voraussetzungen fur Teilnahme am Praktikum wie auch an der Prufung: Bestandenes Modul
+,Datenbanken“
+6 Prifungsformen
+Mundliche Prufung oder Hausarbeit mit mUndl. Prufung; Testat
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+8 Verwendung des Moduls (in anderen Studiengangen)
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Katrin Brabender
+11 _ | Sonstige Informationen
+
+Seite 38 /43
+
+
+
+Seite 39:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+2.10. Wahlpflicht: Digitale Bildverarbeitung und Game Development
+Wahlpflicht - Digitale Bildverarbeitung und Game Development
+Kennummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+150 h 5 6. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+BV:Digitale Bildverarbeitung 4 SWS / 64h B6h 15 Studierende
+und Game Development
+2v1U1P
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+Die Studierenden verfugen Uber grundlegende Kenntnisse zur Analyse von digitalen Bildern. Sie
+haben ein grundlegendes Verstandnis
+uber verschiedene Methoden der Bildverarbeitung.
+Sie besitzen die Fahigkeit einfache Methoden selbst zu programmieren und zu
+implementieren. Sie haben ein Verstandnis dreidimensionaler Konzepte
+und fur deren Umsetzung. Sie sind mit dem Einsatz
+von Autorersystemen zur Erstellung von 3D-Welten und -Spielen vertraut.
+3 Inhalte
+Bildformate, Quantisierung, Filterung, Kantenerkennung, Segmentierung, Objekterkennung, Blender,
+Unity
+4 Lehrformen
+Seminaristischer Unterricht mit Praktikum am Rechner
+5 Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilhahme am Praktikum: Bestandene Module ,Mathematik fur
+Informatiker*innen 1“ und ,Mathematik fur Informatiker*innen 2“
+6 Priifungsformen
+Klausurarbeit (90 Minuten); Testat
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+8 Verwendung des Moduls (in anderen Studiengangen)
+Wahlpflichtfach im Bachelorstudiengang Elektrotechnik
+9 Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Carsten Kohn
+11 _ | Sonstige Informationen
+Literatur: Nischwitz, Fischer, Haberacker ,Computergraphik und Bildverarbeitung", Vieweg+Teubner
+2007
+
+Seite 39 /43
+
+
+Seite 40:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+2.11. Wahlpflicht: Einfuhrung in weitere Programmiersprachen
+
+Wahlpflicht - Einfiihrung in weitere Programmiersprachen
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+150h 5 6. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+PRG: Einfuhrung in weitere 4 SWS / 64h B6h 15 Studierende
+Programmiersprachen
+2viU1P
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden verfugen Uber neue Programmiersprachen und deren Konzepte. Sie haben ein
+Verstandnis fur Besonderheiten und Unterschiede zu Standardprogrammiersprachen wie z.B. Java
+oder Ansi C.
+
+Inhalte
+
+Programmierung in c++ mit Klassen und Objekten, Spezialfalle wie Operator-Overloading, virtuelle
+Methoden und Polymorphie in c++,
+
+Programmierung in Swift fur |OS-Gerate
+
+Programmierung in Prolog
+
+Lehrformen
+Vorlesung, Ubung, Praktikum
+
+Teilnahmevoraussetzungen
+Formale Voraussetzung fur die Teilnahme am Praktikum: Bestandene Module ,Programmierung in
+Java 1“ und ,,Programmierung in Java 2“ und ,,Programmieren in C“
+
+Prifungsformen
+Klausurarbeit (120 Minuten) oder mundliche Prufung; Testat
+
+Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+Verwendung des Moduls (in anderen Studiengangen)
+
+Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10
+
+Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Carsten Kohn
+Prof. Dr. Carsten Kohn, Prof. Dr. Edmund Coersmeier
+
+11
+
+Sonstige Informationen
+
+Seite 40 /43
+
+
+
+Seite 41:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+2.12. Wahlpflicht: Grundlagen Elektrotechnik 2
+
+Wahlpflicht: Grundlagen Elektrotechnik 2
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots Dauer
+75h 5 6. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroBe
+E2: Grundlagen 4 SWS / 64h 86h V60, SV35, U20
+Elektrotechnik 2 P15, $15, EDV-P30
+2v1U1P
+2 Lernergebnisse (learningoutcomes) /Kompetenzen
+
+Die Studierenden sind in der Lage, das Verhalten von Bauelementen in Wechselstromkreisen zu
+verstehen. Sie kdnnen mit komplexen elektrotechnischen GroBen rechnen. Sie beherrschen die
+Leistungsberechnung in Wechselstromkreisen. Sie kennen die Drehstromtechnik und _ ihre
+Anwendung zu Energieubertragung und fur Antriebe und k6nnen entsprechende Systeme berechnen.
+
+Inhalte
+
+Elektrische WechselgroBen, Sinussignale
+
+Komplexe GroBen der Sinusstromtechnik
+
+Leistung in Sinusstromnetzwerken
+
+Gemischte Schaltungen mit Induktivitaten und Kapazitaten
+Transformatoren
+
+Symmetrisches und unsymmetrisches Drehstromnetz
+
+Lehrformen
+Vorlesung, Ubung und Praktikum
+
+Teilnahmevoraussetzungen
+Inhaltliche Voraussetzung: Modul ,,Grundlagen Elektrotechnik“
+
+Priifungsformen
+Klausurarbeit (120 Minuten); Testat
+
+Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,,ausreichend“ bewertete Prufungsleistung; Erlangung des Testats
+
+Verwendung des Moduls (in anderen Studiengangen)
+Pflichtfach im Bachelorstudiengang Nachhaltige Entwicklung in der Vertiefungsrichtung
+Ingenieurwissenschaften als ,Grundlagen der Elektrotechnik 2“
+
+Stellenwert der Note fiir die Endnote
+5/Summe der prufungsrelevanten ECTS
+
+10
+
+Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr. Martin Sternberg
+
+ll
+
+Sonstige Informationen
+
+Seite 41 /43
+
+PO 2019
+
+
+Seite 42:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+2.13. Wahlpflicht: Einfihrung in die Kunstliche Intelligenz
+
+WahlIpflicht - Einfiihrung in die Kiinstliche Intelligenz
+
+Kennnummer Workload Credits Studiensem Haufigkeit des Angebots Dauer
+180h 5 6. Sem. Sommersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+EKI: Einfuhrung in die KI 4 SWS / 64h B6h 20 Studierende
+2viU1P
+2 Lernergebnisse (learning outcomes) /Kompetenzen
+
+Die Studierenden verfugen Uber Kenntnisse im Bereich ,KUnstliche Intelligenz“. Sie kennen
+grundlegende Vorgehensweisen und Algorithmen in diesem Bereich und konnen passende
+Problemstellungen der Informatik mit lernenden Systemen losen. Die Studierenden sind in der Lage,
+einfache Programme der Kunstlichen Intelligenz selbst zu entwerfen und zu implementieren.
+
+3 Inhalte
+e = Grundlagen Python
+e Aufbau und Topologie Neuronaler Netze
+e = Lernverfahren
+e Unsupervised Learning - Clustering
+e Supervised Learning - Multi Layer Perceptron, Backpropagation
+e Support Vector Machine
+e Deep Neural Networks
+e  =Reinforcement Learning
+4 Lehrformen
+Vorlesung, Ubung, Praktikum
+5 Teilnahmevoraussetzungen
+Bestandene Module ,Mathematik fur Informatiker 2“ und ,,Programmieren in Java 2“
+6 Prifungsformen
+Modulprufung in Form einer Klausur (90 Minuten) oder einer mundlichen Prufung.
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+bestandene Prufungsleistung; Erlangung des Testats
+(naheres wird in der gultigen PO beschrieben)
+8 Verwendung des Moduls (in anderen Studiengangen)
+9 Stellenwert der Note fir die Endnote
+5/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende
+Prof. Dr.-Ing. Stefan Muller-Schneiders
+11 | Sonstige Informationen
+
+Es ist geplant, NVIDIA-GPUs mit CUDA fur die Trainingsprozesse zu verwenden.
+Literatur:
+Jorg Frochte, ,Maschinelles Lernen: Grundlagen und Algorithmen in Python“, Hanser Verlag, 2018.
+
+Seite 42 /43
+
+
+
+Seite 43:
+Modulhandbuch
+des Bachelorstudiengangs Informatik
+
+PO 2019
+
+3. Abschluss
+
+Abschluss (IB26-PP/-PA/-KO)
+
+Kennnummer Workload Credits Studiensem. | Haufigkeit des Angebots: Dauer:
+30 900 h 30 7.Sem. Wintersemester 1 Semester
+1 Lehrveranstaltungen Kontaktzeit Selbststudium geplante GruppengroRe
+PP: Praxisphase Oh 900 h Einzelarbeit, Kleingruppe
+
+BA: Bachelorarbeit
+KO: Kolloquium
+
+2 Lernergebnisse (learning outcomes) /Kompetenzen
+
+PP:
+
+Die Studierenden sind in der Lage die im Bereich Projektmanagement erworbenen Fahigkeiten und
+Kompetenzen praktisch umzusetzen. Sie kdnnen sich in ein bestehendes Umfeld (Betrieb,
+Arbeitsgruppe, Projektteam) einordnen oder alternativ sich in einer fremden Kultur anpassen und mit
+ihren Starken einbringen. Die Studierenden k6nnen projektrelevante Einzelaufgaben in Ubergeordnete
+sachliche und organisatorische Zusammenhange einordnen. Kenntnisse wissenschaftliches
+Arbeitens koOnnen angewendet werden. Die Studierenden sind in der Lage ein Thema in einer
+vorgegebenen knappen Zeit zielgruppengerecht auf das Wesentliche zu reduzieren und zu
+prasentieren.
+
+BA/KO:
+
+Die Studierenden besitzen die Fahigkeit Probleme mit Anwendungsbezug zu losen. Sie sind in der
+Lage, sich methodisch und systematisch in Neues, Unbekanntes einzuarbeiten. Sie k6nnen mit
+erlerntem Wissen zielgerichtet umgehen. Des Weiteren sind die Studierenden mit selbststandigem,
+kreativen Arbeiten vertraut. Sie besitzen eine ausgebildete Kommunikationsfahigkeit. Zusatzlich
+konnen sie fachubergreifende Zusammenhange (Interdisziplinaritat) berucksichtigen.
+
+3 Inhalte
+
+PP:
+
+Die Praxisphase ist darauf ausgerichtet, die Vertiefung methodischer und kommunikativer
+
+Kompetenz im Bereich des Projektmanagements durch praktische Erfahrungen zu fordern. Das
+Projekt ist auf die Bearbeitung einer komplexen Aufgabe im Bereich der angewandten oder
+praktischen Informatik gerichtet. Die Projektorganisation liegt dabei weitgehend in der
+Verantwortung der Teilnehmer, die hierdurch Aspekte des Projektmanagements vertiefen sollen. Das
+Dokumentieren und zielgruppengerechte Prasentieren von Ergebnissen ist ein integraler Bestandteil
+dieses Moduls.
+
+BA/KQ:
+
+Der Studierende soll innerhalb der vorgegebenen Frist eine meist anwendungsorientierte
+Aufgabenstellung aus dem Bereich des Studienganges mit wissenschaftlichen und
+anwendungsorientierten Methoden selbstandig bearbeiten. Der Losungsprozess und die Ergebnisse
+sollen ausfuhrlich und kritisch dokumentiert werden.
+
+Der Kandidat soll nachweisen, dass er sich systematisch und methodisch und in das
+Aufgabengebiet eingearbeitet hat. Bei der Losung soll er eine Uber den Einzelfall hinausgehende
+Denkweise aufzeigen. Facherubergreifende Zusammenhange sind gebuhrend zu berucksichtigen.
+
+Seite 43 /43
+
+
+Seite 44:
+Modulhandbuch
+
+des Bachelorstudiengangs Informatik
+
+PO 2019
+Das Kolloquium dient der Feststellung, ob der Studierende befahigt ist, den Losungsprozess und die
+Ergebnisse der Arbeit, ihre fachlichen Zusammenhange und auBerfachlichen Bezuge darzustellen,
+selbstandig und kritisch zu begrUnden und ihre Bedeutung fur die Praxis einzuschatzen.
+
+4 Lehrformen:
+PP: Projektarbeiten, Studierendenzentriertes Seminar
+5 Teilnahmevoraussetzungen
+siehe Prufungsordnung (Abschlussarbeit)
+6 Priifungsformen
+siehe Prufungsordnung; Testat
+7 Voraussetzungen fiir die Vergabe von Kreditpunkten
+mit mindestens ,ausreichend” bewertete Prufungsleistung; Erlangung des Testats (PP)
+8 Verwendung des Moduls (in anderen Studiengangen)
+9 Stellenwert der Note fiir die Endnote
+15/Summe der prufungsrelevanten ECTS
+10 | Modulbeauftragte/r und hauptamtlich Lehrende:
+Priifungsausschussvorsitzende(r);
+Dozenten/ Dozentinnen des Fachbereichs
+11_| Sonstige Informationen
+
+Seite 44 /43
+
+
