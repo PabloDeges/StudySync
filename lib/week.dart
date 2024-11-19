@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -104,77 +105,115 @@ class WeeklySchedule extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                  supplyDataToCell(
-                                          timetable, day, time, 'kursname') +
-                                      " (" +
-                                      supplyDataToCell(timetable, day, time,
-                                              'kurskuerzel')
-                                          .toUpperCase() +
-                                      ")",
-                                  style: TextStyle(
-                                      fontSize: 22, color: Colors.black),
-                                  textAlign: TextAlign.center),
+                                supplyDataToCell(
+                                        timetable, day, time, 'kursname') +
+                                    " (" +
+                                    supplyDataToCell(
+                                            timetable, day, time, 'kurskuerzel')
+                                        .toUpperCase() +
+                                    ")",
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    color: Color(0xFF0766AD),
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
                               Row(
                                 children: [
                                   Text(
                                     "Kursart: ",
                                     style: TextStyle(
                                         fontSize: 22,
-                                        color: Colors.black,
+                                        color: Color(0xFF0766AD),
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  Text(
-                                    supplyKursartAusgeschrieben(
-                                        supplyDataToCell(
-                                            timetable, day, time, 'terminart')),
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        5.0, 0, 15.0, 0),
+                                    child: Text(
+                                      supplyKursartAusgeschrieben(
+                                          supplyDataToCell(timetable, day, time,
+                                              'terminart')),
+                                      style: TextStyle(
+                                          color: Color(0xFF0766AD),
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   )
                                 ],
+                              ),
+                              SizedBox(
+                                height: 20,
                               ),
                               Row(
                                 children: [
                                   Icon(
                                     Icons.room,
                                     size: 50,
+                                    color: const Color(0xFF29ADB2),
                                   ),
-                                  Text(
-                                    supplyDataToCell(
-                                        timetable, day, time, 'raum'),
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        25.0, 0, 15.0, 0),
+                                    child: Text(
+                                      supplyDataToCell(
+                                          timetable, day, time, 'raum'),
+                                      style: TextStyle(
+                                          color: Color(0xFF0766AD),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   )
                                 ],
+                              ),
+                              SizedBox(
+                                height: 20,
                               ),
                               Row(
                                 children: [
                                   Icon(
                                     Icons.school,
                                     size: 50,
+                                    color: Color(0xFF29ADB2),
                                   ),
-                                  Text(
-                                    supplyDataToCell(
-                                        timetable, day, time, 'dozname'),
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        25.0, 0, 15.0, 0),
+                                    child: Text(
+                                      supplyDataToCell(
+                                          timetable, day, time, 'dozname'),
+                                      style: TextStyle(
+                                          color: Color(0xFF0766AD),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   )
                                 ],
+                              ),
+                              SizedBox(
+                                height: 20,
                               ),
                               Row(
                                 children: [
                                   Icon(
-                                    Icons.note,
+                                    Icons.comment,
                                     size: 50,
+                                    color: Color(0xFF29ADB2),
                                   ),
-                                  Text(
-                                    supplyDataToCell(
-                                        timetable, day, time, 'raum'),
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                180,
+                                        child: Text(
+                                            "hier geeignetes Text Input Field einfügen, welches keine komischen Renderfehler hervorruft :P "),
+                                      ),
+                                    ],
                                   )
                                 ],
                               ),
