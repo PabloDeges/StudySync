@@ -49,11 +49,141 @@ class WeeklySchedule extends StatelessWidget {
             .where((x) =>
                 x['wochentag'] == weekdays[day] &&
                 x['startzeit'] == (8 + time) * 100)
-            .toList()[0][data]
-            .toUpperCase();
+            .toList()[0][data];
       } catch (x) {}
 
       return kuerzel;
+    }
+
+    String supplyKursartAusgeschrieben(String kursartShort) {
+      switch (kursartShort) {
+        case "V":
+          return "Vorlesung";
+          break;
+        case "P":
+          return "Praktikum";
+          break;
+        case "U":
+          return "Übung";
+          break;
+        default:
+          "";
+      }
+      return "";
+    }
+
+    void displayPopUp(timetable, time, day) {
+      var selectedCell;
+      try {
+        selectedCell = timetable
+            .where((x) =>
+                x['wochentag'] == weekdays[day] &&
+                x['startzeit'] == (8 + time) * 100)
+            .toList()[0];
+      } catch (x) {}
+
+      if (selectedCell != null) {
+        // falls die angeklickte Zelle einen Inhalt hat, zeige ein Pop Up an
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return Dialog(
+                  backgroundColor: Colors.transparent,
+                  insetPadding: EdgeInsets.all(10),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                          width: double.infinity,
+                          height:
+                              500, // noch hardcoded, später dynamisch anpassen
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Color.fromARGB(255, 232, 247, 255)),
+                          padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+                          child: Column(
+                            children: [
+                              Text(
+                                  supplyDataToCell(
+                                          timetable, day, time, 'kursname') +
+                                      " (" +
+                                      supplyDataToCell(timetable, day, time,
+                                              'kurskuerzel')
+                                          .toUpperCase() +
+                                      ")",
+                                  style: TextStyle(
+                                      fontSize: 22, color: Colors.black),
+                                  textAlign: TextAlign.center),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Kursart: ",
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    supplyKursartAusgeschrieben(
+                                        supplyDataToCell(
+                                            timetable, day, time, 'terminart')),
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.room,
+                                    size: 50,
+                                  ),
+                                  Text(
+                                    supplyDataToCell(
+                                        timetable, day, time, 'raum'),
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.school,
+                                    size: 50,
+                                  ),
+                                  Text(
+                                    supplyDataToCell(
+                                        timetable, day, time, 'dozname'),
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.note,
+                                    size: 50,
+                                  ),
+                                  Text(
+                                    supplyDataToCell(
+                                        timetable, day, time, 'raum'),
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                            ],
+                          )),
+                    ],
+                  ));
+            });
+      }
     }
 
     return FutureBuilder<Map<String, dynamic>>(
@@ -94,59 +224,66 @@ class WeeklySchedule extends StatelessWidget {
                     child: Row(
                       children: List.generate(5, (day) {
                         return Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.all(1.0),
-                            color: timeOffset % 2 == 0
-                                ? const Color(0xFF29ADB2)
-                                : const Color(0xFF0766AD),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  top: 1,
-                                  left: 1,
-                                  child: Text(
-                                    "${8 + timeOffset}:00",
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 8,
+                          child:
+                              InkWell // sorgt dafür dass man bei Klick auf einer Zelle eine Funktion ausführen kann
+                                  (
+                            onTap: () =>
+                                {displayPopUp(timetable, timeOffset, day)},
+                            child: Container(
+                              margin: const EdgeInsets.all(1.0),
+                              color: timeOffset % 2 == 0
+                                  ? const Color(0xFF29ADB2)
+                                  : const Color(0xFF0766AD),
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    top: 1,
+                                    left: 1,
+                                    child: Text(
+                                      "${8 + timeOffset}:00",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 8,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .center,
-                                    children: [
-                                      Text(
-                                        supplyDataToCell(timetable, day,
-                                            timeOffset, 'kurskuerzel'),
-                                        textAlign: TextAlign
-                                            .center,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      ConstrainedBox(
-                                        constraints: const BoxConstraints(
-                                            maxWidth: 90),
-                                        child: Text(
-                                          supplyDataToCell(
-                                              timetable, day, timeOffset, 'raum'),
-                                          textAlign: TextAlign
-                                              .center,
+                                  Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          supplyDataToCell(timetable, day,
+                                                  timeOffset, 'kurskuerzel')
+                                              .toUpperCase(),
+                                          textAlign: TextAlign.center,
                                           style: const TextStyle(
                                             color: Colors.white,
-                                            fontSize: 8,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                        ConstrainedBox(
+                                          constraints: const BoxConstraints(
+                                              maxWidth: 90),
+                                          child: Text(
+                                            supplyDataToCell(timetable, day,
+                                                    timeOffset, 'raum')
+                                                .toUpperCase(),
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 8,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );

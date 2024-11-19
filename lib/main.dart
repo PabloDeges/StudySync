@@ -62,6 +62,8 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:
+          false, // SEHR WICHTIG - Ohne diese Zeile schiebt die Tastatur die gesamte App nach oben und verursacht overflows
       body: SafeArea(
         child: _getSelectedView(),
       ),
@@ -74,26 +76,20 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
                 Icon(
                   Icons.calendar_view_week,
                   color: _selectedIndex == 0
-                      ? (showWeekView
-                          ? const Color(0xFF0766AD)
-                          : Colors.grey)
+                      ? (showWeekView ? const Color(0xFF0766AD) : Colors.grey)
                       : Colors.grey,
                 ),
                 const SizedBox(width: 4),
                 Icon(
                   Icons.today,
                   color: _selectedIndex == 0
-                      ? (showWeekView
-                          ? Colors.grey
-                          : const Color(0xFF0766AD))
+                      ? (showWeekView ? Colors.grey : const Color(0xFF0766AD))
                       : Colors.grey,
                 ),
               ],
             ),
             label: _selectedIndex == 0
-                ? (showWeekView
-                    ? 'Week'
-                    : 'Day')
+                ? (showWeekView ? 'Week' : 'Day')
                 : 'Week/Day',
           ),
           const BottomNavigationBarItem(
