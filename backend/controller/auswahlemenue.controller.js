@@ -46,8 +46,7 @@ const kurseUmwaehlen = async (req, res) => {
 		let entfernteTermine = [];
 		let response;
 		for (let i = 0; i < neueKurse.length; i++) {
-			//termine = (await pool.query(`SELECT t.id FROM studiengang_kurs AS sk LEFT JOIN termin as t ON sk.kursid = t.kursid WHERE sk.semesterid = ${semesterid} AND sk.kursid = ${neueKurse[i].id};`)).rows;
-			termine = (await pool.query(`SELECT t.id FROM studiengang_kurs AS sk LEFT JOIN termin as t ON sk.kursid = t.kursid WHERE sk.kursid = ${neueKurse[i].id};`)).rows;
+			termine = (await pool.query(`SELECT t.id FROM studiengang_kurs AS sk LEFT JOIN termin as t ON sk.kursid = t.kursid WHERE sk.semesterid = ${semesterid} AND sk.kursid = ${neueKurse[i].id};`)).rows;
 			for (let j = 0; j < termine.length; j++) {
 				//existiert keine id fuer die kombination aus kurs, doz, wochentag und startzeit, wird ein neuer eintrag hinzugefuegt
 				if ((await pool.query(`SELECT COUNT(benutzerid) FROM benutzer_termin WHERE benutzerid='${benutzerid}' AND terminid='${termine[j].id}';`)).rows[0].count == 0) {
