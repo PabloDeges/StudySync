@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, empty_catches, prefer_interpolation_to_compose_strings, sized_box_for_whitespace
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,6 +33,10 @@ class WeeklySchedule extends StatelessWidget {
     } catch (error) {
       throw Exception("Fehler beim Laden der Woche");
     }
+  }
+
+  void abschicken() async {
+    //Kommentar speichern
   }
 
   @override
@@ -90,7 +96,7 @@ class WeeklySchedule extends StatelessWidget {
             builder: (BuildContext context) {
               return Dialog(
                   backgroundColor: Colors.transparent,
-                  insetPadding: EdgeInsets.all(10),
+                  insetPadding: const EdgeInsets.all(10),
                   child: Stack(
                     alignment: Alignment.center,
                     children: <Widget>[
@@ -100,8 +106,8 @@ class WeeklySchedule extends StatelessWidget {
                               500, // noch hardcoded, später dynamisch anpassen
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Color.fromARGB(255, 232, 247, 255)),
-                          padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+                              color: const Color.fromARGB(255, 232, 247, 255)),
+                          padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
                           child: Column(
                             children: [
                               Text(
@@ -112,18 +118,18 @@ class WeeklySchedule extends StatelessWidget {
                                             timetable, day, time, 'kurskuerzel')
                                         .toUpperCase() +
                                     ")",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 24,
                                     color: Color(0xFF0766AD),
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Row(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Kursart: ",
                                     style: TextStyle(
                                         fontSize: 22,
@@ -137,7 +143,7 @@ class WeeklySchedule extends StatelessWidget {
                                       supplyKursartAusgeschrieben(
                                           supplyDataToCell(timetable, day, time,
                                               'terminart')),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Color(0xFF0766AD),
                                           fontSize: 22,
                                           fontWeight: FontWeight.bold),
@@ -145,15 +151,15 @@ class WeeklySchedule extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.room,
                                     size: 50,
-                                    color: const Color(0xFF29ADB2),
+                                    color: Color(0xFF29ADB2),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(
@@ -161,7 +167,7 @@ class WeeklySchedule extends StatelessWidget {
                                     child: Text(
                                       supplyDataToCell(
                                           timetable, day, time, 'raum'),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Color(0xFF0766AD),
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -169,12 +175,12 @@ class WeeklySchedule extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.school,
                                     size: 50,
                                     color: Color(0xFF29ADB2),
@@ -185,7 +191,7 @@ class WeeklySchedule extends StatelessWidget {
                                     child: Text(
                                       supplyDataToCell(
                                           timetable, day, time, 'dozname'),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Color(0xFF0766AD),
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -193,12 +199,12 @@ class WeeklySchedule extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.comment,
                                     size: 50,
                                     color: Color(0xFF29ADB2),
@@ -210,13 +216,52 @@ class WeeklySchedule extends StatelessWidget {
                                         width:
                                             MediaQuery.of(context).size.width -
                                                 180,
-                                        child: Text(
-                                            "hier geeignetes Text Input Field einfügen, welches keine komischen Renderfehler hervorruft :P "),
+                                        child: TextField(
+                                          maxLines: 3,
+                                          minLines: 3,
+                                          decoration: InputDecoration(
+                                            labelText: 'Hier Text eingeben...',
+                                            labelStyle: const TextStyle(
+                                                color: Color(0xFF0766AD),
+                                                fontWeight: FontWeight.bold),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              borderSide: const BorderSide(
+                                                  color: Color(0xFF0766AD)),
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   )
                                 ],
                               ),
+                              const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              abschicken();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF0766AD),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: const Text(
+                              'Kommentar speichern',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
                             ],
                           )),
                     ],
