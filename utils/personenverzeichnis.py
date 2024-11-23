@@ -13,7 +13,7 @@ if response.status_code != 200:
 
 # BeautifulSoup-Objekt zum Parsen des HTML-Inhalts
 soup = BeautifulSoup(response.text, "html.parser")
-
+soup.find
 # Liste zum Speichern der Personendaten
 personen_liste = []
 
@@ -25,10 +25,9 @@ for person in soup.select("div.person-list__item"):  # Beispielselektor, passt d
     #email = person.select_one("div.person-list__item-email").get("href", "").replace("mailto:", "") if person.select_one("div.person-list__item-email") else "Keine E-Mail"
     email = person.select_one("div.person-list__item-email").get_text(strip=True).replace("(at)", "@").replace("<wbr/>", "") if person.select_one("div.person-list__item-email") else "Keine E-Mail"
     #email = person.select_one("div.person-list__item-email").get("href", "")
-    
+    print(person.select_one("div.person-list__item-email").get_text(strip=True).replace("(at)", "@").replace("<wbr/>", ""))
     # Daten in ein Wörterbuch speichern
     person_info = {
-        "name": name,
         "email": email,
     }
     
@@ -36,7 +35,7 @@ for person in soup.select("div.person-list__item"):  # Beispielselektor, passt d
     personen_liste.append(person_info)
 
 # Daten als JSON-Datei speichern
-with open("personenverzeichnis.json", "w", encoding="utf-8") as json_file:
+with open("personenverzeichnisMitName.json", "w", encoding="utf-8") as json_file:
     json.dump(personen_liste, json_file, ensure_ascii=False, indent=4)
 
 print("Daten wurden erfolgreich in 'personenverzeichnis.json' gespeichert.")
