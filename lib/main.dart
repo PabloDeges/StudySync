@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:study_sync/login.dart';
+import 'register.dart';
 import 'week.dart';
 import 'day.dart';
 import 'editor.dart';
@@ -19,7 +21,12 @@ class StudySyncApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
-      home: const StudySyncHomePage(),
+      initialRoute: '/login',
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/register': (context) => const RegisterScreen(),
+        '/home': (context) => const StudySyncHomePage(),
+      },
     );
   }
 }
@@ -74,26 +81,20 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
                 Icon(
                   Icons.calendar_view_week,
                   color: _selectedIndex == 0
-                      ? (showWeekView
-                          ? const Color(0xFF0766AD)
-                          : Colors.grey)
+                      ? (showWeekView ? const Color(0xFF0766AD) : Colors.grey)
                       : Colors.grey,
                 ),
                 const SizedBox(width: 4),
                 Icon(
                   Icons.today,
                   color: _selectedIndex == 0
-                      ? (showWeekView
-                          ? Colors.grey
-                          : const Color(0xFF0766AD))
+                      ? (showWeekView ? Colors.grey : const Color(0xFF0766AD))
                       : Colors.grey,
                 ),
               ],
             ),
             label: _selectedIndex == 0
-                ? (showWeekView
-                    ? 'Week'
-                    : 'Day')
+                ? (showWeekView ? 'Week' : 'Day')
                 : 'Week/Day',
           ),
           const BottomNavigationBarItem(
