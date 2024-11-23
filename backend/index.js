@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json())
 
 app.use("/",mainPage);
-app.use("/auth",authRoute);
+app.use("/auth",changeToSchema, authRoute);
 app.use("/auswahlmenue", changeToSchema, auswahlemenue);
 
 app.listen(process.env.PORT, () => {
