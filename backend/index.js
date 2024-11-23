@@ -3,6 +3,7 @@ const cors = require("cors");
 const mainPage = require("./route/mainPage.route.js")
 const auswahlemenue = require("./route/auswahlmenue.route.js")
 const pool = require("./model/db.js");
+const authRoute = require("./route/auth.route.js")
 const { putJsonDataInDb, changeToSchema } = require('./controller/db.controller.js');
 
 require("dotenv").config();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json())
 
 app.use("/",mainPage);
+app.use("/auth",authRoute);
 app.use("/auswahlmenue", changeToSchema, auswahlemenue);
 
 app.listen(process.env.PORT, () => {
