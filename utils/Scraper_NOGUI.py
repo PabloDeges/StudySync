@@ -3,12 +3,22 @@
 #!!!! Bisher nicht zertifizierte HTTPs Requests
 from sys import argv
 import requests
-import ssl
 import json
+import requests
+from bs4 import BeautifulSoup
+import json
+import re
+import getpass
+
+email_datei_name = 'personenverzeichnis.json'
+
+
+
 
 urllink = 'https://wwwccb.hochschule-bochum.de/campusInfo/newslist/displayTimetable.php'
 loginUrl = 'https://wwwccb.hochschule-bochum.de/campusInfo/index.php'
 cert_path = 'utils/zertifikate/certi.pem'
+
 
 header = {
 'Host': 'wwwccb.hochschule-bochum.de',
@@ -19,141 +29,66 @@ header = {
 'Content-Type': 'application/x-www-form-urlencoded; charset=ISO8859-15',
 }
 data = {
-    'username': yourUsername,
-    'loginPassword': yourPassword
+    'username': getpass.getpass('Gebe deinen Benutzernamen ein'),
+    'loginPassword': getpass.getpass('Gebe dein Passwort ein')
 }
-
+def switchCharset(string): #Umlaute laden
+    string = string.replace("Ü","Ue")
+    string = string.replace("ü","ue")
+    string = string.replace("ö","oe")
+    string = string.replace("ä","ae")
+    string = string.replace("Ö","Ue")
+    string = string.replace("Ä","ae")
+    return string
+def loadEMails():
+    with open(email_datei_name, 'r') as file:
+        email_list = json.load(file)
+    return email_list
 
 def fetchSemesterGroups(session): #Alle Semester laden
-    request = session.get(urllink,verify=ssl.CERT_NONE)
-    semesterGroups = []
-    semesterGroups = scrapeSelectionPage(request.content.decode("ISO8859-15"),
-                                          semesterGroups, "semestergroup_nr")
-    return semesterGroups
-
-def switchCharset(string): #Umlaute laden
-    string = string.replace("&Uuml;","Ü")
-    string = string.replace("&uuml;","ü")
-    string = string.replace("&ouml;","ö")
-    string = string.replace("&auml;","ä")
-    string = string.replace("&Ouml;","Ö")
-    string = string.replace("&Auml;","Ä")
-    return string
-
-def removeOptionTag(html): #Formatierung
-    html = html.replace('<optionvalue=','')
-    html = html.replace('</option>','')
-    html = html.replace('>',';')
-    html = html.replace('"',"")
-    return html.split(';')
-
-def removeHTML(string): #Formatierung
-    string = string.replace("\t","")
-    #string = string.replace("\n","")
-    string = string.replace("\r","")
-    string = string.replace(" ","")
-    string = string.replace("<td>","")
-    string = string.replace("</td>","")
-    return string;
-
-class Subject: #Klasse fuer Module
-    def __init__(self,name,dozent,startzeit,wochentag,raum):
-        self.name,self.dozent, self.startzeit, self.wochentag, self.raum = name, dozent, startzeit, wochentag, raum;
-        self.dauer = 60
-        self.splitName(); self.splitTime();
-    def __str__(self):
-        #return f'{self.name} {self.dozent} {self.startzeit}'
-        return f'{self.name}\n {self.dozent}'
-    __repr__ = __str__
-    def toJSON(self):
-        return f'{{\n"name": "{self.name}" \n"lehrender": "{self.dozent}"\n"tag": "{self.wochentag}"\n"startzeit": "{self.startzeit}"\n"raum": "{self.raum}"\n}}'
-    def splitTime(self):
-        self.startzeit = self.startzeit[0:self.startzeit.find('-')]
-    def splitName(self):
-        if self.name.find('Tutorium') == -1: 
-            self.terminart = self.name[self.name.find('-')+1:len(self.name)]
-            if len(self.terminart) > 2:
-                self.terminart = self.terminart[-1];
-        else: self.terminart = "t"
-        if self.name.find('-') != -1: self.name = self.name[0:self.name.find('-')]
-    def to_dict(self):
-        return {
-            "dauer": self.dauer,
-            "dozent": self.dozent,
-            "name": self.name,
-            "raum": self.raum,
-            "startzeit": self.startzeit,
-            "terminart": self.terminart,
-            "wochentag": self.wochentag
-        }
-
-class Semester: #Klasse fuer Ids
-    def __init__(self,id,name):
-        self.id, self.name = id, name
-    def getID(self):
-        return self.id
-    def setStundenplan(self,stundenplan):
-        self.stundenplan = stundenplan
-    def __str__(self):
-        return f'{self.id}\t {self.name}'
-    __repr__ = __str__
-    def toJSON(self):
-        return f'{{\n"id": "{self.id}" \n"name": "{self.name}"\n}}'
-    def exportSemesterJSON(self):
-        # Stundenplan in Liste von Dictionaries umwandeln
-        #stundenplan_data = [subject.to_dict() for subject in self.stundenplan]
-        stundenplan_data = []
-        # Semester-Datenstruktur erstellen
-        for i in range(0,len(self.stundenplan)):
-                for j in range(1,len(self.stundenplan[i])):
-                    stundenplan_data.append(self.stundenplan[i][j].to_dict())
-        data = {
-            "stundenplaene": [
-                {
-                    "studiengang": self.name,
-                    "stundenplan": stundenplan_data
-                }
-            ]
-        }
-        return json.dumps(data, ensure_ascii=False, indent=4)
+    request = session.get(urllink,verify=False)
     
-def initStundenplan(): #Leeren Stundenplan anlegen
-    modules = [['Montag'],['Dienstag'],['Mittwoch'],['Donnerstag'],['Freitag']]
-    return modules
+    semesterGroups = []
+    semesterGroups = scrapeSelectionPage(BeautifulSoup(request.text,"html.parser"), "semestergroup_nr")
+    return semesterGroups
+    
+def scrapeSelectionPage(html,filter): #Auswahlseite Scrapen
+    studiengaenge = []
+    pattern = r'<option value="(\d+)">([A-Za-z0-9_]+(?:[A-Za-z0-9]*))\s*[-|]?\s*([^<]*?(\d+\.?\d*)\s*\.?\s*(Semester|Wintersemester|Gr\.[A-B]))'
 
-def scrapeSelectionPage(html, array,filter): #Auswahlseite Scrapen
-    html= removeHTML(html)
-    #print(html)
-    htmlSplit = html.rsplit('\n')
-    #print(htmlSplit)
-    for line in range(len(htmlSplit)):
-        if htmlSplit[line].find('<selectstyle="color:black"name="'+filter+'">') ==0:
-            line = line+2
-            while htmlSplit[line] != "</select>":
-                semesterSplit = removeOptionTag(htmlSplit[line])
-                array.append(Semester(semesterSplit[0],semesterSplit[1]))
-                line = line+1
-    return array
+    for element in html.find_all("option"):
+        matches = re.findall(pattern, str(element))
+        for id, kuerzel, studiengang, ignoreee, ignore in matches:
+            studiengaenge.append({'id':id,'studiengang':studiengang,'kuerzel':kuerzel})
+        
+    return studiengaenge
             
-def scrape(html): #WebStundenplan Scrapen - Muss immer in Kombination mit fetchStundenplan genutzt werden
-    html = removeHTML(html)
-    modules = initStundenplan()
-    #print(html)
-    htmlSplit = html.rsplit("\n")
-    #print(htmlSplit)
-    for line in range(len(htmlSplit)):
-        if htmlSplit[line].find("<trheight='25'class='tableRowGrey1'>")==0 or htmlSplit[line].find("<trheight='25'class='tableRowGrey0'>")==0:
-            for module in modules:
-                if module.count(htmlSplit[line+3]) == 1:
-                    subject = Subject(htmlSplit[line+2],htmlSplit[line+1],htmlSplit[line+4],htmlSplit[line+3],htmlSplit[line+5])
-                    module.append(subject)
-    return modules
+def scrape(html,semester,kuerzel): #WebStundenplan Scrapen - Muss immer in Kombination mit fetchStundenplan genutzt werden
+    soup = BeautifulSoup(html.text, "html.parser")
+    semester_info = []
+    stundenplan = {
+            'studiengang': semester,
+            'kuerzel': kuerzel
+    }
+    for modul in soup.select("tr"):
+        data_list = [] #0 lehrer, 1 name, 2 tag, 3 zeit, 4 raum
+        emailList = loadEMails()
+        for data in modul.select("td"):
+            try:
+                data_list.append(data.get_text(strip=True))
+            except TypeError:
+                print("Fehler, keine Data")
+        if len(data_list) > 2:
+            semester_info.append(to_dict(emailList,data_list[0],data_list[1],data_list[2],data_list[3],data_list[4]))
+    stundenplan.update({'stundenplan': semester_info})
+    #print(stundenplan)
+    return stundenplan
 
 
 def startSession(): # Nur einmal nutzen  -- Gueltige Session generieren
     session = requests.session()
     session.post(loginUrl, 
-                 data,verify=ssl.CERT_NONE)
+                 data,verify=False)
     return session
 
 def fetchStundenplan(session, semesterNR): #Stundenplan request vorbereiten und absenden
@@ -169,50 +104,59 @@ def fetchStundenplan(session, semesterNR): #Stundenplan request vorbereiten und 
     }
     stundenplan = session.post(urllink
                             ,getStundenplan,
-                            headers=header,verify=ssl.CERT_NONE) 
-    stundenplanLatin = switchCharset(
-        stundenplan.content.decode("ISO8859-15"))
-    return stundenplanLatin
+                            headers=header,verify=False)
+    return stundenplan 
 def writeIntoJSON(semesterList): #Stundenplan in JSON schreiben
-    with open('stundenplaene.json', 'w') as outfile:
-        #for stundenplan in module:
-        #    for i in range(0,len(stundenplan)):
-        #        for j in range(1,len(stundenplan[i])):
-        #            outfile.write(stundenplan[i][j].toRealJSON())
-        #            outfile.write("\n")
-        for semester in semesterList:
-            outfile.write(semester.exportSemesterJSON())
-            outfile.write("\n")
+    with open('stundenplaene.json', 'w', encoding="utf-8") as outfile:
+        json.dump(semesterList, outfile, ensure_ascii=True, indent=4)
+        print("Die Stundenplaene wurden erfolgreich gespeichert")
+def to_dict(emailList,dozent,name,wochentag,startzeit,raum,terminart='pass',):
+    name, terminart = extractTerminart(name)
+    return {
+        "dauer": 60,
+        "dozent": switchCharset(dozent),
+        "name": switchCharset(name),
+        "raum": raum,
+        "startzeit": startzeit[0:startzeit.find('-')],
+        "terminart": switchCharset(terminart)[0],
+        "wochentag": wochentag,
+        'email': get_email_for_dozent(dozent,emailList)
+    }
 
 def getAllStundenplaene(clientSession):
     semesterList = fetchSemesterGroups(clientSession)
-    stundenPlaeneList = []
-    #for studiengang in semesterList:
-    #    stundenPlaeneList.append(scrape(fetchStundenplan(clientSession,studiengang.getID())))
-    for i in range(0,len(semesterList)):
-        semesterList[i].setStundenplan(scrape(fetchStundenplan(clientSession,semesterList[i].getID())))
-    #print(semesterList)
-    #for semester in semesterList:
-    #    print(semester.toRealJSON())
+    stundenplan = []
+    for studiengang in semesterList:
+        studiengang_info = [value for value in studiengang.values()]
+        print(f'Das Semester {studiengang_info[1]} wird nun gespeichert')
+        stundenplan.append(scrape(fetchStundenplan(clientSession,studiengang_info[0]),studiengang_info[1],studiengang_info[2]))
+            
+    semesterList = {'stundenplaene': stundenplan}
     return semesterList
+def get_email_for_dozent(dozent,email_list):
+# Nach der E-Mail anhand des Nachnamens suchen
+    for entry in email_list:
+    # E-Mail-Adresse extrahieren
+        email = entry["email"]
+        #print(email)
+    # Den Nachnamen aus der E-Mail extrahieren (Teil nach dem ersten Punkt)
+        last_name = email.split('@')[0].split('.')[-1].lower()
+        last_name = last_name.replace(" ","")
+        #print("dozent lower:",dozent.lower().replace(" ",""))
+        #print("last name:",last_name)
+        if dozent.lower().replace(" ","") == last_name:
+            return email
+    return "E-Mail nicht gefunden"
+def extractTerminart(name):
+    if name[-2] == '-' or name[-2] == " ": return name[0:-2], name[-1]
+    elif name[1]=='-': return name[2:],name[0]
+    elif name.find('Tutorium') != -1: return name[0:name.find('Tutorium')-1],'T'
+    else: return name, 'N/A';
 
 def main():
+    requests.packages.urllib3.disable_warnings() 
     global clientSession
     clientSession = startSession()
     writeIntoJSON(getAllStundenplaene(clientSession))
-    #print(getAllStundenplaene(clientSession))
-
-    #Besorge Stundenplan
-    #allSemesters = fetchSemesterGroups(clientSession)
-
-    #modules = initStundenplan()
-    #modules = scrape(fetchStundenplan(clientSession,248),modules)
-    
-    #Schreibe in JSOn
-    #writeIntoJSON(modules)
-    
-    #To Do fuer morgen: Alle Semester IDs in eine Liste packen
-    #Alle Stundenplaene abfragen - Check
-    #Alles in Methoden auslagern - Check
 if __name__ == '__main__':
     main()
