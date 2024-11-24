@@ -275,7 +275,7 @@ class _EditorViewState extends State<EditorView> {
                     snapshot.data != null &&
                     showKursAuswahl) {
                   userselectedKurse = snapshot.data!;
-                  kursListe = snapshot.data!;
+                  kursListe = jsonDecode(jsonEncode(snapshot.data!));
 
                   // standardcase
                   return StatefulBuilder(
