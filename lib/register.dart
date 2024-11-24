@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'auth_service.dart';
+import 'package:toastification/toastification.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -37,10 +38,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (success) {
         Navigator.pushReplacementNamed(context, '/login');
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text(
-                  'Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.')),
+        toastification.show(
+          context: context,
+          type: ToastificationType.error,
+          title: const Text('Registrierung fehlgeschlagen'),
+          autoCloseDuration: const Duration(seconds: 3),
         );
       }
     }

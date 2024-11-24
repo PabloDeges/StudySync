@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'auth_service.dart';
+import 'package:toastification/toastification.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -35,8 +36,11 @@ class _LoginScreenState extends State<LoginScreen> {
       if (success) {
         Navigator.pushReplacementNamed(context, '/home');
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Login fehlgeschlagen')),
+        toastification.show(
+          context: context,
+          type: ToastificationType.error,
+          title: const Text('Login fehlgeschlagen'),
+          autoCloseDuration: const Duration(seconds: 3),
         );
       }
     }
