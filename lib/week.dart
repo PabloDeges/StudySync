@@ -103,7 +103,7 @@ class WeeklySchedule extends StatelessWidget {
                       Container(
                           width: double.infinity,
                           height:
-                              500, // noch hardcoded, später dynamisch anpassen
+                              550, // noch hardcoded, später dynamisch anpassen
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               color: const Color.fromARGB(255, 232, 247, 255)),
@@ -242,26 +242,26 @@ class WeeklySchedule extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(
-                            height: 20,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              abschicken();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF0766AD),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                                height: 20,
                               ),
-                            ),
-                            child: const Text(
-                              'Kommentar speichern',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
+                              ElevatedButton(
+                                onPressed: () {
+                                  abschicken();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF0766AD),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                                child: const Text(
+                                  'Kommentar speichern',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
                             ],
                           )),
                     ],
