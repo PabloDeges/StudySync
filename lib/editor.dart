@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:toastification/toastification.dart';
 
 class EditorView extends StatefulWidget {
   const EditorView({super.key});
@@ -15,7 +17,7 @@ class _EditorViewState extends State<EditorView> {
   Widget saveButton() {
     return showKursAuswahl == true
         ? TextButton(
-            onPressed: () => _checkboxenAuswerten(userselectedKurse),
+            onPressed: () => _checkboxenAuswerten(userselectedKurse, kursListe),
             child: Text(
               "Auswahl Speichern",
               style: TextStyle(color: Colors.white),
@@ -26,7 +28,17 @@ class _EditorViewState extends State<EditorView> {
         : Container();
   }
 
-  Future<http.Response> postKursauswahl(List<dynamic> auswahlen) {
+  Future<http.Response> postKursauswahl(
+      List<int> anwahlen, List<int> abwahlen) {
+    // WENN BIS HIERHIN GESCHAFFT => Zeige benachrichtigung an
+
+    toastification.show(
+      context: context,
+      type: ToastificationType.success,
+      title: Text('Kursauswahl gespeichert!'),
+      autoCloseDuration: const Duration(seconds: 5),
+    );
+
     return http.post(
       Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
           '/auswahlmenue/kurse'),
@@ -36,24 +48,46 @@ class _EditorViewState extends State<EditorView> {
       body: jsonEncode({
         'userid': '1',
         'semesterid': currentSemesterid,
-        'kursids': auswahlen,
+        'newkursids': anwahlen,
+        'delkursids': abwahlen,
       }),
     );
   }
 
-  void _checkboxenAuswerten(List<dynamic> auswahlen) {
-    List<dynamic> gefilterteAuswahlen = [];
-    for (var x in auswahlen) {
-      if (x["checked"]) {
-        gefilterteAuswahlen.add(x);
+  void _checkboxenAuswerten(
+      List<dynamic> neueAuswahlen, List<dynamic> vorherigerStand) {
+    List<int> anwahlen = [];
+    List<int> abwahlen = [];
+    List<int> neueAuswahlenIDs = [];
+    List<int> vorherigerStandIDs = [];
+
+    for (var kurs in neueAuswahlen) {
+      if (kurs["isChecked"]) {
+        neueAuswahlenIDs.add(kurs["id"]);
       }
     }
-    if (gefilterteAuswahlen.isNotEmpty && currentSemesterid.isNotEmpty) {
-      postKursauswahl(gefilterteAuswahlen);
+
+    for (var kurs in vorherigerStand) {
+      if (kurs["isChecked"]) {
+        vorherigerStandIDs.add(kurs["id"]);
+      }
+    }
+
+    Set<int> originalSet = vorherigerStandIDs.toSet();
+
+    Set<int> modifiedSet = neueAuswahlenIDs.toSet();
+
+    anwahlen = modifiedSet.difference(originalSet).toList();
+
+    abwahlen = originalSet.difference(modifiedSet).toList();
+
+    if (neueAuswahlen.isNotEmpty && currentSemesterid.isNotEmpty) {
+      postKursauswahl(anwahlen, abwahlen);
     }
   }
 
   List<dynamic> userselectedKurse = [];
+  List<dynamic> kursListe = [];
 
   List<DropdownMenuEntry<String>> convertStudiengaengeToDropdowns(
       List<dynamic> data) {
@@ -104,7 +138,10 @@ class _EditorViewState extends State<EditorView> {
 
   Future<List<dynamic>> fetchKurseVonSemester(var semesterId) async {
     var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
-        '/auswahlmenue/kurse/$semesterId');
+        '/auswahlmenue/kurse/$semesterId', {
+      'userid': '1',
+    });
+
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -238,10 +275,8 @@ class _EditorViewState extends State<EditorView> {
                     snapshot.data != null &&
                     showKursAuswahl) {
                   userselectedKurse = snapshot.data!;
-                  for (var x in userselectedKurse) {
-                    x["checked"] =
-                        false; //fügt das feld checked hinzu, damit nachher ausgewertet werden kann
-                  }
+                  kursListe = snapshot.data!;
+
                   // standardcase
                   return StatefulBuilder(
                       builder: (BuildContext context, StateSetter setState) {
@@ -268,10 +303,10 @@ class _EditorViewState extends State<EditorView> {
                                           //       BorderRadius.circular(10),
 
                                           title: Text(kurs["kursname"]),
-                                          value: kurs["checked"],
+                                          value: kurs["isChecked"],
                                           onChanged: (val) {
                                             setState(() {
-                                              kurs["checked"] = val;
+                                              kurs["isChecked"] = val;
                                             });
                                           }),
                                     );
