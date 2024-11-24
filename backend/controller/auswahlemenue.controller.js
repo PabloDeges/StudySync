@@ -46,7 +46,7 @@ const kurseUmwaehlen = async (req, res) => {
 		let entfernteTermine = [];
 		let response;
 		for (let i = 0; i < neueKurse.length; i++) {
-			termine = (await pool.query(`SELECT t.id FROM studiengang_kurs AS sk LEFT JOIN termin as t ON sk.kursid = t.kursid WHERE sk.semesterid = ${semesterid} AND sk.kursid = ${neueKurse[i].id};`)).rows;
+			termine = (await pool.query(`SELECT t.id FROM studiengang_kurs AS sk LEFT JOIN termin as t ON sk.kursid = t.kursid WHERE sk.semesterid = ${semesterid} AND sk.kursid = ${neueKurse[i]};`)).rows;
 			for (let j = 0; j < termine.length; j++) {
 				//existiert keine id fuer die kombination aus kurs, doz, wochentag und startzeit, wird ein neuer eintrag hinzugefuegt
 				if ((await pool.query(`SELECT COUNT(benutzerid) FROM benutzer_termin WHERE benutzerid='${benutzerid}' AND terminid='${termine[j].id}';`)).rows[0].count == 0) {
@@ -56,8 +56,8 @@ const kurseUmwaehlen = async (req, res) => {
 			}
 		}
 		for (let i = 0; i < entfKurse.length; i++) {
-			let anzDel = (await pool.query(`DELETE FROM benutzer_termin AS bt USING termin AS t WHERE bt.terminid = t.id AND bt.benutzerid = ${benutzerid} AND t.kursid = ${entfKurse[i].id};`)).rowCount;
-			entfernteTermine.push({"kursid": entfKurse[i].id, "anzDel": anzDel});
+			let anzDel = (await pool.query(`DELETE FROM benutzer_termin AS bt USING termin AS t WHERE bt.terminid = t.id AND bt.benutzerid = ${benutzerid} AND t.kursid = ${entfKurse[i]};`)).rowCount;
+			entfernteTermine.push({"kursid": entfKurse[i], "anzDel": anzDel});
 		}
 		response = {"neueTermine": eingefuegteTermine, "entfernteTermine": entfernteTermine}
 		res.status(200).json(response);
