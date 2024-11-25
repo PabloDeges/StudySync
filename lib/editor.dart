@@ -171,6 +171,9 @@ class _EditorViewState extends State<EditorView> {
     _studiengangAuswahl = fetchStudiengaenge();
   }
 
+final ScrollController _scrollController = ScrollController();
+
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -284,8 +287,10 @@ class _EditorViewState extends State<EditorView> {
                         constraints: BoxConstraints(
                             maxHeight: MediaQuery.of(context).size.height / 2),
                         child: Scrollbar(
+                          controller: _scrollController,
                           thumbVisibility: true,
                           child: SingleChildScrollView(
+                            controller: _scrollController,
                               clipBehavior: Clip.antiAlias,
                               padding: EdgeInsets.all(8),
                               child: Column(
