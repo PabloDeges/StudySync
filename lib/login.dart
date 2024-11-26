@@ -58,6 +58,11 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset('assets/studysync_logo.png',
+                height: 200,
+                width: 200,
+                ),
+                const SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.0),
@@ -141,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                           ),
                           child: const Text('Login',
-                              style: TextStyle(fontSize: 16.0)),
+                              style: TextStyle(fontSize: 16.0, color: Colors.white)),
                         ),
                       ),
                 TextButton(

@@ -33,7 +33,7 @@ const getStundenplan = async (req, res) => {
 
 const delTermin = async (req, res) => {
 	try {
-		let userid = req.body.userid;
+		let userid = req.query.userid;
 		let terminid = req.body.terminid;
 		let daten = await pool.query(`DELETE FROM benutzer_termin WHERE benutzerid = ${userid} AND terminid = ${terminid};`);
 		res.status(200).json({"geloeschteZeilen":daten.rowCount});

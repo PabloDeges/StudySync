@@ -31,7 +31,7 @@ const getKurseZuSemester = async (req, res) => {
 
 const kurseAnwaehlen = async (req, res) => {
 	try {
-		let benutzerid = req.body.userid;
+		let benutzerid = req.query.userid;
 		let semesterid = req.body.semesterid;
 		let kurse = req.body.kursids;
 		let termine;

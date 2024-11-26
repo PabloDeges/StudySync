@@ -65,6 +65,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               mainAxisAlignment:
                   MainAxisAlignment.center,
               children: [
+                Image.asset('assets/studysync_logo.png',
+                height: 200,
+                width: 200,
+                ),
+                const SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.0),
@@ -182,7 +187,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           child: const Text(
                             'Registrieren',
-                            style: TextStyle(fontSize: 16.0),
+                            style: TextStyle(fontSize: 16.0, color: Colors.white),
                           ),
                         ),
                       ),

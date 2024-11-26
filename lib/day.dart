@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'auth_service.dart';
 
 class DayView extends StatelessWidget {
   const DayView({super.key});
@@ -61,10 +62,16 @@ class DayStudySync extends StatelessWidget {
 
   Future<Map<String, dynamic>> fetchStundenplan() async {
     try {
+      AuthService authService = AuthService();
       var params = {'userid': '1'};
       var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
           '/stundenplan', params);
-      var response = await http.get(url);
+          String? token = await authService.getToken();
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
+      var response = await http.get(url, headers: headers);
       if (response.statusCode == 200) {
         final decResponse = jsonDecode(response.body) as Map<String, dynamic>;
         return decResponse;
