@@ -6,17 +6,31 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class WeekView extends StatelessWidget {
+class WeekView extends StatefulWidget {
   const WeekView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const WeeklySchedule();
-  }
+  _WeekViewState createState() => _WeekViewState();
 }
 
-class WeeklySchedule extends StatelessWidget {
-  const WeeklySchedule({super.key});
+class _WeekViewState extends State<WeekView> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  final commentController = TextEditingController();
+  final linkController = TextEditingController();
+  final mailController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    commentController.dispose();
+    linkController.dispose();
+    mailController.dispose();
+    super.dispose();
+  }
 
   Future<Map<String, dynamic>> fetchWeek() async {
     try {
@@ -35,8 +49,23 @@ class WeeklySchedule extends StatelessWidget {
     }
   }
 
-  void abschicken() async {
-    //Kommentar speichern
+  Future<http.Response> aenderungenSpeichern(
+      // NACH MERGE FEEDBACK NOTIFICATION ADDEN BEI SPEICHERN
+      String kommentar,
+      String email,
+      String link) async {
+    return http.post(
+      Uri.http(
+          "${dotenv.env['SERVER']}:${dotenv.env['PORT']}", '/editKommentar'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        'kommentar': kommentar,
+        // 'email': email,
+        // 'link': link,
+      }),
+    );
   }
 
   @override
@@ -66,17 +95,197 @@ class WeeklySchedule extends StatelessWidget {
       switch (kursartShort) {
         case "V":
           return "Vorlesung";
-          break;
         case "P":
           return "Praktikum";
-          break;
         case "U":
           return "Übung";
-          break;
         default:
           "";
       }
       return "";
+    }
+
+    void displayEditPopUp(timetable, time, day) {
+      var selectedCell;
+      try {
+        selectedCell = timetable
+            .where((x) =>
+                x['wochentag'] == weekdays[day] &&
+                x['startzeit'] == (8 + time) * 100)
+            .toList()[0];
+      } catch (x) {}
+
+      //TEXTFELDER BEFÜLLEN
+      commentController.text =
+          supplyDataToCell(timetable, day, time, 'kommentar');
+      mailController.text = supplyDataToCell(timetable, day, time, 'email');
+      linkController.text = supplyDataToCell(timetable, day, time, 'link');
+
+      if (selectedCell != null) {
+        // falls die angeklickte Zelle einen Inhalt hat, zeige ein Pop Up an
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return SingleChildScrollView(
+                child: Dialog(
+                    backgroundColor: Colors.transparent,
+                    insetPadding: const EdgeInsets.all(10),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        Container(
+                            width: double.infinity,
+                            height: MediaQuery.sizeOf(context).height *
+                                0.75, // noch hardcoded, später dynamisch anpassen
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color:
+                                    const Color.fromARGB(255, 232, 247, 255)),
+                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      "BEARBEITEN VON: ",
+                                      style: TextStyle(
+                                          color: Color(0xFF0766AD),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20),
+                                    ),
+                                    ElevatedButton.icon(
+                                        style: const ButtonStyle(
+                                            backgroundColor:
+                                                WidgetStatePropertyAll(
+                                                    Color.fromARGB(
+                                                        255, 194, 42, 31))),
+                                        onPressed: () =>
+                                            {Navigator.pop(context)},
+                                        label: const Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                        )),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  supplyKursartAusgeschrieben(supplyDataToCell(
+                                      timetable, day, time, 'terminart')),
+                                  style: const TextStyle(
+                                      color: Color(0xFF0766AD),
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  supplyDataToCell(
+                                          timetable, day, time, 'kursname') +
+                                      " (" +
+                                      supplyDataToCell(timetable, day, time,
+                                              'kurskuerzel')
+                                          .toUpperCase() +
+                                      ")",
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      color: Color(0xFF0766AD),
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              70,
+                                          child: TextField(
+                                            key: const Key("commentInput"),
+                                            maxLines: 6,
+                                            minLines: 6,
+                                            decoration: InputDecoration(
+                                              labelText: 'Kommentar bearbeiten',
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                borderSide: const BorderSide(
+                                                    color: Color(0xFF0766AD)),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                TextField(
+                                  // TEXT FIELD EMAIL
+                                  decoration: InputDecoration(
+                                      labelText: "Doz. Email bearbeiten"),
+
+                                  controller: mailController,
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                TextField(
+                                  // TEXT FIELD MOODLE LINK
+                                  decoration: InputDecoration(
+                                      labelText: "Moodle Link bearbeiten"),
+
+                                  controller: linkController,
+                                ),
+                                const SizedBox(
+                                  height: 40,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    aenderungenSpeichern(
+                                        commentController.text,
+                                        mailController.text,
+                                        linkController.text);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF0766AD),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 12.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Änderungen speichern',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ],
+                    )),
+              );
+            });
+      }
     }
 
     void displayPopUp(timetable, time, day) {
@@ -94,178 +303,238 @@ class WeeklySchedule extends StatelessWidget {
         showDialog(
             context: context,
             builder: (BuildContext context) {
-              return Dialog(
-                  backgroundColor: Colors.transparent,
-                  insetPadding: const EdgeInsets.all(10),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: <Widget>[
-                      Container(
-                          width: double.infinity,
-                          height:
-                              550, // noch hardcoded, später dynamisch anpassen
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: const Color.fromARGB(255, 232, 247, 255)),
-                          padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
-                          child: Column(
-                            children: [
-                              Text(
-                                supplyDataToCell(
-                                        timetable, day, time, 'kursname') +
-                                    " (" +
-                                    supplyDataToCell(
-                                            timetable, day, time, 'kurskuerzel')
-                                        .toUpperCase() +
-                                    ")",
-                                style: const TextStyle(
-                                    fontSize: 24,
-                                    color: Color(0xFF0766AD),
-                                    fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    "Kursart: ",
-                                    style: TextStyle(
-                                        fontSize: 22,
-                                        color: Color(0xFF0766AD),
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        5.0, 0, 15.0, 0),
-                                    child: Text(
-                                      supplyKursartAusgeschrieben(
+              return SingleChildScrollView(
+                child: Dialog(
+                    backgroundColor: Colors.transparent,
+                    insetPadding: const EdgeInsets.all(10),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        Container(
+                            width: double.infinity,
+                            height: MediaQuery.sizeOf(context).height * 0.75,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color:
+                                    const Color.fromARGB(255, 232, 247, 255)),
+                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ElevatedButton.icon(
+                                        style: const ButtonStyle(
+                                            backgroundColor:
+                                                WidgetStatePropertyAll(
+                                                    Color(0xFF0766AD))),
+                                        onPressed: () => {
+                                              displayEditPopUp(
+                                                  timetable, time, day)
+                                            },
+                                        label: const Icon(
+                                          Icons.edit,
+                                          color: Colors.white,
+                                        )),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    ElevatedButton.icon(
+                                        style: const ButtonStyle(
+                                            backgroundColor:
+                                                WidgetStatePropertyAll(
+                                                    Color.fromARGB(
+                                                        255, 194, 42, 31))),
+                                        onPressed: () =>
+                                            {Navigator.pop(context)},
+                                        label: const Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                        )),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  supplyKursartAusgeschrieben(supplyDataToCell(
+                                      timetable, day, time, 'terminart')),
+                                  style: const TextStyle(
+                                      color: Color(0xFF0766AD),
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  supplyDataToCell(
+                                          timetable, day, time, 'kursname') +
+                                      " (" +
+                                      supplyDataToCell(timetable, day, time,
+                                              'kurskuerzel')
+                                          .toUpperCase() +
+                                      ")",
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      color: Color(0xFF0766AD),
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.room,
+                                      size: 50,
+                                      color: Color(0xFF29ADB2),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          25.0, 0, 15.0, 0),
+                                      child: Text(
+                                        supplyDataToCell(
+                                            timetable, day, time, 'raum'),
+                                        style: const TextStyle(
+                                            color: Color(0xFF0766AD),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.school,
+                                      size: 50,
+                                      color: Color(0xFF29ADB2),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          25.0, 0, 15.0, 0),
+                                      child: Text(
+                                        supplyDataToCell(
+                                            timetable, day, time, 'dozname'),
+                                        style: const TextStyle(
+                                            color: Color(0xFF0766AD),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.comment,
+                                      size: 50,
+                                      color: Color(0xFF29ADB2),
+                                    ),
+                                    Container(
+                                      width:
+                                          ((MediaQuery.sizeOf(context).width) *
+                                              0.7),
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            25.0, 0, 15.0, 0),
+                                        child: Text(
                                           supplyDataToCell(timetable, day, time,
-                                              'terminart')),
-                                      style: const TextStyle(
-                                          color: Color(0xFF0766AD),
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.room,
-                                    size: 50,
-                                    color: Color(0xFF29ADB2),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        25.0, 0, 15.0, 0),
-                                    child: Text(
-                                      supplyDataToCell(
-                                          timetable, day, time, 'raum'),
-                                      style: const TextStyle(
-                                          color: Color(0xFF0766AD),
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.school,
-                                    size: 50,
-                                    color: Color(0xFF29ADB2),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        25.0, 0, 15.0, 0),
-                                    child: Text(
-                                      supplyDataToCell(
-                                          timetable, day, time, 'dozname'),
-                                      style: const TextStyle(
-                                          color: Color(0xFF0766AD),
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.comment,
-                                    size: 50,
-                                    color: Color(0xFF29ADB2),
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                180,
-                                        child: TextField(
-                                          maxLines: 3,
-                                          minLines: 3,
-                                          decoration: InputDecoration(
-                                            labelText: 'Hier Text eingeben...',
-                                            labelStyle: const TextStyle(
-                                                color: Color(0xFF0766AD),
-                                                fontWeight: FontWeight.bold),
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              borderSide: const BorderSide(
-                                                  color: Color(0xFF0766AD)),
-                                            ),
-                                          ),
+                                                      'kommentar')
+                                                  .isEmpty
+                                              ? "Kein Kommentar hinzugefügt "
+                                              : supplyDataToCell(timetable, day,
+                                                  time, 'kommentar'),
+                                          style: const TextStyle(
+                                              color: Color(0xFF0766AD),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                          softWrap: true,
                                         ),
                                       ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 100,
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(
+                                        MediaQuery.sizeOf(context).width * 0.75,
+                                        60),
+                                    backgroundColor: Colors.blue,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 12.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    // link öffnen moodle
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(
+                                        Icons.link,
+                                        color: Colors.white,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      // Text
+                                      const Text(
+                                        'Moodle Kurs öffnen',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 16),
+                                      ),
                                     ],
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  abschicken();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF0766AD),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
                                   ),
                                 ),
-                                child: const Text(
-                                  'Kommentar speichern',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
+                                const SizedBox(
+                                  height: 20,
                                 ),
-                              ),
-                            ],
-                          )),
-                    ],
-                  ));
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(
+                                        MediaQuery.sizeOf(context).width * 0.75,
+                                        60),
+                                    backgroundColor: Colors.blue,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 12.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    // email öffnen
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(
+                                        Icons.mail,
+                                        color: Colors.white,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      // Text
+                                      const Text(
+                                        'Email an Kursleitende',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    )),
+              );
             });
       }
     }
