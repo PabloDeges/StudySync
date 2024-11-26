@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -16,14 +15,21 @@ class EditorView extends StatefulWidget {
 class _EditorViewState extends State<EditorView> {
   Widget saveButton() {
     return showKursAuswahl == true
-        ? TextButton(
+        ? ElevatedButton(
             onPressed: () => _checkboxenAuswerten(userselectedKurse, kursListe),
             child: Text(
               "Auswahl Speichern",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white, fontSize: 16),
             ),
-            style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(Colors.blue)),
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(MediaQuery.sizeOf(context).width * 0.75, 60),
+              backgroundColor: const Color(0xFF0766AD),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
           )
         : Container();
   }
@@ -171,12 +177,25 @@ class _EditorViewState extends State<EditorView> {
     _studiengangAuswahl = fetchStudiengaenge();
   }
 
-final ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          "Kurseditor",
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF0766AD),
+              fontSize: 40),
+        ),
+        SizedBox(
+          height: 20,
+        ),
         FutureBuilder<List<dynamic>>(
             future: _studiengangAuswahl,
             builder: (context, snapshot) {
@@ -285,12 +304,13 @@ final ScrollController _scrollController = ScrollController();
                       builder: (BuildContext context, StateSetter setState) {
                     return ConstrainedBox(
                         constraints: BoxConstraints(
-                            maxHeight: MediaQuery.of(context).size.height / 2),
+                            maxHeight:
+                                MediaQuery.of(context).size.height * 0.4),
                         child: Scrollbar(
                           controller: _scrollController,
                           thumbVisibility: true,
                           child: SingleChildScrollView(
-                            controller: _scrollController,
+                              controller: _scrollController,
                               clipBehavior: Clip.antiAlias,
                               padding: EdgeInsets.all(8),
                               child: Column(
