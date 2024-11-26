@@ -42,10 +42,24 @@ const delTermin = async (req, res) => {
 	}
 }
 
+const editKommentar =async (req,res) => {
+	try{
+		console.log(req.body.kommentar);
+		if(req.body.kommentar == undefined){
+			res.status(500).json({"message":"Felher"})
+		}else{
+			res.status(200).json({"message":req.body.kommentar})
+		}
+	}catch(err){
+
+	}
+}
+
 module.exports = {
 	mainPageDisplayInfos,
 	getStundenplan,
-	delTermin
+	delTermin,
+	editKommentar
 };
 
 function readJsonFile(filePath) {
