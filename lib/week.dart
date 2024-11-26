@@ -14,11 +14,6 @@ class WeekView extends StatefulWidget {
 }
 
 class _WeekViewState extends State<WeekView> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   final commentController = TextEditingController();
   final linkController = TextEditingController();
   final mailController = TextEditingController();
@@ -87,22 +82,15 @@ class _WeekViewState extends State<WeekView> {
 
     void showCollisionPopUp(List doppelungen, day, time) {
       var formattedDay = weekdays[day];
-      String formattedTime = ((8 + time) * 100) as String;
-
-      if (formattedTime.length == 3) {
-        formattedTime.replaceRange(1, 1, ":");
-      }
-      if (formattedTime.length == 4) {
-        formattedTime.replaceRange(2, 2, ":");
-      }
+      var formattedTime = ((8 + time));
 
       showDialog(
           context: context,
           builder: (BuildContext context) {
             return Dialog(
               child: Container(
-                height: MediaQuery.sizeOf(context).height * 0.5,
-                width: MediaQuery.sizeOf(context).width * 0.8,
+                height: 500,
+                width: 500,
                 child: Column(
                   children: [
                     const SizedBox(
@@ -121,7 +109,7 @@ class _WeekViewState extends State<WeekView> {
                       height: 20,
                     ),
                     Text(
-                      "Bitte wähle aus welchen Kurs du am $formattedDay ab $formattedTime belegen möchtest:",
+                      "Bitte wähle aus welchen Kurs du am $formattedDay ab $formattedTime Uhr belegen möchtest:",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 18, color: Colors.black),
                     ),
@@ -135,8 +123,6 @@ class _WeekViewState extends State<WeekView> {
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
-                            fixedSize: Size(
-                                MediaQuery.sizeOf(context).width * 0.6, 100),
                             backgroundColor: const Color(0xFF0766AD),
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16.0, vertical: 12.0),
@@ -158,7 +144,7 @@ class _WeekViewState extends State<WeekView> {
           });
     }
 
-    bool hasCollision(timetable, day, time) {
+    void hasCollision(timetable, day, time) {
       try {
         List kurseInSlot = timetable
             .where((x) =>
@@ -167,23 +153,33 @@ class _WeekViewState extends State<WeekView> {
             .toList();
 
         if (kurseInSlot.length <= 1) {
-          return false;
         } else {
           showCollisionPopUp(kurseInSlot, day, time);
-          return true;
         }
-      } catch (x) {
-        return false;
-      }
+      } catch (x) {}
     }
 
     String supplyDataToCell(timetable, day, time, data) {
       String kuerzel = "";
+
+      try {
+        kuerzel = timetable
+            .where((x) =>
+                x['wochentag'] == weekdays[day] &&
+                x['startzeit'] == (8 + time) * 100)
+            .toList()[0][data];
+      } catch (x) {}
+
+      return kuerzel;
+    }
+
+    String supplyDataToCellWithCheck(timetable, day, time, data) {
+      String kuerzel = "";
+
       Future.delayed(Duration.zero, () async {
         hasCollision(timetable, day, time);
-      }); // ulkiger workaround, weil man wohl keine Dialoge callen kann während der Stundenplan befüllt wird
-      // noch nicht ganz sicher wie man sich sicher sein kann, dass das builden fertig ist bevor man es callt...
-      // dann aber in der Funktion eine schleife wie beim Builden machen und nur einmal aufrufen
+      });
+
       try {
         kuerzel = timetable
             .where((x) =>
@@ -712,8 +708,11 @@ class _WeekViewState extends State<WeekView> {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          supplyDataToCell(timetable, day,
-                                                  timeOffset, 'kurskuerzel')
+                                          supplyDataToCellWithCheck(
+                                                  timetable,
+                                                  day,
+                                                  timeOffset,
+                                                  'kurskuerzel')
                                               .toUpperCase(),
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
