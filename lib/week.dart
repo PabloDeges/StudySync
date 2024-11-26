@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WeekView extends StatefulWidget {
   const WeekView({super.key});
@@ -575,8 +576,17 @@ class _WeekViewState extends State<WeekView> {
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                   ),
-                                  onPressed: () {
-                                    // link öffnen moodle
+                                  onPressed: () async {
+                                    String url =
+                                        "https://moodle.hs-bochum.de/course/view.php?id=6987";
+                                    // String url = supplyDataToCell(timetable, day, time, 'moodle_link');
+
+                                    final parsedLink = Uri.parse(url);
+                                    if (await canLaunchUrl(parsedLink)) {
+                                      await launchUrl(parsedLink);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
                                   },
                                   child: const Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -610,8 +620,18 @@ class _WeekViewState extends State<WeekView> {
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                   ),
-                                  onPressed: () {
-                                    // email öffnen
+                                  onPressed: () async {
+                                    String url = "max.mustermann@hs-bochum.de";
+                                    // String url = supplyDataToCell(timetable, day, time, 'email');
+
+                                    var mailUri =
+                                        Uri(scheme: 'mailto', path: url);
+
+                                    if (await canLaunchUrl(mailUri)) {
+                                      await launchUrl(mailUri);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
                                   },
                                   child: const Row(
                                     mainAxisSize: MainAxisSize.min,
