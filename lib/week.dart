@@ -78,8 +78,112 @@ class _WeekViewState extends State<WeekView> {
       "Freitag"
     ];
 
+    void collisionSelection(id, day, time) {
+      print(
+          "Es wurde der Kurs mit der ID: $id am $day um $time als beizubehaltendes fach ausgewählt.");
+
+      // WENN BACKEND ROUTE STEHT => Parameter ans Backend Senden mit Post
+    }
+
+    void showCollisionPopUp(List doppelungen, day, time) {
+      var formattedDay = weekdays[day];
+      String formattedTime = ((8 + time) * 100) as String;
+
+      if (formattedTime.length == 3) {
+        formattedTime.replaceRange(1, 1, ":");
+      }
+      if (formattedTime.length == 4) {
+        formattedTime.replaceRange(2, 2, ":");
+      }
+
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+              child: Container(
+                height: MediaQuery.sizeOf(context).height * 0.5,
+                width: MediaQuery.sizeOf(context).width * 0.8,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Doppelung erkannt!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Bitte wähle aus welchen Kurs du am $formattedDay ab $formattedTime belegen möchtest:",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                    ),
+                    Column(
+                        children: doppelungen.map((kurs) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            collisionSelection(kurs["id"], day, time);
+                            Navigator.pop(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            fixedSize: Size(
+                                MediaQuery.sizeOf(context).width * 0.6, 100),
+                            backgroundColor: const Color(0xFF0766AD),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 12.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          child: Text(
+                            kurs["kursname"],
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+                    }).toList()),
+                  ],
+                ),
+              ),
+            );
+          });
+    }
+
+    bool hasCollision(timetable, day, time) {
+      try {
+        List kurseInSlot = timetable
+            .where((x) =>
+                x['wochentag'] == weekdays[day] &&
+                x['startzeit'] == (8 + time) * 100)
+            .toList();
+
+        if (kurseInSlot.length <= 1) {
+          return false;
+        } else {
+          showCollisionPopUp(kurseInSlot, day, time);
+          return true;
+        }
+      } catch (x) {
+        return false;
+      }
+    }
+
     String supplyDataToCell(timetable, day, time, data) {
       String kuerzel = "";
+      Future.delayed(Duration.zero, () async {
+        hasCollision(timetable, day, time);
+      }); // ulkiger workaround, weil man wohl keine Dialoge callen kann während der Stundenplan befüllt wird
+      // noch nicht ganz sicher wie man sich sicher sein kann, dass das builden fertig ist bevor man es callt...
+      // dann aber in der Funktion eine schleife wie beim Builden machen und nur einmal aufrufen
       try {
         kuerzel = timetable
             .where((x) =>
@@ -478,16 +582,16 @@ class _WeekViewState extends State<WeekView> {
                                   onPressed: () {
                                     // link öffnen moodle
                                   },
-                                  child: Row(
+                                  child: const Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.link,
                                         color: Colors.white,
                                       ),
-                                      const SizedBox(width: 8),
+                                      SizedBox(width: 8),
                                       // Text
-                                      const Text(
+                                      Text(
                                         'Moodle Kurs öffnen',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 16),
@@ -513,16 +617,16 @@ class _WeekViewState extends State<WeekView> {
                                   onPressed: () {
                                     // email öffnen
                                   },
-                                  child: Row(
+                                  child: const Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.mail,
                                         color: Colors.white,
                                       ),
-                                      const SizedBox(width: 8),
+                                      SizedBox(width: 8),
                                       // Text
-                                      const Text(
+                                      Text(
                                         'Email an Kursleitende',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 16),
