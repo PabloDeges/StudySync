@@ -1,27 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:study_sync/login.dart';
+import 'package:http/http.dart' as http;
+import 'auth_service.dart';
 import 'register.dart';
 import 'week.dart';
 import 'day.dart';
 import 'editor.dart';
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+Future<bool> checkTokenValidity() async {
+  AuthService authService = AuthService();
+  String? token = await authService.getToken();
+
+  final response = await http.get(
+      Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
+          '/auth/authToken'),
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+  if (response.statusCode == 200) {
+    return true;
+  } else {
+    return false;
+  }
+}
 void main() async {
   await dotenv.load(fileName: ".env");
-  runApp(const StudySyncApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  bool isTokenValid = await checkTokenValidity();
+  runApp(StudySyncApp(isTokenValid: isTokenValid));
 }
 
 class StudySyncApp extends StatelessWidget {
-  const StudySyncApp({super.key});
+  final bool isTokenValid;
+  const StudySyncApp({super.key, required this.isTokenValid});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'StudySync App',
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
-      initialRoute: '/login',
+      initialRoute: isTokenValid ? '/home' : '/login',
       routes: {
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),

@@ -1,9 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'auth_service.dart';
+import 'main.dart';
 
 class EditorView extends StatefulWidget {
   const EditorView({super.key});
@@ -30,7 +31,7 @@ class _EditorViewState extends State<EditorView> {
   Future<http.Response> postKursauswahl(List<dynamic> auswahlen) async {
     AuthService authService = AuthService();
     String? token = await authService.getToken();
-    return http.post(
+    http.Response response = await http.post(
       Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
           '/auswahlmenue/kurse'),
       headers: <String, String>{
@@ -42,6 +43,12 @@ class _EditorViewState extends State<EditorView> {
         'kursids': auswahlen,
       }),
     );
+    if (response.statusCode == 401) {
+        authService.logout();
+        navigatorKey.currentState?.pushReplacementNamed('/login');
+    }
+
+    return response;
   }
 
   void _checkboxenAuswerten(List<dynamic> auswahlen) {
@@ -258,7 +265,8 @@ class _EditorViewState extends State<EditorView> {
                   }
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasError) {
-                      return const Text("KURSAUSWAHL BUILDER HATTE  EINEN FEHLER");
+                      return const Text(
+                          "KURSAUSWAHL BUILDER HATTE  EINEN FEHLER");
                     }
                     if (snapshot.hasData &&
                         snapshot.data != null &&
@@ -275,21 +283,25 @@ class _EditorViewState extends State<EditorView> {
                             false; //fügt das feld checked hinzu, damit nachher ausgewertet werden kann
                       }
                       // standardcase
-                      return StatefulBuilder(
-                        builder: (BuildContext context, StateSetter setState) {
+                      return StatefulBuilder(builder:
+                          (BuildContext context, StateSetter setState) {
                         return ConstrainedBox(
                             constraints: BoxConstraints(
-                                maxHeight: MediaQuery.of(context).size.height / 2),
+                                maxHeight:
+                                    MediaQuery.of(context).size.height / 2),
                             child: Scrollbar(
                               thumbVisibility: true,
                               child: SingleChildScrollView(
                                   clipBehavior: Clip.antiAlias,
                                   padding: EdgeInsets.all(8),
                                   child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: userselectedKurse.map((kurs) {
                                         return SizedBox(
-                                          width: MediaQuery.of(context).size.width -
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
                                               40,
                                           child: CheckboxListTile(
                                               // shape: RoundedRectangleBorder(
@@ -316,7 +328,6 @@ class _EditorViewState extends State<EditorView> {
                 }),
             saveButton()
           ]),
-        )
-    );
+        ));
   }
 }

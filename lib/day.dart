@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'auth_service.dart';
+import 'main.dart';
 
 class DayView extends StatelessWidget {
   const DayView({super.key});
@@ -72,6 +73,12 @@ class DayStudySync extends StatelessWidget {
         'Content-Type': 'application/json',
       };
       var response = await http.get(url, headers: headers);
+
+      if (response.statusCode == 401) {
+        authService.logout();
+        navigatorKey.currentState?.pushReplacementNamed('/login');
+      }
+
       if (response.statusCode == 200) {
         final decResponse = jsonDecode(response.body) as Map<String, dynamic>;
         return decResponse;

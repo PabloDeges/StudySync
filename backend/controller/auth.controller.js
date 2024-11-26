@@ -50,7 +50,12 @@ const login = async (req, res) => {
     }
 };
 
+const authToken = async (req,res) => {
+    res.status(200).json({"message":"Erfolgreich eingeloggt"})
+}
+
 module.exports = {
     registierung,
     login,
+    authToken,
 };

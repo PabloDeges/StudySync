@@ -30,8 +30,13 @@ const authenticateJWT = async (req, res, next) => {
                 res.status(401).json({ message: "Nutzer nicht erkannt" });
             }
         } catch (error) {
-            console.error("Token-Überprüfung fehlgeschlagen:", error.message);
-            res.status(401).json({ message: "Kein gültiger Token / Session abgelaufen" });
+            if( token == "null" ){
+                console.error("Kein Token ubergeben");
+                res.status(401).json({message: "Kein Token ubergeben"})
+            }else{
+                console.error("Token-Überprüfung fehlgeschlagen:", error.message);
+                res.status(401).json({ message: "Kein gültiger Token / Session abgelaufen" });
+            }
         }
     } else {
         res.status(401).json({ message: "Nicht eingeloggt" });
