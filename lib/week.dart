@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'main.dart';
+import 'auth_service.dart';
 
 class WeekView extends StatelessWidget {
   const WeekView({super.key});
@@ -17,18 +19,33 @@ class WeeklySchedule extends StatelessWidget {
 
   Future<Map<String, dynamic>> fetchWeek() async {
     try {
+      AuthService authService = AuthService();
       var params = {'userid': '1'};
-      var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
-          '/stundenplan', params);
-      var response = await http.get(url);
+      var url = Uri.http(
+        "${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
+        '/stundenplan',
+        params,
+      );
+      String? token = await authService.getToken();
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
+      var response = await http.get(url, headers: headers);
+
+      if (response.statusCode == 401) {
+        authService.logout();
+        navigatorKey.currentState?.pushReplacementNamed('/login');
+      }
+
       if (response.statusCode == 200) {
         final decResponse = jsonDecode(response.body) as Map<String, dynamic>;
         return decResponse;
       } else {
-        throw ErrorDescription("responsecode != 200");
+        throw ErrorDescription("responsecode != 200: ${response.statusCode}");
       }
     } catch (error) {
-      throw Exception("Fehler beim Laden der Woche");
+      throw Exception("Fehler beim Laden der Woche: $error");
     }
   }
 
@@ -115,14 +132,13 @@ class WeeklySchedule extends StatelessWidget {
                                 Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         supplyDataToCell(timetable, day,
                                             timeOffset, 'kurskuerzel'),
-                                        textAlign: TextAlign
-                                            .center,
+                                        textAlign: TextAlign.center,
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
@@ -130,13 +146,12 @@ class WeeklySchedule extends StatelessWidget {
                                         ),
                                       ),
                                       ConstrainedBox(
-                                        constraints: const BoxConstraints(
-                                            maxWidth: 90),
+                                        constraints:
+                                            const BoxConstraints(maxWidth: 90),
                                         child: Text(
-                                          supplyDataToCell(
-                                              timetable, day, timeOffset, 'raum'),
-                                          textAlign: TextAlign
-                                              .center,
+                                          supplyDataToCell(timetable, day,
+                                              timeOffset, 'raum'),
+                                          textAlign: TextAlign.center,
                                           style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 8,
