@@ -95,6 +95,8 @@ class _StudySyncHomePageState extends State<StudySyncHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:
+          false, // SEHR WICHTIG - Ohne diese Zeile schiebt die Tastatur die gesamte App nach oben und verursacht overflows
       body: SafeArea(
         child: _getSelectedView(),
       ),
