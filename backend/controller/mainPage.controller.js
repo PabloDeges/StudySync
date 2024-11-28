@@ -23,7 +23,7 @@ const getStundenplan = async (req, res) => {
 
 const delTermin = async (req, res) => {
 	try {
-		let userid = req.body.userid;
+		let userid = req.query.userid;
 		let terminid = req.body.terminid;
 		let daten = await pool.query(`DELETE FROM benutzer_termin WHERE benutzerid = ${userid} AND terminid = ${terminid};`);
 		res.status(200).json({"geloeschteZeilen":daten.rowCount});
@@ -32,7 +32,21 @@ const delTermin = async (req, res) => {
 	}
 }
 
+const editKommentar =async (req,res) => {
+	try{
+		console.log(req.body.kommentar);
+		if(req.body.kommentar == undefined){
+			res.status(500).json({"message":"Felher"})
+		}else{
+			res.status(200).json({"message":req.body.kommentar})
+		}
+	}catch(err){
+
+	}
+}
+
 module.exports = {
 	getStundenplan,
-	delTermin
+	delTermin,
+	editKommentar
 };
