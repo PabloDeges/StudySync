@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'auth_service.dart';
 import 'main.dart';
+import 'package:toastification/toastification.dart';
 
 class EditorView extends StatefulWidget {
   const EditorView({super.key});
@@ -17,7 +19,7 @@ class _EditorViewState extends State<EditorView> {
   Widget saveButton() {
     return showKursAuswahl == true
         ? TextButton(
-            onPressed: () => _checkboxenAuswerten(userselectedKurse),
+            onPressed: () => _checkboxenAuswerten(userselectedKurse, kursListe),
             child: Text(
               "Auswahl Speichern",
               style: TextStyle(color: Colors.white),
@@ -28,7 +30,13 @@ class _EditorViewState extends State<EditorView> {
         : Container();
   }
 
-  Future<http.Response> postKursauswahl(List<dynamic> auswahlen) async {
+  Future<http.Response> postKursauswahl(List<int> anwahlen, List<int> abwahlen) async {
+    toastification.show(
+      context: context,
+      type: ToastificationType.success,
+      title: Text('Kursauswahl gespeichert!'),
+      autoCloseDuration: const Duration(seconds: 5),
+    );
     AuthService authService = AuthService();
     String? token = await authService.getToken();
     http.Response response = await http.post(
@@ -40,7 +48,8 @@ class _EditorViewState extends State<EditorView> {
       },
       body: jsonEncode({
         'semesterid': currentSemesterid,
-        'kursids': auswahlen,
+        'newkursids': anwahlen,
+        'delkursids': abwahlen,
       }),
     );
     if (response.statusCode == 401) {
@@ -51,19 +60,40 @@ class _EditorViewState extends State<EditorView> {
     return response;
   }
 
-  void _checkboxenAuswerten(List<dynamic> auswahlen) {
-    List<dynamic> gefilterteAuswahlen = [];
-    for (var x in auswahlen) {
-      if (x["checked"]) {
-        gefilterteAuswahlen.add(x);
+  void _checkboxenAuswerten(
+      List<dynamic> neueAuswahlen, List<dynamic> vorherigerStand) {
+    List<int> anwahlen = [];
+    List<int> abwahlen = [];
+    List<int> neueAuswahlenIDs = [];
+    List<int> vorherigerStandIDs = [];
+
+    for (var kurs in neueAuswahlen) {
+      if (kurs["isChecked"]) {
+        neueAuswahlenIDs.add(kurs["id"]);
       }
     }
-    if (gefilterteAuswahlen.isNotEmpty && currentSemesterid.isNotEmpty) {
-      postKursauswahl(gefilterteAuswahlen);
+
+    for (var kurs in vorherigerStand) {
+      if (kurs["isChecked"]) {
+        vorherigerStandIDs.add(kurs["id"]);
+      }
+    }
+
+    Set<int> originalSet = vorherigerStandIDs.toSet();
+
+    Set<int> modifiedSet = neueAuswahlenIDs.toSet();
+
+    anwahlen = modifiedSet.difference(originalSet).toList();
+
+    abwahlen = originalSet.difference(modifiedSet).toList();
+
+    if (neueAuswahlen.isNotEmpty && currentSemesterid.isNotEmpty) {
+      postKursauswahl(anwahlen, abwahlen);
     }
   }
 
   List<dynamic> userselectedKurse = [];
+  List<dynamic> kursListe = [];
 
   List<DropdownMenuEntry<String>> convertStudiengaengeToDropdowns(
       List<dynamic> data) {
@@ -114,7 +144,10 @@ class _EditorViewState extends State<EditorView> {
 
   Future<List<dynamic>> fetchKurseVonSemester(var semesterId) async {
     var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
-        '/auswahlmenue/kurse/$semesterId');
+        '/auswahlmenue/kurse/$semesterId', {
+      'userid': '1',
+    });
+
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -144,6 +177,7 @@ class _EditorViewState extends State<EditorView> {
     _studiengangAuswahl = fetchStudiengaenge();
   }
 
+final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
