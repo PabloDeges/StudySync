@@ -1,8 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'auth_service.dart';
+import 'main.dart';
 import 'package:toastification/toastification.dart';
 
 class EditorView extends StatefulWidget {
@@ -34,30 +36,34 @@ class _EditorViewState extends State<EditorView> {
         : Container();
   }
 
-  Future<http.Response> postKursauswahl(
-      List<int> anwahlen, List<int> abwahlen) {
-    // WENN BIS HIERHIN GESCHAFFT => Zeige benachrichtigung an
-
+  Future<http.Response> postKursauswahl(List<int> anwahlen, List<int> abwahlen) async {
     toastification.show(
       context: context,
       type: ToastificationType.success,
       title: Text('Kursauswahl gespeichert!'),
       autoCloseDuration: const Duration(seconds: 5),
     );
-
-    return http.post(
+    AuthService authService = AuthService();
+    String? token = await authService.getToken();
+    http.Response response = await http.post(
       Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
           '/auswahlmenue/kurse'),
       headers: <String, String>{
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode({
-        'userid': '1',
         'semesterid': currentSemesterid,
         'newkursids': anwahlen,
         'delkursids': abwahlen,
       }),
     );
+    if (response.statusCode == 401) {
+        authService.logout();
+        navigatorKey.currentState?.pushReplacementNamed('/login');
+    }
+
+    return response;
   }
 
   void _checkboxenAuswerten(
@@ -143,12 +149,17 @@ class _EditorViewState extends State<EditorView> {
   }
 
   Future<List<dynamic>> fetchKurseVonSemester(var semesterId) async {
+    AuthService authService = AuthService();
+    String? token = await authService.getToken();
     var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
-        '/auswahlmenue/kurse/$semesterId', {
-      'userid': '1',
-    });
+        '/auswahlmenue/kurse/$semesterId');
 
-    final response = await http.get(url);
+    final header = {
+      'Authorization' : 'Bearer $token',
+      'Content-Type': 'apllication/json',
+    };
+
+    final response = await http.get(url, headers: header);
 
     if (response.statusCode == 200) {
       setState(() {});
@@ -177,107 +188,121 @@ class _EditorViewState extends State<EditorView> {
     _studiengangAuswahl = fetchStudiengaenge();
   }
 
-  final ScrollController _scrollController = ScrollController();
-
+final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        SizedBox(
-          height: 20,
+    return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          actions: [
+            PopupMenuButton<String>(
+              icon: Icon(Icons.settings),
+              onSelected: (value) {
+                if (value == 'Option 1') {
+                  print("Farbe gewählt");
+                } else if (value == 'logout') {
+                  AuthService authService = AuthService();
+                  authService.logout();
+                  Navigator.pushReplacementNamed(context, '/login');
+                }
+              },
+              itemBuilder: (BuildContext context) => [
+                PopupMenuItem(
+                  value: 'Option 1',
+                  child: Text('Farbi X'),
+                ),
+                PopupMenuItem(
+                  value: 'logout',
+                  child: Text('Abmelden'),
+                ),
+              ],
+            ),
+          ],
         ),
-        Text(
-          "Kurseditor",
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFF0766AD),
-              fontSize: 40),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        FutureBuilder<List<dynamic>>(
-            future: _studiengangAuswahl,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              }
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasError) {
-                  return const Text("Fehler");
-                }
-                if (snapshot.hasData && snapshot.data != null) {
-                  // standardcase
+        body: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            FutureBuilder<List<dynamic>>(
+                future: _studiengangAuswahl,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return const Text("Fehler");
+                    }
+                    if (snapshot.hasData && snapshot.data != null) {
+                      // standardcase
 
-                  List<DropdownMenuEntry<String>> studiengaenge =
-                      convertStudiengaengeToDropdowns(snapshot.data!);
+                      List<DropdownMenuEntry<String>> studiengaenge =
+                          convertStudiengaengeToDropdowns(snapshot.data!);
 
-                  return DropdownMenu<String>(
-                      menuHeight: 200,
-                      width: 320,
-                      label: const Text("Studiengang"),
-                      enableFilter: true,
-                      onSelected: (value) => {
-                            _semesterAuswahl =
-                                fetchSemesterVonStudiengaenge(value),
-                            currentSemesterid =
-                                "", // bei neuauswahl clearen, damit keine falschen posts und datenbankfehler entstehen
-                          },
-                      dropdownMenuEntries: studiengaenge);
-                }
-              }
-              return const CircularProgressIndicator();
-            }),
-        SizedBox(height: 50),
-        FutureBuilder<List<dynamic>>(
-            future: _semesterAuswahl,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
-              }
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasError) {
-                  return const Text(
-                      "SEMESTERAUSWAHL BUILDER HATTE  EINEN FEHLER");
-                }
-                if (snapshot.hasData &&
-                    snapshot.data != null &&
-                    !showSemesterAuswahl) {
-                  // zustand bevor ein studiengang ausgewählt wurde
+                      return DropdownMenu<String>(
+                          menuHeight: 200,
+                          width: 320,
+                          label: const Text("Studiengang"),
+                          enableFilter: true,
+                          onSelected: (value) => {
+                                _semesterAuswahl =
+                                    fetchSemesterVonStudiengaenge(value),
+                                currentSemesterid =
+                                    "", // bei neuauswahl clearen, damit keine falschen posts und datenbankfehler entstehen
+                              },
+                          dropdownMenuEntries: studiengaenge);
+                    }
+                  }
+                  return const CircularProgressIndicator();
+                }),
+            SizedBox(height: 50),
+            FutureBuilder<List<dynamic>>(
+                future: _semesterAuswahl,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  }
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return const Text(
+                          "SEMESTERAUSWAHL BUILDER HATTE  EINEN FEHLER");
+                    }
+                    if (snapshot.hasData &&
+                        snapshot.data != null &&
+                        !showSemesterAuswahl) {
+                      // zustand bevor ein studiengang ausgewählt wurde
 
-                  return DropdownMenu<String>(
-                    menuHeight: 200,
-                    width: 320,
-                    label: const Text("Semester"),
-                    enableFilter: true,
-                    dropdownMenuEntries: [],
-                    helperText: "Wähle zuerst einen Studiengang aus",
-                  );
-                }
-                if (snapshot.hasData &&
-                    snapshot.data != null &&
-                    showSemesterAuswahl) {
-                  // standardcase
+                      return DropdownMenu<String>(
+                        menuHeight: 200,
+                        width: 320,
+                        label: const Text("Semester"),
+                        enableFilter: true,
+                        dropdownMenuEntries: [],
+                        helperText: "Wähle zuerst einen Studiengang aus",
+                      );
+                    }
+                    if (snapshot.hasData &&
+                        snapshot.data != null &&
+                        showSemesterAuswahl) {
+                      // standardcase
 
-                  List<DropdownMenuEntry<String>> semester =
-                      convertSemesterToDropdowns(snapshot.data!);
+                      List<DropdownMenuEntry<String>> semester =
+                          convertSemesterToDropdowns(snapshot.data!);
 
-                  return DropdownMenu<String>(
-                      menuHeight: 200,
-                      width: 320,
-                      label: const Text("Semester"),
-                      enableFilter: true,
-                      onSelected: (value) => {
-                            _kursAuswahl = fetchKurseVonSemester(value),
-                            currentSemesterid = value!,
-                          },
-                      dropdownMenuEntries: semester);
-                }
-              }
-              return const CircularProgressIndicator();
-            }),
-        SizedBox(height: 50),
-        FutureBuilder<List<dynamic>>(
+                      return DropdownMenu<String>(
+                          menuHeight: 200,
+                          width: 320,
+                          label: const Text("Semester"),
+                          enableFilter: true,
+                          onSelected: (value) => {
+                                _kursAuswahl = fetchKurseVonSemester(value),
+                                currentSemesterid = value!,
+                              },
+                          dropdownMenuEntries: semester);
+                    }
+                  }
+                  return const CircularProgressIndicator();
+                }),
+            SizedBox(height: 50),
+            FutureBuilder<List<dynamic>>(
             future: _kursAuswahl,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -307,7 +332,6 @@ class _EditorViewState extends State<EditorView> {
                             maxHeight:
                                 MediaQuery.of(context).size.height * 0.4),
                         child: Scrollbar(
-                          controller: _scrollController,
                           thumbVisibility: true,
                           child: SingleChildScrollView(
                               controller: _scrollController,
@@ -342,8 +366,8 @@ class _EditorViewState extends State<EditorView> {
               }
               return const CircularProgressIndicator();
             }),
-        saveButton()
-      ]),
-    );
+            saveButton()
+          ]),
+        ));
   }
 }

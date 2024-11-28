@@ -37,7 +37,7 @@ const getKurseZuSemester = async (req, res) => {
 
 const kurseUmwaehlen = async (req, res) => {
 	try {
-		let benutzerid = req.body.userid;
+		let benutzerid = req.query.userid;
 		let semesterid = req.body.semesterid;
 		let neueKurse = req.body.newkursids;
 		let entfKurse = req.body.delkursids;
