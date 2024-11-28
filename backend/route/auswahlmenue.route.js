@@ -11,7 +11,7 @@ router.get("/studiengaenge",getStudiengaenge);
 
 router.get("/semester/:studiengangid", getSemesterZuStudiengang);
 
-router.get("/kurse/:semesterid", getKurseZuSemester);
+router.get("/kurse/:semesterid", authenticateJWT, getKurseZuSemester);
 
 router.post("/kurse", authenticateJWT, kurseUmwaehlen);
 

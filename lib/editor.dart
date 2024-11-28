@@ -143,12 +143,17 @@ class _EditorViewState extends State<EditorView> {
   }
 
   Future<List<dynamic>> fetchKurseVonSemester(var semesterId) async {
+    AuthService authService = AuthService();
+    String? token = await authService.getToken();
     var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
-        '/auswahlmenue/kurse/$semesterId', {
-      'userid': '1',
-    });
+        '/auswahlmenue/kurse/$semesterId');
 
-    final response = await http.get(url);
+    final header = {
+      'Authorization' : 'Bearer $token',
+      'Content-Type': 'apllication/json',
+    };
+
+    final response = await http.get(url, headers: header);
 
     if (response.statusCode == 200) {
       setState(() {});
@@ -292,74 +297,67 @@ final ScrollController _scrollController = ScrollController();
                 }),
             SizedBox(height: 50),
             FutureBuilder<List<dynamic>>(
-                future: _kursAuswahl,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
-                  }
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasError) {
-                      return const Text(
-                          "KURSAUSWAHL BUILDER HATTE  EINEN FEHLER");
-                    }
-                    if (snapshot.hasData &&
-                        snapshot.data != null &&
-                        !showKursAuswahl) {
-                      // zustand bevor ein semester ausgewählt wurde
-                      return SizedBox();
-                    }
-                    if (snapshot.hasData &&
-                        snapshot.data != null &&
-                        showKursAuswahl) {
-                      userselectedKurse = snapshot.data!;
-                      for (var x in userselectedKurse) {
-                        x["checked"] =
-                            false; //fügt das feld checked hinzu, damit nachher ausgewertet werden kann
-                      }
-                      // standardcase
-                      return StatefulBuilder(builder:
-                          (BuildContext context, StateSetter setState) {
-                        return ConstrainedBox(
-                            constraints: BoxConstraints(
-                                maxHeight:
-                                    MediaQuery.of(context).size.height / 2),
-                            child: Scrollbar(
-                              thumbVisibility: true,
-                              child: SingleChildScrollView(
-                                  clipBehavior: Clip.antiAlias,
-                                  padding: EdgeInsets.all(8),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: userselectedKurse.map((kurs) {
-                                        return SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              40,
-                                          child: CheckboxListTile(
-                                              // shape: RoundedRectangleBorder(
-                                              //   side: BorderSide(
-                                              //       color: Colors.black,
-                                              //       width: 2),
-                                              //   borderRadius:
-                                              //       BorderRadius.circular(10),
+            future: _kursAuswahl,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text("KURSAUSWAHL BUILDER HATTE  EINEN FEHLER");
+                }
+                if (snapshot.hasData &&
+                    snapshot.data != null &&
+                    !showKursAuswahl) {
+                  // zustand bevor ein semester ausgewählt wurde
+                  return SizedBox();
+                }
+                if (snapshot.hasData &&
+                    snapshot.data != null &&
+                    showKursAuswahl) {
+                  userselectedKurse = snapshot.data!;
+                  kursListe = jsonDecode(jsonEncode(snapshot.data!));
 
-                                              title: Text(kurs["kursname"]),
-                                              value: kurs["checked"],
-                                              onChanged: (val) {
-                                                setState(() {
-                                                  kurs["checked"] = val;
-                                                });
-                                              }),
-                                        );
-                                      }).toList())),
-                            ));
-                      });
-                    }
-                  }
-                  return const CircularProgressIndicator();
-                }),
+                  // standardcase
+                  return StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                    return ConstrainedBox(
+                        constraints: BoxConstraints(
+                            maxHeight: MediaQuery.of(context).size.height / 2),
+                        child: Scrollbar(
+                          thumbVisibility: true,
+                          child: SingleChildScrollView(
+                              clipBehavior: Clip.antiAlias,
+                              padding: EdgeInsets.all(8),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: userselectedKurse.map((kurs) {
+                                    return SizedBox(
+                                      width: MediaQuery.of(context).size.width -
+                                          40,
+                                      child: CheckboxListTile(
+                                          // shape: RoundedRectangleBorder(
+                                          //   side: BorderSide(
+                                          //       color: Colors.black,
+                                          //       width: 2),
+                                          //   borderRadius:
+                                          //       BorderRadius.circular(10),
+
+                                          title: Text(kurs["kursname"]),
+                                          value: kurs["isChecked"],
+                                          onChanged: (val) {
+                                            setState(() {
+                                              kurs["isChecked"] = val;
+                                            });
+                                          }),
+                                    );
+                                  }).toList())),
+                        ));
+                  });
+                }
+              }
+              return const CircularProgressIndicator();
+            }),
             saveButton()
           ]),
         ));
