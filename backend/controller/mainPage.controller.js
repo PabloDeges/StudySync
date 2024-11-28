@@ -1,14 +1,4 @@
-const fs = require("fs");
 const pool = require("../model/db");
-
-const mainPageDisplayInfos = async (req, res) => {
-	try {
-		let daten = readJsonFile("./mainData.json");
-		res.status(200).json(daten);
-	} catch (err) {
-		res.status(500).json({ message: err.message });
-	}
-};
 
 const getStundenplan = async (req, res) => {
 	try {
@@ -56,14 +46,7 @@ const editKommentar =async (req,res) => {
 }
 
 module.exports = {
-	mainPageDisplayInfos,
 	getStundenplan,
 	delTermin,
 	editKommentar
 };
-
-function readJsonFile(filePath) {
-	const data = fs.readFileSync(filePath, "utf8");
-	const jsonData = JSON.parse(data);
-	return jsonData;
-}
