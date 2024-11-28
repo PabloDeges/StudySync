@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'main.dart';
+import 'auth_service.dart';
 
 class WeekView extends StatefulWidget {
   const WeekView({super.key});
@@ -30,18 +32,33 @@ class _WeekViewState extends State<WeekView> {
 
   Future<Map<String, dynamic>> fetchWeek() async {
     try {
+      AuthService authService = AuthService();
       var params = {'userid': '1'};
-      var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
-          '/stundenplan', params);
-      var response = await http.get(url);
+      var url = Uri.http(
+        "${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
+        '/stundenplan',
+        params,
+      );
+      String? token = await authService.getToken();
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
+      var response = await http.get(url, headers: headers);
+
+      if (response.statusCode == 401) {
+        authService.logout();
+        navigatorKey.currentState?.pushReplacementNamed('/login');
+      }
+
       if (response.statusCode == 200) {
         final decResponse = jsonDecode(response.body) as Map<String, dynamic>;
         return decResponse;
       } else {
-        throw ErrorDescription("responsecode != 200");
+        throw ErrorDescription("responsecode != 200: ${response.statusCode}");
       }
     } catch (error) {
-      throw Exception("Fehler beim Laden der Woche");
+      throw Exception("Fehler beim Laden der Woche: $error");
     }
   }
 
