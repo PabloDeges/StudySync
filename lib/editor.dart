@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'auth_service.dart';
@@ -211,15 +212,165 @@ class _EditorViewState extends State<EditorView> {
                       context: context,
                       builder: (BuildContext context) {
                         return Dialog(
-                            backgroundColor: Colors.transparent,
+                            backgroundColor: Colors.white,
                             insetPadding: const EdgeInsets.all(10),
-                            child:
-                                Stack(alignment: Alignment.center, children: [
-                              Text("Wähle das gewünschte Theme:"),
-                              ElevatedButton(
-                                  onPressed: setColorTheme('1'),
-                                  child: Text("Theme 1"))
-                            ]));
+                            child: Container(
+                              width: 380,
+                              height: 550,
+                              child:
+                                  Stack(alignment: Alignment.center, children: [
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(32.0),
+                                      child: Text(
+                                        "Wähle das gewünschte Theme:",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 26,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          fixedSize: Size(320, 54),
+                                          backgroundColor: Color(0xFFD91656),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setColorTheme(1);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          "Theme 1",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              color: Color(0xFF640D5F)),
+                                        )),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color(0xFF355F2E),
+                                          fixedSize: Size(320, 54),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setColorTheme(2);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          "Theme 2",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              color: Color(0xFFA8CD89)),
+                                        )),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color(0xFFB3C8CF),
+                                          fixedSize: Size(320, 54),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setColorTheme(3);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          "Theme 3",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              color: Color(0xFFE5E1DA)),
+                                        )),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color(0xFFAB886D),
+                                          fixedSize: Size(320, 54),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setColorTheme(4);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          "Theme 4",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              color: Color(0xFFD6C0B3)),
+                                        )),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color(0xFFFD8B51),
+                                          fixedSize: Size(320, 54),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setColorTheme(5);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          "Theme 5",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              color: Color(0xFFF2E5BF)),
+                                        )),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color(0xFF0A5EB0),
+                                          fixedSize: Size(320, 54),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setColorTheme(0);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          "Default",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              color: Color(0xFF0A97B0)),
+                                        )),
+                                  ],
+                                ),
+                              ]),
+                            ));
                       });
                 } else if (value == 'logout') {
                   AuthService authService = AuthService();
@@ -233,7 +384,7 @@ class _EditorViewState extends State<EditorView> {
               itemBuilder: (BuildContext context) => [
                 PopupMenuItem(
                   value: 'theme_select',
-                  child: Text('Farbi X'),
+                  child: Text('Farbauswahl'),
                 ),
                 PopupMenuItem(
                   value: 'reset',
@@ -256,7 +407,7 @@ class _EditorViewState extends State<EditorView> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 40,
-                    color: Theme.of(context).colorScheme.primary),
+                    color: Color.fromARGB(255, 25, 25, 25)),
               ),
             ),
             FutureBuilder<List<dynamic>>(
@@ -413,9 +564,40 @@ class _EditorViewState extends State<EditorView> {
         ));
   }
 
-  setColorTheme(String selection) {
-    // if(selection == 'red') {
+  setColorTheme(int selection) async {
+    toastification.show(
+      context: context,
+      type: ToastificationType.success,
+      title: Text('Farbauswahl gespeichert!'),
+      autoCloseDuration: const Duration(seconds: 3),
+    );
 
-    // }
+    final prefs = await SharedPreferences.getInstance();
+
+    if (selection == 1) {
+      // RED - PURPLE
+      prefs.setInt('primaryColor', 0xFFD91656);
+      prefs.setInt('secondaryColor', 0xFF640D5F);
+    } else if (selection == 2) {
+      // GREEN
+      prefs.setInt('primaryColor', 0xFF355F2E);
+      prefs.setInt('secondaryColor', 0xFFA8CD89);
+    } else if (selection == 3) {
+      // BLUEISH
+      prefs.setInt('primaryColor', 0xFFB3C8CF);
+      prefs.setInt('secondaryColor', 0xFFE5E1DA);
+    } else if (selection == 4) {
+      // LIGHT
+      prefs.setInt('primaryColor', 0xFFAB886D);
+      prefs.setInt('secondaryColor', 0xFFD6C0B3);
+    } else if (selection == 5) {
+      //
+      prefs.setInt('primaryColor', 0xFFFD8B51);
+      prefs.setInt('secondaryColor', 0xFFF2E5BF);
+    } else {
+      // DEFAULT
+      prefs.setInt('primaryColor', 0xFF0A5EB0);
+      prefs.setInt('secondaryColor', 0xFF0A97B0);
+    }
   }
 }
