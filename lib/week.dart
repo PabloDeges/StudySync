@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:toastification/toastification.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'main.dart';
 import 'auth_service.dart';
@@ -380,6 +381,14 @@ class _WeekViewState extends State<WeekView> {
                                         commentController.text,
                                         mailController.text,
                                         linkController.text);
+                                    toastification.show(
+                                      context: context,
+                                      type: ToastificationType.success,
+                                      title: Text('Änderungen gespeichert!'),
+                                      autoCloseDuration:
+                                          const Duration(seconds: 5),
+                                    );
+                                    Navigator.pop(context);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xFF0766AD),
