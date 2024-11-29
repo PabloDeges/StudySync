@@ -66,9 +66,20 @@ const kurseUmwaehlen = async (req, res) => {
 	}
 };
 
+const alleTermineEinesBenutzersLoe = async (req, res) => {
+	try {
+		let benutzerid = req.query.userid;
+		let anzDel = (await pool.query(`DELETE FROM benutzer_termin WHERE benutzerid = ${benutzerid};`)).rowCount;
+		res.status(200).json(anzDel);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+};
+
 module.exports = {
 	getStudiengaenge,
 	getSemesterZuStudiengang,
 	getKurseZuSemester,
-	kurseUmwaehlen
+	kurseUmwaehlen,
+	alleTermineEinesBenutzersLoe
 };
