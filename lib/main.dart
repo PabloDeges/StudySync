@@ -7,6 +7,7 @@ import 'register.dart';
 import 'week.dart';
 import 'day.dart';
 import 'editor.dart';
+
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<bool> checkTokenValidity() async {
@@ -14,13 +15,13 @@ Future<bool> checkTokenValidity() async {
   String? token = await authService.getToken();
 
   final response = await http.get(
-      Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
-          '/auth/authToken'),
-      headers: <String, String>{
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    );
+    Uri.http(
+        "${dotenv.env['SERVER']}:${dotenv.env['PORT']}", '/auth/authToken'),
+    headers: <String, String>{
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
 
   if (response.statusCode == 200) {
     return true;
@@ -28,6 +29,7 @@ Future<bool> checkTokenValidity() async {
     return false;
   }
 }
+
 void main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,8 +47,12 @@ class StudySyncApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       title: 'StudySync App',
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
-      ),
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+              primary: Color(0xFF0766AD),
+              seedColor: Color(0xFF0766AD),
+              brightness: Brightness.light,
+              secondary: Color(0xFF29ADB2))),
       initialRoute: isTokenValid ? '/home' : '/login',
       routes: {
         '/login': (context) => const LoginScreen(),
