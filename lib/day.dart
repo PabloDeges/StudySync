@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'auth_service.dart';
 import 'main.dart';
 
@@ -10,7 +11,7 @@ class DayView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         FocussedWeekdayIndicator(),
         Expanded(child: DayStudySync()),
@@ -59,15 +60,23 @@ class FocussedWeekdayIndicator extends StatelessWidget {
 }
 
 class DayStudySync extends StatelessWidget {
-  const DayStudySync({super.key});
+  DayStudySync({super.key});
+
+  int primaryColor = 0xFF29ADB2;
+  int secondaryColor = 0xFF0766AD;
 
   Future<Map<String, dynamic>> fetchStundenplan() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    primaryColor = prefs.getInt('primaryColor') ?? 0xFF29ADB2;
+    secondaryColor = prefs.getInt('secondaryColor') ?? 0xFF0766AD;
+
     try {
       AuthService authService = AuthService();
       var params = {'userid': '1'};
       var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
           '/stundenplan', params);
-          String? token = await authService.getToken();
+      String? token = await authService.getToken();
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
@@ -160,8 +169,8 @@ class DayStudySync extends StatelessWidget {
                 height: cellHeight,
                 width: widthDisplay - 20,
                 color: timeOffset % 2 == 0
-                    ? const Color(0xFF29ADB2)
-                    : const Color(0xFF0766AD),
+                    ? Color(primaryColor)
+                    : Color(secondaryColor),
                 child: Stack(
                   children: [
                     Positioned(
@@ -190,22 +199,22 @@ class DayStudySync extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                          supplyDataToCell(
-                              timetable, weekday - 1, timeOffset, 'raum'),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(width: 100),
-                        Text(
-                          supplyDataToCell(
-                              timetable, weekday - 1, timeOffset, 'dozname'),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
-                        ),
+                              supplyDataToCell(
+                                  timetable, weekday - 1, timeOffset, 'raum'),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(width: 100),
+                            Text(
+                              supplyDataToCell(timetable, weekday - 1,
+                                  timeOffset, 'dozname'),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            ),
                           ],
                         ),
                       ]),

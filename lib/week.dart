@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toastification/toastification.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'main.dart';
 import 'auth_service.dart';
@@ -21,6 +23,9 @@ class _WeekViewState extends State<WeekView> {
   final linkController = TextEditingController();
   final mailController = TextEditingController();
 
+  int primaryColor = 0xFF29ADB2;
+  int secondaryColor = 0xFF0766AD;
+
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -31,6 +36,11 @@ class _WeekViewState extends State<WeekView> {
   }
 
   Future<Map<String, dynamic>> fetchWeek() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    primaryColor = prefs.getInt('primaryColor') ?? 0xFF29ADB2;
+    secondaryColor = prefs.getInt('secondaryColor') ?? 0xFF0766AD;
+
     try {
       AuthService authService = AuthService();
       var params = {'userid': '1'};
@@ -98,7 +108,8 @@ class _WeekViewState extends State<WeekView> {
       // WENN BACKEND ROUTE STEHT => Parameter ans Backend Senden mit Post
     }
 
-    void showCollisionPopUp(List doppelungen, day, time) {
+    void showCollisionPopUp(
+        List doppelungen, day, time, primaryColor, secondaryColor) {
       var formattedDay = weekdays[day];
       var formattedTime = ((8 + time));
 
@@ -109,17 +120,21 @@ class _WeekViewState extends State<WeekView> {
               child: Container(
                 height: 500,
                 width: 500,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: const Color.fromARGB(255, 255, 245, 245),
+                ),
                 child: Column(
                   children: [
                     const SizedBox(
                       height: 20,
                     ),
-                    const Text(
+                    Text(
                       "Doppelung erkannt!",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 32,
+                        color: Color(primaryColor),
+                        fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -141,7 +156,7 @@ class _WeekViewState extends State<WeekView> {
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF0766AD),
+                            backgroundColor: Color(primaryColor),
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16.0, vertical: 12.0),
                             shape: RoundedRectangleBorder(
@@ -172,7 +187,8 @@ class _WeekViewState extends State<WeekView> {
 
         if (kurseInSlot.length <= 1) {
         } else {
-          showCollisionPopUp(kurseInSlot, day, time);
+          showCollisionPopUp(
+              kurseInSlot, day, time, primaryColor, secondaryColor);
         }
       } catch (x) {}
     }
@@ -223,7 +239,7 @@ class _WeekViewState extends State<WeekView> {
       return "";
     }
 
-    void displayEditPopUp(timetable, time, day) {
+    void displayEditPopUp(timetable, time, day, primaryColor, secondaryColor) {
       var selectedCell;
       try {
         selectedCell = timetable
@@ -253,12 +269,10 @@ class _WeekViewState extends State<WeekView> {
                       children: <Widget>[
                         Container(
                             width: double.infinity,
-                            height: MediaQuery.sizeOf(context).height *
-                                0.75, // noch hardcoded, später dynamisch anpassen
+                            height: MediaQuery.sizeOf(context).height * 0.8,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
-                                color:
-                                    const Color.fromARGB(255, 232, 247, 255)),
+                                color: Color.fromARGB(255, 239, 239, 239)),
                             padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                             child: Column(
                               children: [
@@ -266,10 +280,10 @@ class _WeekViewState extends State<WeekView> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
+                                    Text(
                                       "BEARBEITEN VON: ",
                                       style: TextStyle(
-                                          color: Color(0xFF0766AD),
+                                          color: Color(primaryColor),
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
                                     ),
@@ -293,8 +307,8 @@ class _WeekViewState extends State<WeekView> {
                                 Text(
                                   supplyKursartAusgeschrieben(supplyDataToCell(
                                       timetable, day, time, 'terminart')),
-                                  style: const TextStyle(
-                                      color: Color(0xFF0766AD),
+                                  style: TextStyle(
+                                      color: Color(primaryColor),
                                       fontSize: 26,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -306,17 +320,14 @@ class _WeekViewState extends State<WeekView> {
                                               'kurskuerzel')
                                           .toUpperCase() +
                                       ")",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontSize: 24,
-                                      color: Color(0xFF0766AD),
+                                      color: Color(primaryColor),
                                       fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
                                 ),
                                 const SizedBox(
-                                  height: 20,
-                                ),
-                                const SizedBox(
-                                  height: 20,
+                                  height: 40,
                                 ),
                                 Row(
                                   children: [
@@ -341,8 +352,8 @@ class _WeekViewState extends State<WeekView> {
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(5),
-                                                borderSide: const BorderSide(
-                                                    color: Color(0xFF0766AD)),
+                                                borderSide: BorderSide(
+                                                    color: Color(primaryColor)),
                                               ),
                                             ),
                                           ),
@@ -380,19 +391,27 @@ class _WeekViewState extends State<WeekView> {
                                         commentController.text,
                                         mailController.text,
                                         linkController.text);
+                                    toastification.show(
+                                      context: context,
+                                      type: ToastificationType.success,
+                                      title: Text('Änderungen gespeichert!'),
+                                      autoCloseDuration:
+                                          const Duration(seconds: 5),
+                                    );
+                                    Navigator.pop(context);
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF0766AD),
+                                    backgroundColor: Color(primaryColor),
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0, vertical: 12.0),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     'Änderungen speichern',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: Color(secondaryColor),
                                       fontSize: 18,
                                     ),
                                   ),
@@ -406,7 +425,7 @@ class _WeekViewState extends State<WeekView> {
       }
     }
 
-    void displayPopUp(timetable, time, day) {
+    void displayPopUp(timetable, time, day, primaryColor, secondaryColor) {
       var selectedCell;
       try {
         selectedCell = timetable
@@ -430,11 +449,10 @@ class _WeekViewState extends State<WeekView> {
                       children: <Widget>[
                         Container(
                             width: double.infinity,
-                            height: MediaQuery.sizeOf(context).height * 0.75,
+                            height: MediaQuery.sizeOf(context).height * 0.8,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
-                                color:
-                                    const Color.fromARGB(255, 232, 247, 255)),
+                                color: Color.fromARGB(255, 239, 239, 239)),
                             padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                             child: Column(
                               children: [
@@ -448,7 +466,11 @@ class _WeekViewState extends State<WeekView> {
                                                     Color(0xFF0766AD))),
                                         onPressed: () => {
                                               displayEditPopUp(
-                                                  timetable, time, day)
+                                                  timetable,
+                                                  time,
+                                                  day,
+                                                  primaryColor,
+                                                  secondaryColor)
                                             },
                                         label: const Icon(
                                           Icons.edit,
@@ -477,8 +499,8 @@ class _WeekViewState extends State<WeekView> {
                                 Text(
                                   supplyKursartAusgeschrieben(supplyDataToCell(
                                       timetable, day, time, 'terminart')),
-                                  style: const TextStyle(
-                                      color: Color(0xFF0766AD),
+                                  style: TextStyle(
+                                      color: Color(primaryColor),
                                       fontSize: 26,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -490,9 +512,9 @@ class _WeekViewState extends State<WeekView> {
                                               'kurskuerzel')
                                           .toUpperCase() +
                                       ")",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontSize: 24,
-                                      color: Color(0xFF0766AD),
+                                      color: Color(primaryColor),
                                       fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
                                 ),
@@ -501,10 +523,10 @@ class _WeekViewState extends State<WeekView> {
                                 ),
                                 Row(
                                   children: [
-                                    const Icon(
+                                    Icon(
                                       Icons.room,
                                       size: 50,
-                                      color: Color(0xFF29ADB2),
+                                      color: Color(secondaryColor),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
@@ -512,8 +534,8 @@ class _WeekViewState extends State<WeekView> {
                                       child: Text(
                                         supplyDataToCell(
                                             timetable, day, time, 'raum'),
-                                        style: const TextStyle(
-                                            color: Color(0xFF0766AD),
+                                        style: TextStyle(
+                                            color: Color(primaryColor),
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -525,10 +547,10 @@ class _WeekViewState extends State<WeekView> {
                                 ),
                                 Row(
                                   children: [
-                                    const Icon(
+                                    Icon(
                                       Icons.school,
                                       size: 50,
-                                      color: Color(0xFF29ADB2),
+                                      color: Color(secondaryColor),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
@@ -536,8 +558,8 @@ class _WeekViewState extends State<WeekView> {
                                       child: Text(
                                         supplyDataToCell(
                                             timetable, day, time, 'dozname'),
-                                        style: const TextStyle(
-                                            color: Color(0xFF0766AD),
+                                        style: TextStyle(
+                                            color: Color(primaryColor),
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -549,10 +571,10 @@ class _WeekViewState extends State<WeekView> {
                                 ),
                                 Row(
                                   children: [
-                                    const Icon(
+                                    Icon(
                                       Icons.comment,
                                       size: 50,
-                                      color: Color(0xFF29ADB2),
+                                      color: Color(secondaryColor),
                                     ),
                                     Container(
                                       width:
@@ -568,8 +590,8 @@ class _WeekViewState extends State<WeekView> {
                                               ? "Kein Kommentar hinzugefügt "
                                               : supplyDataToCell(timetable, day,
                                                   time, 'kommentar'),
-                                          style: const TextStyle(
-                                              color: Color(0xFF0766AD),
+                                          style: TextStyle(
+                                              color: Color(primaryColor),
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                           softWrap: true,
@@ -586,9 +608,7 @@ class _WeekViewState extends State<WeekView> {
                                     fixedSize: Size(
                                         MediaQuery.sizeOf(context).width * 0.75,
                                         60),
-                                    backgroundColor: Colors.blue,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0, vertical: 12.0),
+                                    backgroundColor: Color(primaryColor),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
@@ -605,19 +625,20 @@ class _WeekViewState extends State<WeekView> {
                                       throw 'Could not launch $url';
                                     }
                                   },
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(
                                         Icons.link,
-                                        color: Colors.white,
+                                        color: Color(secondaryColor),
                                       ),
                                       SizedBox(width: 8),
                                       // Text
                                       Text(
                                         'Moodle Kurs öffnen',
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 16),
+                                            color: Color(secondaryColor),
+                                            fontSize: 16),
                                       ),
                                     ],
                                   ),
@@ -630,9 +651,7 @@ class _WeekViewState extends State<WeekView> {
                                     fixedSize: Size(
                                         MediaQuery.sizeOf(context).width * 0.75,
                                         60),
-                                    backgroundColor: Colors.blue,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0, vertical: 12.0),
+                                    backgroundColor: Color(primaryColor),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
@@ -650,19 +669,20 @@ class _WeekViewState extends State<WeekView> {
                                       throw 'Could not launch $url';
                                     }
                                   },
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(
                                         Icons.mail,
-                                        color: Colors.white,
+                                        color: Color(secondaryColor),
                                       ),
                                       SizedBox(width: 8),
                                       // Text
                                       Text(
                                         'Email an Kursleitende',
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 16),
+                                            color: Color(secondaryColor),
+                                            fontSize: 16),
                                       ),
                                     ],
                                   ),
@@ -717,13 +737,15 @@ class _WeekViewState extends State<WeekView> {
                           child:
                               InkWell // sorgt dafür dass man bei Klick auf einer Zelle eine Funktion ausführen kann
                                   (
-                            onTap: () =>
-                                {displayPopUp(timetable, timeOffset, day)},
+                            onTap: () => {
+                              displayPopUp(timetable, timeOffset, day,
+                                  primaryColor, secondaryColor)
+                            },
                             child: Container(
                               margin: const EdgeInsets.all(1.0),
                               color: timeOffset % 2 == 0
-                                  ? const Color(0xFF29ADB2)
-                                  : const Color(0xFF0766AD),
+                                  ? Color(primaryColor)
+                                  : Color(secondaryColor),
                               child: Stack(
                                 children: [
                                   Positioned(
