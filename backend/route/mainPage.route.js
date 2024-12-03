@@ -4,10 +4,10 @@ const { getStundenplan, delTermin , editKommentar } = require("../controller/mai
 const { changeToSchema } = require("../controller/db.controller.js");
 const { authenticateJWT } = require("../utils/authentication.js");
 
-router.get("/stundenplan", changeToSchema, authenticateJWT, getStundenplan);
+router.get("/stundenplan", authenticateJWT, getStundenplan);
 
-router.delete("/terminEntfernen", changeToSchema, authenticateJWT, delTermin);
+router.delete("/terminEntfernen", authenticateJWT, delTermin);
 
-router.post('/editKommentar',changeToSchema,editKommentar);
+router.post('/editKommentar', editKommentar);
 
 module.exports = router;
