@@ -73,9 +73,8 @@ class DayStudySync extends StatelessWidget {
 
     try {
       AuthService authService = AuthService();
-      var params = {'userid': '1'};
-      var url = Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
-          '/stundenplan', params);
+      var url = Uri.http(
+          "${dotenv.env['SERVER']}:${dotenv.env['PORT']}", '/stundenplan');
       String? token = await authService.getToken();
       final headers = {
         'Authorization': 'Bearer $token',

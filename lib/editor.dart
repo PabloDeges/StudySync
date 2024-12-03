@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -173,6 +174,27 @@ class _EditorViewState extends State<EditorView> {
     }
   }
 
+  void clearStundenplan() async {
+    AuthService authService = AuthService();
+    String? token = await authService.getToken();
+    http.Response response = await http.delete(
+      Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
+          '/auswahlmenue/termine'),
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    if (response.statusCode == 200) {
+      toastification.show(
+        context: context,
+        type: ToastificationType.success,
+        title: Text('Studenplan wurde zurückgesetzt'),
+        autoCloseDuration: const Duration(seconds: 5),
+      );
+    }
+  }
+
   late Future<List<dynamic>> _studiengangAuswahl;
   late Future<List<dynamic>> _semesterAuswahl = Future.value([
     {"id": 0, "semesterkennung": "-"}
@@ -235,7 +257,7 @@ class _EditorViewState extends State<EditorView> {
                                     ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           fixedSize: Size(320, 54),
-                                          backgroundColor: Color(0xFFD91656),
+                                          backgroundColor: Color(0xFFC353EC),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
@@ -250,14 +272,14 @@ class _EditorViewState extends State<EditorView> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20,
-                                              color: Color(0xFF640D5F)),
+                                              color: Color(0xFFE1A9F6)),
                                         )),
                                     SizedBox(
                                       height: 10,
                                     ),
                                     ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color(0xFF355F2E),
+                                          backgroundColor: Color(0xFF5B6BE4),
                                           fixedSize: Size(320, 54),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -273,14 +295,14 @@ class _EditorViewState extends State<EditorView> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20,
-                                              color: Color(0xFFA8CD89)),
+                                              color: Color(0xFFADB5F2)),
                                         )),
                                     SizedBox(
                                       height: 10,
                                     ),
                                     ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color(0xFFB3C8CF),
+                                          backgroundColor: Color(0xFF60DFB9),
                                           fixedSize: Size(320, 54),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -296,14 +318,14 @@ class _EditorViewState extends State<EditorView> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20,
-                                              color: Color(0xFFE5E1DA)),
+                                              color: Color(0xFFAFEFDC)),
                                         )),
                                     SizedBox(
                                       height: 10,
                                     ),
                                     ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color(0xFFAB886D),
+                                          backgroundColor: Color(0xFF66D96C),
                                           fixedSize: Size(320, 54),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -319,14 +341,14 @@ class _EditorViewState extends State<EditorView> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20,
-                                              color: Color(0xFFD6C0B3)),
+                                              color: Color(0xFFB3ECB5)),
                                         )),
                                     SizedBox(
                                       height: 10,
                                     ),
                                     ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color(0xFFFD8B51),
+                                          backgroundColor: Color(0xFFEB6653),
                                           fixedSize: Size(320, 54),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -342,7 +364,7 @@ class _EditorViewState extends State<EditorView> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20,
-                                              color: Color(0xFFF2E5BF)),
+                                              color: Color(0xFFF5B3A9)),
                                         )),
                                     SizedBox(
                                       height: 10,
@@ -377,8 +399,70 @@ class _EditorViewState extends State<EditorView> {
                   authService.logout();
                   Navigator.pushReplacementNamed(context, '/login');
                 } else if (value == 'reset') {
-                  // FUNKTIONSAUFRUF UM ALLE KURSE FÜR DEN USER ZU LEEREN
-                  // AM BESTEN NOCH EIN PUP UP UM SICHER ZU GEHEN, DASS MAN SICH NICHT VERKLICKT
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'Möchtest du alle aktiven Kurse aus deinem Stundenplan entfernen?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(
+                                    'Abbrechen',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  style: ButtonStyle(
+                                      shape: WidgetStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20))),
+                                      backgroundColor:
+                                          WidgetStatePropertyAll(Colors.grey)),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    clearStundenplan();
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(
+                                    'Kurse löschen',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  style: ButtonStyle(
+                                      shape: WidgetStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20))),
+                                      backgroundColor:
+                                          WidgetStatePropertyAll(Colors.red)),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
                 }
               },
               itemBuilder: (BuildContext context) => [
@@ -401,7 +485,7 @@ class _EditorViewState extends State<EditorView> {
         body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(16.0),
               child: Text(
                 "Kurseditor",
                 style: TextStyle(
@@ -520,7 +604,7 @@ class _EditorViewState extends State<EditorView> {
                         return ConstrainedBox(
                             constraints: BoxConstraints(
                                 maxHeight:
-                                    MediaQuery.of(context).size.height * 0.4),
+                                    MediaQuery.of(context).size.height * 0.35),
                             child: Scrollbar(
                               thumbVisibility: true,
                               child: SingleChildScrollView(
@@ -537,14 +621,12 @@ class _EditorViewState extends State<EditorView> {
                                                   .width -
                                               40,
                                           child: CheckboxListTile(
-                                              // shape: RoundedRectangleBorder(
-                                              //   side: BorderSide(
-                                              //       color: Colors.black,
-                                              //       width: 2),
-                                              //   borderRadius:
-                                              //       BorderRadius.circular(10),
-
-                                              title: Text(kurs["kursname"]),
+                                              title: Text(
+                                                kurs["kursname"],
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
                                               value: kurs["isChecked"],
                                               onChanged: (val) {
                                                 setState(() {
@@ -575,25 +657,25 @@ class _EditorViewState extends State<EditorView> {
     final prefs = await SharedPreferences.getInstance();
 
     if (selection == 1) {
-      // RED - PURPLE
-      prefs.setInt('primaryColor', 0xFFD91656);
-      prefs.setInt('secondaryColor', 0xFF640D5F);
+      // PURPLE
+      prefs.setInt('primaryColor', 0xFFC353EC); // PRIMARY DARK
+      prefs.setInt('secondaryColor', 0xFFE1A9F6); // SECONDARY HELLER
     } else if (selection == 2) {
-      // GREEN
-      prefs.setInt('primaryColor', 0xFF355F2E);
-      prefs.setInt('secondaryColor', 0xFFA8CD89);
+      // BLUE
+      prefs.setInt('primaryColor', 0xFF5B6BE4);
+      prefs.setInt('secondaryColor', 0xFFADB5F2);
     } else if (selection == 3) {
-      // BLUEISH
-      prefs.setInt('primaryColor', 0xFFB3C8CF);
-      prefs.setInt('secondaryColor', 0xFFE5E1DA);
+      // MINT
+      prefs.setInt('primaryColor', 0xFF60DFB9);
+      prefs.setInt('secondaryColor', 0xFFAFEFDC);
     } else if (selection == 4) {
-      // LIGHT
-      prefs.setInt('primaryColor', 0xFFAB886D);
-      prefs.setInt('secondaryColor', 0xFFD6C0B3);
+      // GREEN
+      prefs.setInt('primaryColor', 0xFF66D96C);
+      prefs.setInt('secondaryColor', 0xFFB3ECB5);
     } else if (selection == 5) {
-      //
-      prefs.setInt('primaryColor', 0xFFFD8B51);
-      prefs.setInt('secondaryColor', 0xFFF2E5BF);
+      // RED
+      prefs.setInt('primaryColor', 0xFFEB6653);
+      prefs.setInt('secondaryColor', 0xFFF5B3A9);
     } else {
       // DEFAULT
       prefs.setInt('primaryColor', 0xFF0A5EB0);

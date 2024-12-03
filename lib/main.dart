@@ -44,6 +44,7 @@ class StudySyncApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       title: 'StudySync App',
       theme: ThemeData(
