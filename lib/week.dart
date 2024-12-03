@@ -404,6 +404,7 @@ class _WeekViewState extends State<WeekView> {
                                                     color: Color(primaryColor)),
                                               ),
                                             ),
+                                            controller: commentController,
                                           ),
                                         ),
                                       ],
