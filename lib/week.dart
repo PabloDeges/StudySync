@@ -245,11 +245,15 @@ class _WeekViewState extends State<WeekView> {
       String kuerzel = "";
 
       try {
-        kuerzel = timetable
+        var preselect = timetable
             .where((x) =>
                 x['wochentag'] == weekdays[day] &&
                 x['startzeit'] == (8 + time) * 100)
-            .toList()[0][data];
+            .toList();
+
+        if (preselect.isNotEmpty) {
+          kuerzel = preselect[0][data]?.toString() ?? "";
+        }
       } catch (x) {}
 
       return kuerzel;
@@ -442,14 +446,6 @@ class _WeekViewState extends State<WeekView> {
                                         linkController.text,
                                         supplyDataToCell(
                                             timetable, day, time, 'terminid'));
-
-                                    toastification.show(
-                                      context: context,
-                                      type: ToastificationType.success,
-                                      title: Text('Änderungen gespeichert!'),
-                                      autoCloseDuration:
-                                          const Duration(seconds: 5),
-                                    );
                                     Navigator.pop(context);
                                   },
                                   style: ElevatedButton.styleFrom(
