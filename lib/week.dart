@@ -35,6 +35,29 @@ class _WeekViewState extends State<WeekView> {
     super.dispose();
   }
 
+  void removeKurs(terminid) async {
+    AuthService authService = AuthService();
+    String? token = await authService.getToken();
+    http.Response response = await http.delete(
+        Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
+            '/terminEntfernen'),
+        headers: <String, String>{
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          'terminid': terminid,
+        }));
+    if (response.statusCode == 200) {
+      toastification.show(
+        context: context,
+        type: ToastificationType.success,
+        title: Text('Kurs wurde entfernt'),
+        autoCloseDuration: const Duration(seconds: 3),
+      );
+    }
+  }
+
   Future<Map<String, dynamic>> fetchWeek() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -43,11 +66,9 @@ class _WeekViewState extends State<WeekView> {
 
     try {
       AuthService authService = AuthService();
-      var params = {'userid': '1'};
       var url = Uri.http(
         "${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
         '/stundenplan',
-        params,
       );
       String? token = await authService.getToken();
       final headers = {
@@ -73,20 +94,27 @@ class _WeekViewState extends State<WeekView> {
   }
 
   Future<http.Response> aenderungenSpeichern(
-      // NACH MERGE FEEDBACK NOTIFICATION ADDEN BEI SPEICHERN
-      String kommentar,
-      String email,
-      String link) async {
+      String kommentar, String email, String link, String terminID) async {
+    toastification.show(
+      context: context,
+      type: ToastificationType.success,
+      title: Text('Änderungen gespeichert'),
+      autoCloseDuration: const Duration(seconds: 5),
+    );
+    AuthService authService = AuthService();
+    String? token = await authService.getToken();
     return http.post(
-      Uri.http(
-          "${dotenv.env['SERVER']}:${dotenv.env['PORT']}", '/editKommentar'),
+      Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
+          '/editor/customStrings'),
       headers: <String, String>{
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode({
-        'kommentar': kommentar,
-        // 'email': email,
-        // 'link': link,
+        'comment': kommentar,
+        'mail': email,
+        'link': link,
+        'terminid': terminID,
       }),
     );
   }
@@ -101,11 +129,30 @@ class _WeekViewState extends State<WeekView> {
       "Freitag"
     ];
 
-    void collisionSelection(id, day, time) {
-      print(
-          "Es wurde der Kurs mit der ID: $id am $day um $time als beizubehaltendes fach ausgewählt.");
-
-      // WENN BACKEND ROUTE STEHT => Parameter ans Backend Senden mit Post
+    void collisionSelection(id, day, time) async {
+      AuthService authService = AuthService();
+      String? token = await authService.getToken();
+      http.Response response = await http.delete(
+        Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
+            '/editor/kollisionen'),
+        headers: <String, String>{
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          'terminid': id,
+          'day': day,
+          'time': time,
+        }),
+      );
+      if (response.statusCode == 200) {
+        toastification.show(
+          context: context,
+          type: ToastificationType.success,
+          title: Text('Doppelung behoben!'),
+          autoCloseDuration: const Duration(seconds: 3),
+        );
+      }
     }
 
     void showCollisionPopUp(
@@ -142,7 +189,7 @@ class _WeekViewState extends State<WeekView> {
                       height: 20,
                     ),
                     Text(
-                      "Bitte wähle aus welchen Kurs du am $formattedDay ab $formattedTime Uhr belegen möchtest:",
+                      "Bitte wähle aus welchen Kurs du am $formattedDay um $formattedTime Uhr belegen möchtest:",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 18, color: Colors.black),
                     ),
@@ -152,7 +199,8 @@ class _WeekViewState extends State<WeekView> {
                         padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton(
                           onPressed: () {
-                            collisionSelection(kurs["id"], day, time);
+                            collisionSelection(kurs['terminid'], weekdays[day],
+                                ((8 + time) * 100));
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
@@ -197,11 +245,15 @@ class _WeekViewState extends State<WeekView> {
       String kuerzel = "";
 
       try {
-        kuerzel = timetable
+        var preselect = timetable
             .where((x) =>
                 x['wochentag'] == weekdays[day] &&
                 x['startzeit'] == (8 + time) * 100)
-            .toList()[0][data];
+            .toList();
+
+        if (preselect.isNotEmpty) {
+          kuerzel = preselect[0][data]?.toString() ?? "";
+        }
       } catch (x) {}
 
       return kuerzel;
@@ -252,8 +304,8 @@ class _WeekViewState extends State<WeekView> {
       //TEXTFELDER BEFÜLLEN
       commentController.text =
           supplyDataToCell(timetable, day, time, 'kommentar');
-      mailController.text = supplyDataToCell(timetable, day, time, 'email');
-      linkController.text = supplyDataToCell(timetable, day, time, 'link');
+      mailController.text = supplyDataToCell(timetable, day, time, 'mail');
+      linkController.text = supplyDataToCell(timetable, day, time, 'kurslink');
 
       if (selectedCell != null) {
         // falls die angeklickte Zelle einen Inhalt hat, zeige ein Pop Up an
@@ -269,7 +321,7 @@ class _WeekViewState extends State<WeekView> {
                       children: <Widget>[
                         Container(
                             width: double.infinity,
-                            height: MediaQuery.sizeOf(context).height * 0.8,
+                            height: MediaQuery.sizeOf(context).height * 0.86,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 color: Color.fromARGB(255, 239, 239, 239)),
@@ -356,6 +408,7 @@ class _WeekViewState extends State<WeekView> {
                                                     color: Color(primaryColor)),
                                               ),
                                             ),
+                                            controller: commentController,
                                           ),
                                         ),
                                       ],
@@ -390,14 +443,9 @@ class _WeekViewState extends State<WeekView> {
                                     aenderungenSpeichern(
                                         commentController.text,
                                         mailController.text,
-                                        linkController.text);
-                                    toastification.show(
-                                      context: context,
-                                      type: ToastificationType.success,
-                                      title: Text('Änderungen gespeichert!'),
-                                      autoCloseDuration:
-                                          const Duration(seconds: 5),
-                                    );
+                                        linkController.text,
+                                        supplyDataToCell(
+                                            timetable, day, time, 'terminid'));
                                     Navigator.pop(context);
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -414,6 +462,121 @@ class _WeekViewState extends State<WeekView> {
                                       color: Color(secondaryColor),
                                       fontSize: 18,
                                     ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                ElevatedButton(
+                                  // TERMIN LÖSCHEN BUTTON
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  'Möchtest du ' +
+                                                      supplyDataToCell(
+                                                          timetable,
+                                                          day,
+                                                          time,
+                                                          'kursname') +
+                                                      ' aus deinem Stundenplan entfernen?',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(height: 20),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text(
+                                                      'Abbrechen',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                    style: ButtonStyle(
+                                                        shape: WidgetStatePropertyAll(
+                                                            RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20))),
+                                                        backgroundColor:
+                                                            WidgetStatePropertyAll(
+                                                                Colors.grey)),
+                                                  ),
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      removeKurs(
+                                                          supplyDataToCell(
+                                                              timetable,
+                                                              day,
+                                                              time,
+                                                              'terminid'));
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text(
+                                                      'Termin entfernen',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    style: ButtonStyle(
+                                                        shape: WidgetStatePropertyAll(
+                                                            RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20))),
+                                                        backgroundColor:
+                                                            WidgetStatePropertyAll(
+                                                                Colors.red)),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 12.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Termin löschen',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ],
@@ -614,15 +777,14 @@ class _WeekViewState extends State<WeekView> {
                                     ),
                                   ),
                                   onPressed: () async {
-                                    String url =
-                                        "https://moodle.hs-bochum.de/course/view.php?id=6987";
-                                    // String url = supplyDataToCell(timetable, day, time, 'moodle_link');
+                                    String url = supplyDataToCell(
+                                        timetable, day, time, 'kurslink');
 
                                     final parsedLink = Uri.parse(url);
                                     if (await canLaunchUrl(parsedLink)) {
                                       await launchUrl(parsedLink);
                                     } else {
-                                      throw 'Could not launch $url';
+                                      print("url launch fehlgeschlagen");
                                     }
                                   },
                                   child: Row(
@@ -657,8 +819,8 @@ class _WeekViewState extends State<WeekView> {
                                     ),
                                   ),
                                   onPressed: () async {
-                                    String url = "max.mustermann@hs-bochum.de";
-                                    // String url = supplyDataToCell(timetable, day, time, 'email');
+                                    String url = supplyDataToCell(
+                                        timetable, day, time, 'mail');
 
                                     var mailUri =
                                         Uri(scheme: 'mailto', path: url);
