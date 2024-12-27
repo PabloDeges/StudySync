@@ -3,7 +3,7 @@ const pool = require("../model/db");
 const getStundenplan = async (req, res) => {
 	try {
 		let userid = req.query.userid;
-		let daten = (await pool.query(`SELECT t.id AS terminid, k.kursname, k.kurskuerzel, d.dozname, d.dozkuerzel, t.terminart, t.wochentag, t.startzeit, t.dauer, t.raum, bt.terminstartverzoegerung, bt.kommentar, bt.kurslink FROM termin AS t LEFT JOIN benutzer_termin AS bt ON t.id = bt.terminid LEFT JOIN doz AS d ON t.dozid = d.id LEFT JOIN kurs AS k ON t.kursid = k.id WHERE bt.benutzerid = ${userid};`)).rows;
+		let daten = (await pool.query(`SELECT t.id AS terminid, k.kursname, k.kurskuerzel, d.dozname, d.dozkuerzel, d.dozmail, t.terminart, t.wochentag, t.startzeit, t.dauer, t.raum, bt.terminstartverzoegerung, bt.kommentar, bt.kurslink, bt.kontaktmail FROM termin AS t LEFT JOIN benutzer_termin AS bt ON t.id = bt.terminid LEFT JOIN doz AS d ON t.dozid = d.id LEFT JOIN kurs AS k ON t.kursid = k.id WHERE bt.benutzerid = ${userid};`)).rows;
 		let startzeit, terminstartverzoegerung;
 		//terminstartverzoegerung wird auf die startzeit gerechnet und anschliessend aus dem datensatz entfernt
 		for (let i = 0; i < daten.length; i++) {
@@ -14,6 +14,11 @@ const getStundenplan = async (req, res) => {
 			startzeit = startzeit[0]*100 + startzeit[1];
 			daten[i].startzeit = startzeit;
 			delete daten[i].terminstartverzoegerung;
+
+			if (daten[i].kontaktmail != "") {
+				daten[i].dozmail = daten[i].kontaktmail;
+			}
+			delete daten[i].kontaktmail;
 		}
 		res.status(200).json({'data' : daten});
 	} catch (err) {
