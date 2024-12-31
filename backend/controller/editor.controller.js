@@ -7,7 +7,7 @@ const postCustomStrings = async (req, res) => {
         let kommentar = req.body.comment;
         let link = req.body.link;
         let mail = req.body.mail;
-        let anzMod = (await pool.query(`UPDATE benutzer_termin SET kommentar = '${kommentar}', kurslink = '${link}' WHERE benutzerid = ${benutzerid} AND terminid = ${terminid}`)).rowCount;
+        let anzMod = (await pool.query(`UPDATE benutzer_termin SET kommentar = '${kommentar}', kurslink = '${link}', kontaktmail = '${mail}' WHERE benutzerid = ${benutzerid} AND terminid = ${terminid}`)).rowCount;
 		res.status(200).json(anzMod);
 	} catch (err) {
 		res.status(500).json({ message: err.message });

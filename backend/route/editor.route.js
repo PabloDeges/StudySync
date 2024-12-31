@@ -5,7 +5,7 @@ const { postCustomStrings, delKollisionen } = require("../controller/editor.cont
 
 const router = express.Router();
 
-router.post("/customStrings", authenticateJWT ,postCustomStrings);
+router.post("/customStrings", authenticateJWT, postCustomStrings);
 
 router.delete("/kollisionen", authenticateJWT, delKollisionen);
 
