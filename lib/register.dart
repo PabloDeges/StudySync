@@ -42,7 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           context: context,
           type: ToastificationType.error,
           title: const Text('Registrierung fehlgeschlagen'),
-          autoCloseDuration: const Duration(seconds: 3),
+          autoCloseDuration: const Duration(seconds: 2),
         );
       }
     }

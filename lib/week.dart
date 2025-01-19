@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, empty_catches, prefer_interpolation_to_compose_strings, sized_box_for_whitespace
+// ignore_for_file: prefer_typing_uninitialized_variables, empty_catches, prefer_interpolation_to_compose_strings, sized_box_for_whitespace, use_build_context_synchronously
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -22,6 +22,9 @@ class _WeekViewState extends State<WeekView> {
   final commentController = TextEditingController();
   final linkController = TextEditingController();
   final mailController = TextEditingController();
+
+  int counter = 0;
+  int remainingCollisions = 0;
 
   int primaryColor = 0xFF29ADB2;
   int secondaryColor = 0xFF0766AD;
@@ -53,8 +56,11 @@ class _WeekViewState extends State<WeekView> {
         context: context,
         type: ToastificationType.success,
         title: Text('Kurs wurde entfernt'),
-        autoCloseDuration: const Duration(seconds: 3),
+        autoCloseDuration: const Duration(seconds: 2),
       );
+      setState(() {
+        counter++;
+      });
     }
   }
 
@@ -99,11 +105,11 @@ class _WeekViewState extends State<WeekView> {
       context: context,
       type: ToastificationType.success,
       title: Text('Änderungen gespeichert'),
-      autoCloseDuration: const Duration(seconds: 5),
+      autoCloseDuration: const Duration(seconds: 2),
     );
     AuthService authService = AuthService();
     String? token = await authService.getToken();
-    return http.post(
+    var response = http.post(
       Uri.http("${dotenv.env['SERVER']}:${dotenv.env['PORT']}",
           '/editor/customStrings'),
       headers: <String, String>{
@@ -117,6 +123,18 @@ class _WeekViewState extends State<WeekView> {
         'terminid': terminID,
       }),
     );
+    setState(() {
+      counter++;
+    });
+    return response;
+  }
+
+  void checkAllCollisionsResolved() {
+    if (remainingCollisions <= 0) {
+      setState(() {
+        counter++;
+      });
+    }
   }
 
   @override
@@ -150,8 +168,10 @@ class _WeekViewState extends State<WeekView> {
           context: context,
           type: ToastificationType.success,
           title: Text('Doppelung behoben!'),
-          autoCloseDuration: const Duration(seconds: 3),
+          autoCloseDuration: const Duration(seconds: 2),
         );
+        remainingCollisions--;
+        checkAllCollisionsResolved();
       }
     }
 
@@ -233,8 +253,9 @@ class _WeekViewState extends State<WeekView> {
                 x['startzeit'] == (8 + time) * 100)
             .toList();
 
-        if (kurseInSlot.length <= 1) {
-        } else {
+        if (kurseInSlot.length > 1) {
+          remainingCollisions =
+              kurseInSlot.length; // Anzahl Kollisionen speichern
           showCollisionPopUp(
               kurseInSlot, day, time, primaryColor, secondaryColor);
         }
@@ -304,7 +325,7 @@ class _WeekViewState extends State<WeekView> {
       //TEXTFELDER BEFÜLLEN
       commentController.text =
           supplyDataToCell(timetable, day, time, 'kommentar');
-      mailController.text = supplyDataToCell(timetable, day, time, 'mail');
+      mailController.text = supplyDataToCell(timetable, day, time, 'dozmail');
       linkController.text = supplyDataToCell(timetable, day, time, 'kurslink');
 
       if (selectedCell != null) {
@@ -447,6 +468,7 @@ class _WeekViewState extends State<WeekView> {
                                         supplyDataToCell(
                                             timetable, day, time, 'terminid'));
                                     Navigator.pop(context);
+                                    Navigator.pop(context);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Color(primaryColor),
@@ -456,15 +478,15 @@ class _WeekViewState extends State<WeekView> {
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                   ),
-                                  child: Text(
+                                  child: const Text(
                                     'Änderungen speichern',
                                     style: TextStyle(
-                                      color: Color(secondaryColor),
+                                      color: Colors.white,
                                       fontSize: 18,
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 ElevatedButton(
@@ -489,13 +511,13 @@ class _WeekViewState extends State<WeekView> {
                                                           'kursname') +
                                                       ' aus deinem Stundenplan entfernen?',
                                                   textAlign: TextAlign.center,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(height: 20),
+                                              const SizedBox(height: 20),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -784,23 +806,29 @@ class _WeekViewState extends State<WeekView> {
                                     if (await canLaunchUrl(parsedLink)) {
                                       await launchUrl(parsedLink);
                                     } else {
-                                      print("url launch fehlgeschlagen");
+                                      toastification.show(
+                                        context: context,
+                                        type: ToastificationType.warning,
+                                        title: const Text(
+                                            'Kein Moodle-Kurs hinterlegt'),
+                                        autoCloseDuration:
+                                            const Duration(seconds: 2),
+                                      );
                                     }
                                   },
-                                  child: Row(
+                                  child: const Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(
                                         Icons.link,
-                                        color: Color(secondaryColor),
+                                        color: Colors.white,
                                       ),
                                       SizedBox(width: 8),
                                       // Text
                                       Text(
                                         'Moodle Kurs öffnen',
                                         style: TextStyle(
-                                            color: Color(secondaryColor),
-                                            fontSize: 16),
+                                            color: Colors.white, fontSize: 16),
                                       ),
                                     ],
                                   ),
@@ -831,20 +859,19 @@ class _WeekViewState extends State<WeekView> {
                                       throw 'Could not launch $url';
                                     }
                                   },
-                                  child: Row(
+                                  child: const Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(
                                         Icons.mail,
-                                        color: Color(secondaryColor),
+                                        color: Colors.white,
                                       ),
                                       SizedBox(width: 8),
                                       // Text
                                       Text(
                                         'Email an Kursleitende',
                                         style: TextStyle(
-                                            color: Color(secondaryColor),
-                                            fontSize: 16),
+                                            color: Colors.white, fontSize: 16),
                                       ),
                                     ],
                                   ),
@@ -929,16 +956,33 @@ class _WeekViewState extends State<WeekView> {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          supplyDataToCellWithCheck(
-                                                  timetable,
-                                                  day,
-                                                  timeOffset,
-                                                  'kurskuerzel')
-                                              .toUpperCase(),
+                                          (() {
+                                            final kurskuerzel =
+                                                supplyDataToCellWithCheck(
+                                                    timetable,
+                                                    day,
+                                                    timeOffset,
+                                                    'kurskuerzel');
+                                            final terminart = supplyDataToCell(
+                                                timetable,
+                                                day,
+                                                timeOffset,
+                                                'terminart');
+
+                                            if (kurskuerzel.isEmpty) {
+                                              return "";
+                                            } else {
+                                              if (terminart == "U") {
+                                                return "${kurskuerzel.toUpperCase()} - Ü";
+                                              } else {
+                                                return "${kurskuerzel.toUpperCase()} - $terminart";
+                                              }
+                                            }
+                                          })(),
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
                                             color: Colors.white,
-                                            fontSize: 16,
+                                            fontSize: 30,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -952,7 +996,7 @@ class _WeekViewState extends State<WeekView> {
                                             textAlign: TextAlign.center,
                                             style: const TextStyle(
                                               color: Colors.white,
-                                              fontSize: 8,
+                                              fontSize: 14,
                                             ),
                                           ),
                                         ),
