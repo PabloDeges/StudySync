@@ -848,7 +848,8 @@ class _WeekViewState extends State<WeekView> {
                                   ),
                                   onPressed: () async {
                                     String url = supplyDataToCell(
-                                        timetable, day, time, 'mail');
+                                        timetable, day, time, 'dozmail');
+                                        print(url);
 
                                     var mailUri =
                                         Uri(scheme: 'mailto', path: url);
