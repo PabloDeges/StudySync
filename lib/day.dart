@@ -184,39 +184,43 @@ class DayStudySync extends StatelessWidget {
                       ),
                     ),
                     Center(
-                      child: Column(children: [
-                        Text(
-                          supplyDataToCell(
-                              timetable, weekday - 1, timeOffset, 'kursname'),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                              height: 20),
+                          Text(
+                            supplyDataToCell(
+                                timetable, weekday - 1, timeOffset, 'kursname'),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              supplyDataToCell(
-                                  timetable, weekday - 1, timeOffset, 'raum'),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                supplyDataToCell(
+                                    timetable, weekday - 1, timeOffset, 'raum'),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 100),
-                            Text(
-                              supplyDataToCell(timetable, weekday - 1,
-                                  timeOffset, 'dozname'),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
+                              const SizedBox(width: 100),
+                              Text(
+                                supplyDataToCell(timetable, weekday - 1,
+                                    timeOffset, 'dozname'),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ]),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

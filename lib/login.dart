@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
           context: context,
           type: ToastificationType.error,
           title: const Text('Login fehlgeschlagen'),
-          autoCloseDuration: const Duration(seconds: 3),
+          autoCloseDuration: const Duration(seconds: 2),
         );
       }
     }

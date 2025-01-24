@@ -14,8 +14,9 @@ const authenticateJWT = async (req, res, next) => {
 
         try {
             const decodedToken = jwt.verify(token, KEY, jwtHeader);
-            if ((await pool.query(`select * from benutzer where benutzername = '${decodedToken.username}' `)).rowCount >= 1) {
-            let userCheck = (await pool.query(`select * from benutzer where benutzername = '${decodedToken.username}'`)).rows
+            let userCheck = await pool.query(`select * from benutzer where benutzername = '${decodedToken.username}'`)
+            if ((userCheck).rowCount >= 1) {
+            userCheck = userCheck.rows;
                 let payload = {
                     username: decodedToken.username,
                     exp: expirationTime,

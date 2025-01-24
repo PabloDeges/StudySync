@@ -45,7 +45,7 @@ class _EditorViewState extends State<EditorView> {
       context: context,
       type: ToastificationType.success,
       title: Text('Kursauswahl gespeichert!'),
-      autoCloseDuration: const Duration(seconds: 5),
+      autoCloseDuration: const Duration(seconds: 2),
     );
     AuthService authService = AuthService();
     String? token = await authService.getToken();
@@ -190,7 +190,7 @@ class _EditorViewState extends State<EditorView> {
         context: context,
         type: ToastificationType.success,
         title: Text('Studenplan wurde zurückgesetzt'),
-        autoCloseDuration: const Duration(seconds: 5),
+        autoCloseDuration: const Duration(seconds: 2),
       );
     }
   }
@@ -505,8 +505,6 @@ class _EditorViewState extends State<EditorView> {
                       return const Text("Fehler");
                     }
                     if (snapshot.hasData && snapshot.data != null) {
-                      // standardcase
-
                       List<DropdownMenuEntry<String>> studiengaenge =
                           convertStudiengaengeToDropdowns(snapshot.data!);
 
@@ -651,7 +649,7 @@ class _EditorViewState extends State<EditorView> {
       context: context,
       type: ToastificationType.success,
       title: Text('Farbauswahl gespeichert!'),
-      autoCloseDuration: const Duration(seconds: 3),
+      autoCloseDuration: const Duration(seconds: 2),
     );
 
     final prefs = await SharedPreferences.getInstance();
